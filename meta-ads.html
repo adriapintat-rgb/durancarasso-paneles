@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agente Meta Ads · Duran Carasso</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0D3550;--navy2:#0A2A40;--gold:#B8922A;--ink:#0D3550;--text:#274863;--sub:#8C99A4;
+  --line:#ECEBE6;--soft:#F7F8FA;--bg:#fff;--green:#2E7D4F;--amber:#C08A1E;--red:#B03020;--r:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font-family:inherit}
+a{color:var(--navy)}
+.hdr{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line);padding:16px 16px 0}
+.hdr-top{display:flex;align-items:flex-end;gap:12px;max-width:1100px;margin:0 auto}
+.logo b{display:block;font-family:'Playfair Display',serif;font-weight:500;font-size:20px;color:var(--navy);line-height:1.05}
+.logo small{display:block;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--sub);margin-top:6px}
+.sp{flex:1}
+.pill{font-size:11px;border:1px solid var(--line);border-radius:20px;padding:5px 11px;color:var(--navy);white-space:nowrap}
+.pill.auto{border-color:var(--gold);color:var(--gold)}
+.pill.off{color:var(--sub)}
+.pill.demo{background:var(--gold);border-color:var(--gold);color:#fff}
+.tabs{display:flex;gap:2px;max-width:1100px;margin:12px auto 0;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{background:none;border:none;border-bottom:2px solid transparent;padding:10px 11px;font-size:12px;letter-spacing:.6px;text-transform:uppercase;color:var(--sub);cursor:pointer;white-space:nowrap;font-weight:500;position:relative}
+.tab.on{color:var(--navy);border-bottom-color:var(--gold)}
+.tab .bdg{display:inline-block;min-width:17px;height:17px;line-height:17px;border-radius:9px;background:var(--red);color:#fff;font-size:10px;padding:0 5px;margin-left:5px;letter-spacing:0}
+main{max-width:1100px;margin:0 auto;padding:22px 16px 80px}
+.page{display:none}.page.on{display:block}
+h2{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--navy);font-weight:600;margin:28px 0 12px;display:flex;align-items:center;gap:10px}
+h2:first-child{margin-top:0}
+h2 .aux{font-size:12px;letter-spacing:0;text-transform:none;font-weight:400;color:var(--sub)}
+.muted{color:var(--sub);font-size:12.5px}
+.card{border:1px solid var(--line);border-radius:var(--r);padding:16px;background:#fff}
+.btn{border:none;border-radius:9px;padding:10px 15px;font-size:13px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:7px;transition:.15s;white-space:nowrap;text-decoration:none}
+.btn:disabled{opacity:.5;cursor:default}
+.btn-p{background:var(--navy);color:#fff}.btn-p:hover:not(:disabled){background:var(--navy2)}
+.btn-s{background:#fff;color:var(--navy);border:1px solid var(--line)}.btn-s:hover:not(:disabled){border-color:var(--navy)}
+.btn-g{background:var(--gold);color:#fff}
+.btn-w{background:#1F9D55;color:#fff}
+.btn-sm{padding:6px 10px;font-size:12px;border-radius:8px}
+.btn-link{background:none;border:none;color:var(--navy);text-decoration:underline;cursor:pointer;font-size:12px;padding:0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+label{display:block;font-size:10.5px;letter-spacing:.4px;text-transform:uppercase;color:var(--sub);font-weight:500;margin-bottom:6px}
+input,select,textarea{width:100%;font-size:14px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:9px;padding:10px 12px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(13,53,80,.07)}
+textarea{resize:vertical;line-height:1.55}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:860px){.g4{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.g2,.g3{grid-template-columns:1fr}}
+@media(max-width:480px){.g4{grid-template-columns:1fr}}
+.spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite}
+.btn-s .spin{border-color:rgba(13,53,80,.15);border-top-color:var(--navy)}
+@keyframes sp{to{transform:rotate(360deg)}}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:11px 16px;border-radius:10px;font-size:13px;z-index:99;max-width:92vw;box-shadow:0 6px 24px rgba(13,53,80,.2)}
+.toast.err{background:var(--red)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:20px;padding:6px 12px;font-size:12.5px;cursor:pointer;color:var(--navy)}
+.chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.tag{display:inline-block;font-size:10.5px;border:1px solid var(--line);border-radius:10px;padding:1px 8px;color:var(--sub);font-weight:500;letter-spacing:0;text-transform:none;white-space:nowrap}
+.tag.gold{border-color:#E8D9B0;color:var(--gold)}
+.tag.red{border-color:#EBC9C3;color:var(--red)}
+.tag.green{border-color:#CFE3D6;color:var(--green)}
+.empty{border:1px dashed var(--line);border-radius:var(--r);padding:22px;text-align:center;color:var(--sub)}
+.ok{color:var(--green)}.ko{color:var(--red)}.na{color:#C4CCD3}
+
+/* Resumen */
+.hero{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center}
+@media(max-width:560px){.hero{grid-template-columns:1fr}}
+.ring{position:relative;width:104px;height:104px}
+.ring b{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:30px;color:var(--navy);font-weight:500;line-height:1}
+.ring b small{font-family:'Inter';font-size:9px;letter-spacing:1.5px;color:var(--sub);text-transform:uppercase;margin-top:5px}
+.headline{font-family:'Playfair Display',serif;font-size:21px;color:var(--navy);line-height:1.3}
+.summary{font-size:13.5px;margin-top:6px;font-style:italic}
+.meta{font-size:12px;color:var(--sub);margin-top:10px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.week{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.week button{border:1px solid var(--line);background:var(--soft);border-radius:10px;padding:10px 14px;cursor:pointer;text-align:left;color:var(--navy);font-size:13px}
+.week button b{font-family:'Playfair Display',serif;font-size:20px;font-weight:500;margin-right:6px}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+@media(max-width:760px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{border:1px solid var(--line);border-radius:var(--r);padding:12px}
+.kpi .v{font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);line-height:1.1;font-variant-numeric:tabular-nums}
+.kpi .l{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--sub);margin-top:4px}
+.kpi .d{font-size:11px;margin-top:3px}
+.kpi .h{font-size:11px;color:var(--sub);margin-top:6px;line-height:1.35}
+.up{color:var(--green)}.down{color:var(--red)}
+.sedes{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:900px){.sedes{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.sedes{grid-template-columns:1fr}}
+.sd{border:1px solid var(--line);border-radius:var(--r);padding:14px;display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:.15s;background:#fff;text-align:left}
+.sd:hover{border-color:var(--navy)}
+.sd .top{display:flex;justify-content:space-between;align-items:baseline}
+.sd .nm{font-family:'Playfair Display',serif;font-size:18px;color:var(--navy)}
+.sd .sc{font-size:12px;font-weight:600}
+.sd .big{font-family:'Playfair Display',serif;font-size:26px;color:var(--navy);line-height:1}
+.sd .big small{font-family:'Inter';font-size:12px;color:var(--sub);margin-left:4px}
+.bar{height:6px;background:#EEF0F2;border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--navy);border-radius:4px}
+.checks{list-style:none;font-size:12px;display:grid;gap:3px}
+.checks li{display:flex;gap:6px;align-items:flex-start}
+.checks b{width:14px;flex-shrink:0;text-align:center}
+.sd .tip{font-size:11.5px;color:var(--gold)}
+.chart{border:1px solid var(--line);border-radius:var(--r);padding:12px 12px 6px}
+.chart svg{width:100%;height:150px;display:block}
+.legend{display:flex;gap:14px;font-size:11px;color:var(--sub);margin-bottom:6px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.diag li{margin:0 0 6px 18px}
+.focus{margin-top:10px;font-size:13px}
+.focus b{color:var(--gold)}
+
+/* Plan */
+.tasks{display:grid;gap:10px}
+.task{border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:grid;gap:7px}
+.task.done{background:var(--soft)}
+.task .hd{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.task .pr{font-size:12px}
+.task .ti{font-weight:600;color:var(--navy);font-size:15px;line-height:1.35}
+.task .i{font-size:12.5px;color:#6B7B88}
+.task ol{margin:2px 0 0 20px;font-size:13px}
+.task ol li{margin-bottom:3px}
+.task details summary{cursor:pointer;font-size:12px;color:var(--navy);font-weight:500;list-style:none}
+.task details summary::-webkit-details-marker{display:none}
+.var{background:var(--soft);border-left:2px solid var(--gold);padding:10px 12px;font-size:13px;white-space:pre-line;border-radius:0 8px 8px 0}
+.learn li{margin:0 0 6px 18px;font-size:13px}
+.v-bien{color:var(--green)}.v-mal{color:var(--red)}.v-neutro{color:var(--sub)}
+
+/* Anuncios */
+.ads{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.ad{border:1px solid var(--line);border-radius:var(--r);padding:14px;display:flex;flex-direction:column;gap:8px}
+.ad .tx{font-size:13.5px;white-space:pre-line}
+.ad .hl{font-weight:600;color:var(--navy)}
+.ad .img{font-size:12px;color:var(--sub)}
+.adjust{display:grid;gap:6px}
+.adjust .chips .chip{font-size:11.5px;padding:4px 10px}
+
+/* Leads */
+.lstats{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+@media(max-width:760px){.lstats{grid-template-columns:repeat(2,1fr)}}
+.leads{display:grid;gap:8px}
+.lead{border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;display:grid;gap:6px}
+.lead.new{border-left:3px solid var(--red)}
+.lead .nm{font-weight:600;color:var(--navy);font-size:14.5px}
+.lead .qa{font-size:12.5px;color:#4d6477}
+.lead .qa b{font-weight:500;color:var(--sub)}
+.qsel{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.qsel button{border:none;background:#fff;padding:5px 9px;font-size:12px;cursor:pointer;border-right:1px solid var(--line);color:var(--navy)}
+.qsel button:last-child{border-right:none}
+.qsel button.on{background:var(--navy);color:#fff}
+
+/* Competencia */
+.comp{display:grid;gap:14px}
+.cbox{border:1px solid var(--line);border-radius:var(--r);padding:14px 16px}
+.cbox h3{font-family:'Playfair Display',serif;font-weight:500;font-size:18px;color:var(--navy);margin-bottom:8px}
+.crow{display:grid;grid-template-columns:minmax(120px,200px) 1fr auto;gap:10px;align-items:center;font-size:13px;padding:6px 0;border-bottom:1px solid var(--line)}
+.crow:last-child{border-bottom:none}
+.crow .cb{height:10px;background:#EEF0F2;border-radius:5px;overflow:hidden}
+.crow .cb i{display:block;height:100%;background:var(--navy);opacity:.75}
+.crow .hk{grid-column:1/-1;font-size:12px;color:#6B7B88;font-style:italic;margin-top:-2px}
+@media(max-width:560px){.crow{grid-template-columns:1fr auto}.crow .cb{grid-column:1/-1;order:3}}
+.note{background:#FBF6EA;border-radius:9px;padding:10px 12px;font-size:13px;margin-top:10px}
+.note b{color:var(--gold)}
+
+/* Sedes / tabla */
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--sub);font-weight:500;text-align:right;padding:8px 6px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl th:first-child{text-align:left}
+.tbl td{padding:9px 6px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl td:first-child{text-align:left;white-space:normal;min-width:170px}
+.tbl tr.c td{background:var(--soft);font-weight:600;color:var(--navy)}
+.tbl tr.s td:first-child{padding-left:18px}
+.tbl tr.a td:first-child{padding-left:34px;color:#4d6477}
+.tblw{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;vertical-align:0}
+.f-good{background:var(--green)}.f-watch{background:var(--amber)}.f-bad{background:var(--red)}.f-new,.f-idle{background:#C9D1D8}
+.mini{display:inline-flex;gap:4px}
+.mini button{border:1px solid var(--line);background:#fff;border-radius:6px;font-size:11px;padding:3px 7px;cursor:pointer;color:var(--navy)}
+.mini button:hover{border-color:var(--navy)}
+
+/* Asistente */
+.chat{display:grid;gap:10px;margin-bottom:12px}
+.msg{max-width:85%;padding:10px 13px;border-radius:12px;font-size:13.5px;white-space:pre-line}
+.msg.u{justify-self:end;background:var(--navy);color:#fff;border-bottom-right-radius:3px}
+.msg.a{justify-self:start;background:var(--soft);border-bottom-left-radius:3px}
+.ask{display:flex;gap:8px}
+
+/* Crear */
+.steps{display:grid;gap:14px}
+.step{border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.step h3{font-size:13px;color:var(--navy);font-weight:600;margin-bottom:10px;display:flex;gap:10px;align-items:center}
+.step h3 .n{width:22px;height:22px;border-radius:50%;border:1px solid var(--navy);font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.opts{display:grid;gap:8px;grid-template-columns:1fr 1fr}
+@media(max-width:560px){.opts{grid-template-columns:1fr}}
+.opt{border:1px solid var(--line);border-radius:10px;padding:12px;cursor:pointer;text-align:left;background:#fff}
+.opt b{display:block;color:var(--navy);font-size:13.5px}
+.opt span{font-size:12px;color:var(--sub)}
+.opt.on{border-color:var(--navy);box-shadow:0 0 0 2px rgba(13,53,80,.12)}
+.range{display:flex;align-items:center;gap:12px}
+.range input{padding:0;border:none;box-shadow:none;accent-color:var(--navy)}
+.bignum{font-family:'Playfair Display',serif;font-size:26px;color:var(--navy);min-width:92px}
+.est{font-size:12.5px;margin-top:8px;padding:10px 12px;background:var(--soft);border-radius:9px}
+.drop{border:1px dashed #C9D1D8;border-radius:10px;padding:18px;text-align:center;cursor:pointer;color:var(--sub);font-size:13px}
+.drop img{max-height:180px;border-radius:8px;display:block;margin:0 auto}
+.variants{display:grid;gap:8px;margin-top:10px}
+.variant{border:1px solid var(--line);border-radius:10px;padding:12px;cursor:pointer;font-size:13px;white-space:pre-line}
+.variant.on{border-color:var(--navy);box-shadow:0 0 0 2px rgba(13,53,80,.12)}
+.variant em{display:block;font-style:normal;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.preview{max-width:340px;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13px}
+.preview .ph{display:flex;align-items:center;gap:8px;padding:10px}
+.preview .av{width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center}
+.preview .img{aspect-ratio:1/1;background:var(--soft) center/cover no-repeat}
+.preview .cta{display:flex;justify-content:space-between;align-items:center;padding:10px;border-bottom:1px solid var(--line);font-size:12px;gap:8px}
+.preview .cta b{color:var(--navy);white-space:nowrap}
+.preview .tx{padding:10px;white-space:pre-line}
+.check{display:flex;gap:9px;align-items:flex-start;font-size:13px;cursor:pointer;text-transform:none;letter-spacing:0;color:var(--text)}
+.check input{width:auto;margin-top:3px}
+details.wiz>summary{cursor:pointer;list-style:none}
+details.wiz>summary::-webkit-details-marker{display:none}
+
+/* Ajustes */
+.seg{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{border:none;background:#fff;padding:12px 8px;cursor:pointer;text-align:center;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:none}
+.seg button b{display:block;color:var(--navy);font-size:13px}
+.seg button span{font-size:11px;color:var(--sub)}
+.seg button.on{background:var(--navy)}
+.seg button.on b,.seg button.on span{color:#fff}
+.sedit{display:grid;grid-template-columns:1.1fr 1.6fr .7fr 1.1fr auto;gap:8px;align-items:end;margin-bottom:8px}
+@media(max-width:700px){.sedit{grid-template-columns:1fr 1fr}}
+.diagl{display:grid;gap:6px;font-size:13px;margin-top:10px}
+
+/* Conexión */
+.onb{max-width:580px;margin:10px auto}
+.onb h1{font-family:'Playfair Display',serif;font-weight:500;color:var(--navy);font-size:28px;line-height:1.2;margin-bottom:8px}
+.onb ul{margin:14px 0 18px 0;list-style:none;font-size:13.5px;display:grid;gap:6px}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-top">
+    <div class="logo"><b>Durán<br>Carasso</b><small>Agente Meta Ads</small></div>
+    <div class="sp"></div>
+    <span id="modePill" class="pill" hidden></span>
+  </div>
+  <nav class="tabs" id="tabs">
+    <button class="tab on" data-p="res">🎯 Resumen</button>
+    <button class="tab" data-p="plan">🛠️ Plan<span class="bdg" id="bPlan" hidden></span></button>
+    <button class="tab" data-p="ads">✍️ Anuncios</button>
+    <button class="tab" data-p="leads">📲 Leads<span class="bdg" id="bLeads" hidden></span></button>
+    <button class="tab" data-p="comp">🔍 Competencia</button>
+    <button class="tab" data-p="sede">📍 Sedes</button>
+    <button class="tab" data-p="chat">🤖 Asistente</button>
+    <button class="tab" data-p="aj">⚙️ Ajustes</button>
+  </nav>
+</header>
+
+<main>
+  <!-- Conexión / onboarding -->
+  <section id="onb" class="onb" hidden>
+    <h1>El panel de control de tu publicidad en Instagram y Facebook</h1>
+    <p class="muted">Como el Agente Google, pero para anuncios: cada mañana revisa tus campañas por sede, te dice qué hacer (y lo hace por ti con un clic), te prepara los anuncios, te trae los leads para escribirles por WhatsApp y vigila a la competencia.</p>
+    <ul>
+      <li>🎯 Objetivos por sede con ✓/✗ y meta concreta</li>
+      <li>🛠️ Plan de acción con pasos: ⚡ Hacerlo ya · ✅ Hecho · 🔄 Otra · ❌ No me sirve</li>
+      <li>✍️ Anuncios listos: 📋 Copiar · ✏️ Ajustar con IA · 🚀 Lanzar</li>
+      <li>📲 Leads con WhatsApp en un toque y calidad 👍/👎</li>
+      <li>🔍 Competencia de cada zona · 🤖 Asistente con tus datos</li>
+    </ul>
+    <div class="card grid">
+      <div><label>URL del agente</label><input id="cUrl" placeholder="https://dc-ads-agent.tu-usuario.workers.dev"></div>
+      <div><label>Contraseña (APP_SECRET)</label><input id="cSec" type="password" placeholder="••••••••"></div>
+      <div class="row">
+        <button class="btn btn-p" id="cGo">Conectar y comprobar</button>
+        <button class="btn btn-s" id="cDemo">Ver demo sin conectar</button>
+      </div>
+      <div id="cDiag" class="diagl"></div>
+      <p class="muted">¿Aún no está desplegado? Guía de 20 minutos en <b>ads-agent/README.md</b>.</p>
+    </div>
+  </section>
+
+  <!-- 🎯 RESUMEN -->
+  <section class="page on" id="p-res">
+    <div id="resEmpty" class="empty" hidden>
+      <p>Aún no hay análisis. Pulsa el botón y en ~1 minuto tendrás el diagnóstico de tu cuenta por sede.</p>
+      <p style="margin-top:12px"><button class="btn btn-p" data-run>Analizar ahora</button></p>
+    </div>
+    <div id="resBody" hidden>
+      <div class="hero">
+        <div class="ring" id="ring"></div>
+        <div>
+          <div class="headline" id="headline"></div>
+          <div class="summary" id="summary"></div>
+          <div class="meta"><span id="lastRun"></span><button class="btn btn-s btn-sm" data-run>Analizar ahora</button><label class="check" style="margin:0;font-size:12px;color:var(--sub)"><input type="checkbox" id="runMail"> enviar resumen por email</label></div>
+        </div>
+      </div>
+      <div class="week" id="week"></div>
+
+      <h2>🎯 Objetivos por sede <span class="aux">últimos 7 días · toca una sede para ver el detalle</span></h2>
+      <div class="sedes" id="sedes"></div>
+
+      <h2>Cuenta completa</h2>
+      <div class="kpis" id="kpis"></div>
+
+      <h2>Diagnóstico</h2>
+      <ul class="diag" id="diag"></ul>
+      <p class="focus" id="focus"></p>
+
+      <h2>Tendencia 30 días</h2>
+      <div class="chart"><div class="legend"><span><i style="background:rgba(13,53,80,.22)"></i>Inversión diaria</span><span><i style="background:var(--gold)"></i><span id="lgRes">Resultados</span></span></div><div id="chart"></div></div>
+    </div>
+  </section>
+
+  <!-- 🛠️ PLAN -->
+  <section class="page" id="p-plan">
+    <div class="row" style="margin-bottom:12px"><div class="chips" id="planF"></div></div>
+    <p class="muted" style="margin-bottom:12px">Por orden de prioridad. <b>⚡ Hacerlo ya</b> lo ejecuta el agente en Meta (y se puede deshacer). Las tareas para ti llevan los pasos exactos. Marca <b>❌ No me sirve</b> y no te lo volverá a proponer.</p>
+    <div class="tasks" id="tasks"></div>
+    <h2>Hecho <span class="aux">últimos 14 días</span></h2>
+    <div class="tasks" id="doneTasks"></div>
+    <h2>Lo que ha aprendido</h2>
+    <ul class="learn" id="learn"></ul>
+  </section>
+
+  <!-- ✍️ ANUNCIOS -->
+  <section class="page" id="p-ads">
+    <p class="muted" style="margin-bottom:12px">Un anuncio por sede, escrito con lo que ya te funciona y diferenciado de la competencia. <b>🚀 Lanzar</b> lo publica junto a tu mejor anuncio de esa sede (misma foto y público), así compiten y Meta se queda con el ganador.</p>
+    <div class="ads" id="adsReady"></div>
+
+    <h2>Crear campaña desde cero</h2>
+    <details class="wiz card" id="wizBox">
+      <summary><b style="color:var(--navy)">＋ Nueva campaña en 6 pasos</b> <span class="muted">— para una sede sin campaña o una promoción nueva. Se crea en pausa.</span></summary>
+      <div class="steps" style="margin-top:14px">
+        <div class="step">
+          <h3><span class="n">1</span>¿Qué quieres conseguir?</h3>
+          <div class="opts" id="wObj">
+            <button class="opt on" data-v="leads"><b>Leads de clientes</b><span>Formulario dentro de Instagram/Facebook: te llegan nombre, email y teléfono. Recomendado.</span></button>
+            <button class="opt" data-v="traffic"><b>Visitas a tu web</b><span>Llevar gente a una ficha o landing de tu web.</span></button>
+          </div>
+        </div>
+        <div class="step">
+          <h3><span class="n">2</span>¿Dónde está tu cliente?</h3>
+          <div class="chips" id="wGeo">
+            <button class="chip" data-v="barcelona">Barcelona</button><button class="chip on" data-v="sitges">Sitges</button><button class="chip" data-v="cerdanya">Cerdanya</button><button class="chip" data-v="andorra">Andorra</button><button class="chip" data-v="madrid">Madrid</button><button class="chip" data-v="espana">Toda España</button><button class="chip" data-v="intl">Internacional</button>
+          </div>
+          <div class="grid g2" style="margin-top:10px" id="wKmBox"><div><label>Radio alrededor</label><select id="wKm"><option value="25">25 km</option><option value="40">40 km</option><option value="60" selected>60 km</option><option value="80">80 km</option></select></div></div>
+          <p class="muted" id="wIntl" hidden style="margin-top:8px">Reino Unido, Francia, Alemania, Países Bajos, Bélgica, Suiza, Suecia, Noruega, Dinamarca, Irlanda, Italia, EE. UU. y Emiratos.</p>
+        </div>
+        <div class="step">
+          <h3><span class="n">3</span>¿Cuánto quieres invertir?</h3>
+          <div class="range"><span class="bignum" id="wBudV">25 €</span><input type="range" id="wBud" min="5" max="200" step="5" value="25"></div>
+          <div class="est" id="wEst"></div>
+        </div>
+        <div class="step">
+          <h3><span class="n">4</span>Tu anuncio</h3>
+          <div class="grid g2">
+            <div>
+              <label>Imagen (cuadrada o vertical 4:5)</label>
+              <div class="drop" id="wDrop">Toca para subir una foto<br><span style="font-size:11px">o arrástrala aquí</span></div>
+              <input type="file" id="wFile" accept="image/*" hidden>
+            </div>
+            <div>
+              <label>¿Qué anuncias? (2 líneas bastan)</label>
+              <textarea id="wBrief" rows="5" placeholder="Obra nueva en Sitges, entrega 2027. Plantas bajas con jardín y áticos con vistas al mar, 2-4 habitaciones, desde 785.000 €."></textarea>
+              <button class="btn btn-g" id="wAi" style="margin-top:8px;width:100%">✦ Escribir textos con IA</button>
+            </div>
+          </div>
+          <div class="variants" id="wVars"></div>
+          <div class="grid" style="margin-top:12px">
+            <div><label>Texto principal</label><textarea id="wText" rows="4"></textarea></div>
+            <div class="grid g2">
+              <div><label>Titular (≤ 40)</label><input id="wHead" maxlength="60"></div>
+              <div><label>Descripción (≤ 30)</label><input id="wDesc" maxlength="60"></div>
+            </div>
+            <div><label>Web de destino</label><input id="wLink" placeholder="https://www.durancarasso.com"></div>
+          </div>
+        </div>
+        <div class="step" id="wFormStep">
+          <h3><span class="n">5</span>Formulario de contacto</h3>
+          <select id="wForm"><option value="">Crear uno nuevo automático (nombre, email y teléfono)</option></select>
+          <p class="muted" style="margin-top:6px">Para crear uno automático hace falta la URL de tu política de privacidad (Ajustes).</p>
+        </div>
+        <div class="step">
+          <h3><span class="n">6</span>Revisa y crea</h3>
+          <div class="grid g2">
+            <div class="preview"><div class="ph"><div class="av">DC</div><div><b style="color:var(--navy)">Durán Carasso</b><div class="muted" style="font-size:11px">Publicidad</div></div></div><div class="img" id="pvImg"></div><div class="cta"><span id="pvHead" style="font-weight:600;color:var(--navy)"></span><b>Más información</b></div><div class="tx" id="pvText"></div></div>
+            <div class="grid" style="align-content:start">
+              <div><label>Nombre de la campaña</label><input id="wName" placeholder="Leads · Sitges"></div>
+              <label class="check"><input type="checkbox" id="wHousing" checked> <span>Categoría especial <b>Vivienda</b> (anuncios inmobiliarios: Meta limita edad/sexo y exige radio ≥ 25 km)</span></label>
+              <div id="wSum" class="est"></div>
+              <div class="row"><button class="btn btn-p" id="wCreate">Crear en pausa (recomendado)</button><button class="btn btn-s" id="wLaunch">Crear y lanzar ya</button></div>
+              <div id="wRes"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- 📲 LEADS -->
+  <section class="page" id="p-leads">
+    <div class="lstats" id="lStats"></div>
+    <div class="row" style="margin:16px 0 12px">
+      <div class="chips" id="leadF"></div>
+      <label class="check" style="margin:0 0 0 6px;font-size:12.5px"><input type="checkbox" id="onlyNew"> Solo sin contactar</label>
+      <span class="sp"></span>
+      <button class="btn btn-s btn-sm" id="lSync">↻ Traer leads nuevos</button>
+    </div>
+    <div class="leads" id="leads"></div>
+    <p class="muted" style="margin-top:12px">Llamar en la primera hora multiplica las visitas: el agente mide cuántos contactas a tiempo. Marca la calidad (👍/👎) y el agente aprenderá qué anuncios traen leads buenos, no solo baratos. Datos personales: se guardan 90 días y solo se ven con la contraseña.</p>
+  </section>
+
+  <!-- 🔍 COMPETENCIA -->
+  <section class="page" id="p-comp">
+    <div class="row" style="margin-bottom:12px"><p class="muted" style="flex:1">Quién anuncia vivienda ahora mismo en cada zona (Biblioteca de anuncios de Meta). El anuncio que más tiempo lleva activo suele ser el que mejor les funciona.</p><button class="btn btn-s btn-sm" id="cRefresh">↻ Actualizar</button></div>
+    <div class="comp" id="comp"></div>
+  </section>
+
+  <!-- 📍 SEDES -->
+  <section class="page" id="p-sede">
+    <div class="chips" id="sedeF" style="margin-bottom:16px"></div>
+    <div id="sedeBody"></div>
+  </section>
+
+  <!-- 🤖 ASISTENTE -->
+  <section class="page" id="p-chat">
+    <div class="chips" id="sugg" style="margin-bottom:14px"></div>
+    <div class="chat" id="chat"></div>
+    <div class="ask"><input id="askQ" placeholder="Pregunta lo que quieras sobre tus anuncios…"><button class="btn btn-p" id="askGo">Preguntar</button></div>
+  </section>
+
+  <!-- ⚙️ AJUSTES -->
+  <section class="page" id="p-aj">
+    <h2>Modo de trabajo</h2>
+    <div class="seg" id="sMode">
+      <button data-v="off"><b>Apagado</b><span>No hace nada</span></button>
+      <button data-v="copiloto"><b>Copiloto</b><span>Propone, tú decides</span></button>
+      <button data-v="autopiloto"><b>Autopiloto</b><span>Actúa solo, con límites</span></button>
+    </div>
+    <p class="muted" style="margin-top:8px">En autopiloto solo ejecuta lo seguro (pausar perdedores claros, mover presupuesto como máximo el % de abajo, crear variantes de texto). Nunca lanza campañas ni hace tareas manuales. Todo se puede deshacer.</p>
+
+    <h2>Sedes</h2>
+    <p class="muted" style="margin-bottom:10px">El agente reconoce la sede por el nombre de la campaña, conjunto o anuncio (palabras clave). Meta = leads por semana (0 = automático: +20 % sobre tu mejor semana reciente).</p>
+    <div id="sSedes"></div>
+    <button class="btn btn-s btn-sm" id="sAddSede">＋ Añadir sede</button>
+
+    <h2>¿Cuánto vale un resultado para ti?</h2>
+    <div class="grid g3">
+      <div><label>€ por lead</label><input id="tLeads" type="number" min="0" step="1"></div>
+      <div><label>€ por visita web</label><input id="tTraffic" type="number" min="0" step="0.05"></div>
+      <div><label>€ por conversación</label><input id="tMsg" type="number" min="0" step="0.5"></div>
+    </div>
+    <p class="muted" style="margin-top:6px" id="tAuto">0 = automático: el agente usa la media de tu propia cuenta.</p>
+
+    <h2>Límites de seguridad</h2>
+    <div class="grid g3">
+      <div><label>Tope de gasto diario total (€)</label><input id="sCap" type="number" min="0" step="5"></div>
+      <div><label>Cambio máx. de presupuesto (%)</label><input id="sStep" type="number" min="5" max="30" step="5"></div>
+      <div><label>Días sin tocar tras un cambio</label><input id="sCalm" type="number" min="1" max="14"></div>
+      <div><label>Frecuencia máxima</label><input id="sFreq" type="number" min="1.5" max="10" step="0.5"></div>
+      <div><label>CTR mínimo (%)</label><input id="sCtr" type="number" min="0.1" max="5" step="0.1"></div>
+      <div><label>Pausar si gasta N× objetivo sin resultados</label><input id="sKill" type="number" min="1.5" max="6" step="0.5"></div>
+    </div>
+
+    <h2>WhatsApp a leads</h2>
+    <div class="grid g2">
+      <div><label>Tu nombre (se usa en el mensaje)</label><input id="sMe" placeholder="Adrià"></div>
+      <div><label>Plantilla ({nombre}, {comercial}, {sede})</label><textarea id="sWa" rows="3"></textarea></div>
+    </div>
+
+    <h2>Emails</h2>
+    <div class="grid g2">
+      <div><label>Destinatarios (separados por coma)</label><input id="sMails" placeholder="tu@email.com, director@email.com"></div>
+      <label class="check" style="align-self:end"><input type="checkbox" id="sDaily"> Aviso diario solo si hay algo urgente (el resumen semanal llega siempre los lunes con el botón al panel)</label>
+    </div>
+
+    <h2>Tu negocio</h2>
+    <div class="grid">
+      <div><label>¿Qué vendes? (contexto para la IA)</label><textarea id="sBiz" rows="2"></textarea></div>
+      <div><label>Voz de marca para los textos</label><textarea id="sVoice" rows="2"></textarea></div>
+      <div class="grid g2">
+        <div><label>Web</label><input id="sWeb"></div>
+        <div><label>URL política de privacidad (formularios)</label><input id="sPriv" placeholder="https://.../privacidad"></div>
+      </div>
+      <label class="check"><input type="checkbox" id="sHousing"> Mi negocio es inmobiliario (usar categoría especial Vivienda)</label>
+    </div>
+    <p style="margin-top:14px"><button class="btn btn-p" id="sSave">Guardar ajustes</button></p>
+
+    <h2>Conexión</h2>
+    <div class="card">
+      <div id="sDiag" class="diagl"></div>
+      <div class="row" style="margin-top:12px"><button class="btn btn-s" id="sTest">Comprobar conexión</button><button class="btn btn-s" id="sOut">Desconectar</button></div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+'use strict';
+var $=function(id){return document.getElementById(id)};
+var qa=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function eur(n,dec){if(n==null||!isFinite(n))return '—';var d=dec!=null?dec:(Math.abs(n)>=100?0:2);return (+n).toLocaleString('es-ES',{minimumFractionDigits:d>0&&n%1?d:0,maximumFractionDigits:d})+' €'}
+function num(n,d){if(n==null||!isFinite(n))return '—';return (+n).toLocaleString('es-ES',{maximumFractionDigits:d==null?1:d})}
+function ago(ts){if(!ts)return '';var m=Math.round((Date.now()-ts)/60000);if(m<1)return 'ahora';if(m<60)return 'hace '+m+' min';var h=Math.round(m/60);if(h<24)return 'hace '+h+' h';return 'hace '+Math.round(h/24)+' d'}
+function fdate(ts){var d=new Date(ts);return d.toLocaleDateString('es-ES',{day:'numeric',month:'short'})+' '+d.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'})}
+var TOAST=null;
+function toast(msg,err){if(TOAST){clearTimeout(TOAST.tm);TOAST.remove()}var t=TOAST=document.createElement('div');t.className='toast'+(err?' err':'');t.setAttribute('role','status');t.textContent=msg;document.body.appendChild(t);t.tm=setTimeout(function(){t.remove();if(TOAST===t)TOAST=null},err?6000:3200)}
+function busy(btn,on,txt){if(!btn)return;if(on){btn._t=btn.innerHTML;btn.disabled=true;btn.innerHTML='<span class="spin"></span>'+(txt||'')}else{btn.disabled=false;if(btn._t)btn.innerHTML=btn._t}}
+function copy(txt){if(navigator.clipboard&&navigator.clipboard.writeText){return navigator.clipboard.writeText(txt).then(function(){toast('Copiado')},function(){fallbackCopy(txt)})}fallbackCopy(txt)}
+function fallbackCopy(txt){var t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand('copy');toast('Copiado')}catch(e){toast('No se pudo copiar',1)}t.remove()}
+function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+
+var LABEL={leads:'leads',traffic:'visitas',messages:'conversaciones',sales:'ventas',reach:'mil personas'};
+var LABEL1={leads:'lead',traffic:'visita',messages:'conversación',sales:'venta',reach:'mil personas'};
+var KIND={PAUSE:'Lo hace el agente',ACTIVATE:'Lo hace el agente',SCALE_UP:'Lo hace el agente',SCALE_DOWN:'Lo hace el agente',BUDGET:'Lo hace el agente',NEW_AD:'Lo hace el agente',LAUNCH:'Crear en el panel',MANUAL:'Tarea para ti',ALERT:'Aviso',CREATE:'Campaña nueva'};
+var EXEC=['PAUSE','ACTIVATE','SCALE_UP','SCALE_DOWN','BUDGET','NEW_AD'];
+var STATUS={pending:'Pendiente',done:'Hecho',failed:'No se pudo',rejected:'No me sirve',undone:'Deshecho',expired:'Caducado',replaced:'Cambiada',info:'Aviso'};
+var Q={bueno:'👍 Bueno',malo:'👎 Malo',visita:'🏠 Visita',cliente:'🤝 Cliente'};
+
+/* ── Conexión ── */
+var CFG_KEY='dc_ads_cfg';
+function cfg(){try{return JSON.parse(ls(CFG_KEY)||'{}')}catch(e){return {}}}
+function setCfg(c){ls(CFG_KEY,JSON.stringify(c))}
+var DEMO=false,STATE=null,LEADS=null,COMP=null;
+var F={plan:'all',lead:'all',sede:''};
+
+function api(path,body){
+  if(DEMO)return demoApi(path,body);
+  var c=cfg();
+  if(!c.url)return Promise.reject(new Error('Sin conectar'));
+  return fetch(c.url.replace(/\/+$/,'')+path,{method:body?'POST':'GET',headers:{'x-app-secret':c.secret||'','Content-Type':'application/json'},body:body?JSON.stringify(body):undefined})
+    .then(function(r){return r.json().catch(function(){return {error:'Respuesta no válida ('+r.status+')'}}).then(function(d){if(!r.ok||d.error){var m=d.error==='unauthorized'?'Contraseña incorrecta':(d.error||'Error '+r.status);if(d.meta&&d.meta.title)m=d.meta.title+': '+m;throw new Error(m)}return d})});
+}
+function diagHtml(d){
+  var rows=[[d.worker,'Agente desplegado y accesible'],[d.kv,'Memoria (KV) conectada'],
+    [d.meta_token&&!d.meta_error,'Token de Meta válido'+(d.meta_user?' ('+esc(d.meta_user)+')':'')+(d.meta_error?' — '+esc(d.meta_error):'')],
+    [d.account_id&&!d.account_error,'Cuenta publicitaria'+(d.account?' '+esc(d.account):'')+(d.account_error?' — '+esc(d.account_error):'')+(d.account_ok===false?' — no está activa (revisa facturación)':'')],
+    [d.page_id,'Página de Facebook (leads y crear campañas)'],[d.ai,'IA conectada ('+esc(d.model||'')+')'],[d.email,'Email (Resend) — opcional']];
+  return rows.map(function(r){return '<div><span class="'+(r[0]?'ok':'ko')+'">'+(r[0]?'✓':'✗')+'</span> '+r[1]+'</div>'}).join('');
+}
+function showOnb(on){$('onb').hidden=!on;$('tabs').style.display=on?'none':'';qa('.page').forEach(function(p){p.style.display=on?'none':''})}
+$('cGo').onclick=function(){
+  var url=$('cUrl').value.trim(),sec=$('cSec').value.trim(),b=this;
+  if(!/^https?:\/\//.test(url)){toast('Pega la URL completa (https://...)',1);return}
+  DEMO=false;setCfg({url:url,secret:sec});busy(b,true,'Comprobando…');
+  api('/diag').then(function(d){$('cDiag').innerHTML=diagHtml(d);if(d.meta_token&&d.account_id){showOnb(false);load()}})
+  .catch(function(e){$('cDiag').innerHTML='<div class="ko">✗ '+esc(e.message)+'</div><div class="muted">Revisa la URL, que el Worker esté desplegado y la contraseña.</div>'})
+  .then(function(){busy(b,false)});
+};
+$('cDemo').onclick=function(){DEMO=true;showOnb(false);load()};
+$('sOut').onclick=function(){if(!confirm('¿Desconectar este navegador del agente?'))return;setCfg({});DEMO=false;STATE=null;showOnb(true)};
+$('sTest').onclick=function(){var b=this;busy(b,true);api('/diag').then(function(d){$('sDiag').innerHTML=diagHtml(d)}).catch(function(e){$('sDiag').innerHTML='<div class="ko">✗ '+esc(e.message)+'</div>'}).then(function(){busy(b,false)})};
+
+/* ── Tabs ── */
+function go(p){qa('.tab').forEach(function(x){x.classList.toggle('on',x.dataset.p===p)});qa('.page').forEach(function(x){x.classList.toggle('on',x.id==='p-'+p)});ls('dc_ads_tab',p);if(p==='ads')loadForms();if(p==='leads'&&!LEADS)loadLeads();if(p==='comp'&&!COMP)loadComp();window.scrollTo(0,0)}
+qa('.tab').forEach(function(t){t.onclick=function(){go(t.dataset.p)}});
+
+/* ── Carga ── */
+function load(){return api('/state').then(function(s){STATE=s;render();loadLeads(true);loadComp(true)}).catch(function(e){toast(e.message,1)})}
+function loadLeads(quiet){return api('/leads').then(function(d){LEADS=d;renderLeads();renderWeek();renderSedes()}).catch(function(e){if(!quiet)toast(e.message,1)})}
+function loadComp(quiet){return api('/competition').then(function(d){COMP=d;renderComp();renderSedeDetail()}).catch(function(e){if(!quiet)toast(e.message,1)})}
+function sedes(){return (STATE&&STATE.settings.sedes)||[]}
+function sedeName(id){if(id==='todas')return 'Todas';var s=sedes().filter(function(x){return x.id===id})[0];return s?s.name:(id==='otras'?'Otras':id)}
+function rep(){return STATE&&STATE.report}
+function render(){
+  var s=STATE;if(!s)return;
+  var m=s.settings.mode,pill=$('modePill');pill.hidden=false;
+  pill.className='pill'+(DEMO?' demo':m==='autopiloto'?' auto':m==='off'?' off':'');
+  pill.textContent=(DEMO?'Demo · ':'')+(m==='autopiloto'?'● Autopiloto':m==='off'?'Apagado':'● Copiloto');
+  if(!F.sede&&sedes()[0])F.sede=sedes()[0].id;
+  renderRes();renderPlan();renderAds();renderSedeDetail();renderAj();wEstimate();renderSugg();
+}
+
+/* ── 🎯 RESUMEN ── */
+function ring(v){
+  if(v==null)return '<b>—<small>salud</small></b>';
+  var c=2*Math.PI*44,col=v>=70?'var(--green)':v>=45?'var(--amber)':'var(--red)';
+  return '<svg viewBox="0 0 104 104" width="104" height="104"><circle cx="52" cy="52" r="44" fill="none" stroke="#EEF0F2" stroke-width="7"/><circle cx="52" cy="52" r="44" fill="none" stroke="'+col+'" stroke-width="7" stroke-linecap="round" stroke-dasharray="'+(c*v/100)+' '+c+'" transform="rotate(-90 52 52)"/></svg><b>'+v+'<small>salud</small></b>';
+}
+function delta(a,b,inv){if(a==null||b==null||!b)return '';var p=Math.round((a/b-1)*100);if(!p)return '<span class="muted">= semana anterior</span>';var good=inv?p<0:p>0;return '<span class="'+(good?'up':'down')+'">'+(p>0?'▲':'▼')+Math.abs(p)+'%</span> <span class="muted">vs anterior</span>'}
+function planItems(){var r=rep();if(!r)return [];var ids=r.plan||[];return STATE.actions.filter(function(a){return ids.indexOf(a.id)>=0||(a.status==='pending'&&EXEC.indexOf(a.type)>=0)}).filter(function(a,i,arr){return arr.indexOf(a)===i})}
+function pendingTasks(){return planItems().filter(function(a){return a.status==='pending'})}
+function renderRes(){
+  var r=rep();$('resEmpty').hidden=!!r;$('resBody').hidden=!r;if(!r)return;
+  var k=r.kpi,T=r.targets[r.mainObj],L=LABEL[r.mainObj],L1=LABEL1[r.mainObj];
+  $('ring').innerHTML=ring(r.ai&&r.ai.health);
+  $('headline').textContent=(r.ai&&r.ai.headline)||'';
+  $('summary').textContent=(r.ai&&r.ai.summary)||'';
+  $('lastRun').textContent='Actualizado '+ago(r.ts)+(r.aiError?' · decidido con reglas (IA no disponible)':'');
+  renderWeek();renderSedes();
+  var cpaCls=k.cur.cpa!=null&&T?(k.cur.cpa<=T?'up':k.cur.cpa<=T*1.3?'':'down'):'';
+  $('kpis').innerHTML=[
+    ['Invertido',eur(k.cur.spendAll,0),delta(k.cur.spendAll,k.prev.spendAll),'Lo gastado esta semana.'],
+    [L,num(k.cur.res,0),delta(k.cur.res,k.prev.res),'Resultados conseguidos.'],
+    ['Coste por '+L1,'<span class="'+cpaCls+'">'+eur(k.cur.cpa)+'</span>',delta(k.cur.cpa,k.prev.cpa,true),'Objetivo: '+eur(T)+(r.autoT&&r.autoT[r.mainObj]?' (automático)':'')],
+    ['CTR',num(k.cur.ctr,2)+'%',delta(k.cur.ctr,k.prev.ctr),'De cada 100 que lo ven, cuántos hacen clic. Sano: >0,8%.'],
+    ['Frecuencia',num(k.cur.freq,1),'','Veces que lo ve cada persona. Más de 3,5 cansa.']
+  ].map(function(x){return '<div class="kpi"><div class="v">'+x[1]+'</div><div class="l">'+esc(x[0])+'</div><div class="d">'+x[2]+'</div><div class="h">'+x[3]+'</div></div>'}).join('');
+  $('lgRes').textContent=L.charAt(0).toUpperCase()+L.slice(1);
+  $('chart').innerHTML=chart(r.daily||[],'d',L);
+  $('diag').innerHTML=((r.ai&&r.ai.diagnosis)||[]).map(function(d){return '<li>'+esc(d)+'</li>'}).join('')||'<li class="muted">Sin incidencias.</li>';
+  $('focus').innerHTML=r.ai&&r.ai.focus?'<b>Foco próxima semana:</b> '+esc(r.ai.focus):'';
+}
+function renderWeek(){
+  var r=rep();if(!r)return;
+  var t=pendingTasks().length,a=(r.adsReady||[]).length,l=LEADS?LEADS.items.filter(function(x){return !x.contactedAt&&Date.now()-x.ts<3*86400000}).length:0;
+  $('week').innerHTML='<button data-go="plan"><b>'+t+'</b>tarea'+(t===1?'':'s')+' esta semana</button><button data-go="ads"><b>'+a+'</b>anuncio'+(a===1?'':'s')+' listo'+(a===1?'':'s')+'</button><button data-go="leads"><b>'+l+'</b>lead'+(l===1?'':'s')+' sin contactar</button>';
+  $('bPlan').hidden=!t;$('bPlan').textContent=t;$('bLeads').hidden=!l;$('bLeads').textContent=l;
+}
+function checkIcon(ok){return ok===null?'<b class="na">·</b>':ok?'<b class="ok">✓</b>':'<b class="ko">✗</b>'}
+function renderSedes(){
+  var r=rep();if(!r||!r.sedes)return;
+  $('sedes').innerHTML=r.sedes.filter(function(s){return s.id!=='otras'}).map(function(s){
+    var L=LABEL[s.obj],pct=s.goal?Math.min(100,Math.round((s.m7.res||0)/s.goal*100)):0,col=s.score>=70?'ok':s.score>=45?'':'ko';
+    var ls=LEADS&&LEADS.stats&&LEADS.stats[s.id];
+    return '<button class="sd" data-sede="'+esc(s.id)+'"><div class="top"><span class="nm">'+esc(s.name)+'</span><span class="sc '+col+'">'+s.score+'%</span></div>'+
+      '<div class="big">'+num(s.m7.res,0)+'<small>'+esc(L)+' · '+eur(s.m7.cpa)+'/'+LABEL1[s.obj]+'</small></div>'+
+      (s.goal?'<div class="bar"><i style="width:'+pct+'%;background:'+(pct>=100?'var(--green)':'var(--navy)')+'"></i></div><div class="muted">'+esc(s.goalText)+'</div>':'')+
+      '<ul class="checks">'+s.checks.map(function(c){return '<li>'+checkIcon(c.ok)+'<span>'+esc(c.label)+'</span></li>'}).join('')+'</ul>'+
+      (s.extraDaily&&s.activeSets?'<div class="tip">≈ +'+eur(s.extraDaily,0)+'/día para llegar a la meta</div>':'')+
+      (!s.activeSets?'<div class="tip">Sin campaña activa</div>':'')+
+      (ls&&ls.pending?'<div class="tip" style="color:var(--red)">'+ls.pending+' lead'+(ls.pending>1?'s':'')+' sin contactar</div>':'')+'</button>';
+  }).join('');
+}
+function chart(d,key,L){
+  if(!d.length)return '<div class="muted" style="padding:30px;text-align:center">Sin datos todavía.</div>';
+  var W=600,H=150,P=8,bw=(W-P*2)/d.length;
+  var sp=function(x){return x.spend||0},ms=Math.max.apply(null,d.map(sp))||1,mr=Math.max.apply(null,d.map(function(x){return x.res||0}))||1;
+  var bars=d.map(function(x,i){var h=(H-P*2)*sp(x)/ms;return '<rect x="'+(P+i*bw+1)+'" y="'+(H-P-h)+'" width="'+Math.max(1,bw-2)+'" height="'+h+'" rx="2" fill="rgba(13,53,80,.22)"><title>'+esc(x[key])+': '+eur(sp(x))+' · '+num(x.res)+' '+esc(L)+'</title></rect>'}).join('');
+  var pts=d.map(function(x,i){return (P+i*bw+bw/2)+','+(H-P-(H-P*2)*(x.res||0)/mr)}).join(' ');
+  var lab=function(s){var p=String(s).split('-');return p[2]+'/'+p[1]};
+  return '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" role="img" aria-label="Inversión y resultados">'+bars+'<polyline points="'+pts+'" fill="none" stroke="#B8922A" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>'+
+    '<div class="muted" style="display:flex;justify-content:space-between;font-size:11px;padding:2px 4px 0"><span>'+lab(d[0][key])+'</span><span>máx. '+eur(ms,0)+' · '+num(mr)+' '+esc(L)+'</span><span>'+lab(d[d.length-1][key])+'</span></div>';
+}
+document.addEventListener('click',function(e){
+  var t=e.target.closest('[data-go],[data-sede],[data-run],[data-ap],[data-tk],[data-un],[data-q],[data-cp],[data-adj],[data-rw],[data-lc],[data-wz],[data-lq],[data-lwa],[data-ask]');if(!t)return;
+  if(t.dataset.go){go(t.dataset.go);return}
+  if(t.dataset.sede&&t.classList.contains('sd')){F.sede=t.dataset.sede;renderSedeDetail();go('sede');return}
+  if(t.dataset.run!==undefined){run(t);return}
+  if(t.dataset.ap){act('/approve',{id:t.dataset.ap},t);return}
+  if(t.dataset.un){act('/undo',{id:t.dataset.un},t);return}
+  if(t.dataset.tk){task(t);return}
+  if(t.dataset.q){quick(t);return}
+  if(t.dataset.cp){adCopy(t.dataset.cp);return}
+  if(t.dataset.adj){var box=$('adj-'+t.dataset.adj);box.hidden=!box.hidden;return}
+  if(t.dataset.rw){rewrite(t);return}
+  if(t.dataset.lc){launch(t);return}
+  if(t.dataset.wz){openWizard(t.dataset.wz,t.dataset.ad);return}
+  if(t.dataset.lq!==undefined&&t.dataset.lid){leadMark(t.dataset.lid,{q:t.dataset.lq},t);return}
+  if(t.dataset.lwa){leadMark(t.dataset.lwa,{contacted:true});return}
+  if(t.dataset.ask){ask(t.dataset.ask);return}
+});
+function act(path,body,btn){
+  busy(btn,true);
+  api(path,body).then(function(r){var a=r.action;toast(a.status==='done'?'Hecho: '+(a.result||''):a.status==='failed'?'No se pudo: '+a.error:a.status==='undone'?'Deshecho':'Listo',a.status==='failed');return load()})
+  .catch(function(e){toast(e.message,1);busy(btn,false)});
+}
+function run(btn){
+  var t0=Date.now(),iv;busy(btn,true,'Analizando… 0 s');
+  iv=setInterval(function(){btn.innerHTML='<span class="spin"></span>Analizando… '+Math.round((Date.now()-t0)/1000)+' s'},1000);
+  api('/run',{email:$('runMail').checked}).then(function(r){toast('Análisis listo'+(r.emailed?' · email '+r.emailed:''));return load()})
+  .catch(function(e){toast(e.message,1)}).then(function(){clearInterval(iv);busy(btn,false)});
+}
+
+/* ── 🛠️ PLAN ── */
+function renderFilter(el,cur,cb){
+  var opts=[['all','Todas']].concat(sedes().map(function(s){return [s.id,s.name]}));
+  el.innerHTML=opts.map(function(o){return '<button class="chip'+(o[0]===cur?' on':'')+'" data-f="'+esc(o[0])+'">'+esc(o[1])+'</button>'}).join('');
+  qa('.chip',el).forEach(function(b){b.onclick=function(){cb(b.dataset.f)}});
+}
+function prio(a){return a.priority===0||a.when==='hoy'?'🔴':a.when==='esta semana'?'🟠':'⚪'}
+function taskCard(a){
+  var st=a.status,ex=EXEC.indexOf(a.type)>=0,btns='';
+  if(st==='pending'){
+    if(ex)btns='<button class="btn btn-p btn-sm" data-ap="'+a.id+'">⚡ Hacerlo ya</button>';
+    else if(a.type==='LAUNCH')btns='<button class="btn btn-p btn-sm" data-wz="'+esc(a.sede)+'">🚀 Crear campaña</button><button class="btn btn-s btn-sm" data-tk="done" data-id="'+a.id+'">✅ Hecho</button>';
+    else btns='<button class="btn btn-s btn-sm" data-tk="done" data-id="'+a.id+'">✅ Hecho</button><button class="btn btn-s btn-sm" data-tk="other" data-id="'+a.id+'">🔄 Otra</button>';
+    btns+='<button class="btn btn-s btn-sm" data-tk="reject" data-id="'+a.id+'">❌ No me sirve</button>';
+  } else if(st==='done'&&a.undo)btns='<button class="btn-link" data-un="'+a.id+'">Deshacer</button>';
+  var steps=(a.steps||[]).length?'<details'+(st==='pending'?' open':'')+'><summary>Cómo hacerlo ▾</summary><ol>'+a.steps.map(function(s){return '<li>'+esc(s)+'</li>'}).join('')+'</ol></details>':'';
+  return '<div class="task'+(st!=='pending'?' done':'')+'"><div class="hd"><span class="pr">'+prio(a)+'</span><span class="tag gold">'+esc(KIND[a.type]||a.type)+'</span>'+(a.sede&&a.sede!=='todas'?'<span class="tag">'+esc(sedeName(a.sede))+'</span>':'')+
+    '<span class="tag">'+esc(st==='pending'?(a.when||'esta semana'):(a.auto&&st==='done'?'Hecho automáticamente':STATUS[st]||st))+'</span></div>'+
+    '<div class="ti">'+esc(a.title||a.target_name)+'</div><div>'+esc(a.why)+'</div>'+(a.impact?'<div class="i">→ '+esc(a.impact)+'</div>':'')+
+    (a.pct&&(a.type==='SCALE_UP'||a.type==='SCALE_DOWN')?'<div class="i">Cambio: '+(a.type==='SCALE_DOWN'?'−':'+')+a.pct+'% del presupuesto diario de "'+esc(a.target_name)+'"</div>':'')+
+    (a.variant?'<div class="var">'+esc(a.variant.primary_text)+'\n<b>'+esc(a.variant.headline)+'</b> · '+esc(a.variant.description)+'</div>':'')+steps+
+    (a.result&&st!=='pending'?'<div class="i">'+esc(a.result)+'</div>':'')+(a.error?'<div class="i" style="color:var(--red)">'+esc(a.error)+'</div>':'')+
+    (btns?'<div class="row">'+btns+'</div>':'')+'</div>';
+}
+function renderPlan(){
+  renderFilter($('planF'),F.plan,function(v){F.plan=v;renderPlan()});
+  var fil=function(a){return F.plan==='all'||a.sede===F.plan||a.sede==='todas'};
+  var P=pendingTasks().filter(fil).sort(function(a,b){return (a.priority||9)-(b.priority||9)});
+  $('tasks').innerHTML=P.length?P.map(taskCard).join(''):'<div class="empty">'+(rep()?'Nada pendiente. Buen trabajo.':'Pulsa "Analizar ahora" en Resumen para tener tu plan.')+'</div>';
+  var D=STATE.actions.filter(function(a){return ['done','failed','undone'].indexOf(a.status)>=0&&Date.now()-(a.doneAt||a.ts)<14*86400000}).filter(fil).slice(0,20);
+  $('doneTasks').innerHTML=D.length?D.map(taskCard).join(''):'<div class="muted">Todavía nada.</div>';
+  var L=STATE.learnings||[];
+  $('learn').innerHTML=L.length?L.map(function(l){return '<li><b class="v-'+esc(l.verdict)+'">'+(l.verdict==='bien'?'✓':l.verdict==='mal'?'✗':'·')+'</b> '+esc(l.text)+' <span class="muted">'+ago(l.ts)+'</span></li>'}).join(''):'<li class="muted" style="list-style:none;margin-left:0">Cada acción se evalúa a los 7 días: aquí verás qué funcionó y cómo se autoajusta. También aprende de lo que marcas como ❌.</li>';
+}
+function task(b){
+  var mark=b.dataset.tk,id=b.dataset.id,note='';
+  if(mark==='reject'){note=prompt('¿Por qué no te sirve? (opcional, ayuda a que aprenda)','');if(note===null)return}
+  if(mark==='other'){note=prompt('¿Qué prefieres? (opcional)','');if(note===null)return}
+  busy(b,true,mark==='other'?'Pensando…':'');
+  api('/task',{id:id,mark:mark,note:note}).then(function(r){toast(mark==='done'?'¡Hecho!':mark==='reject'?'Entendido: no te lo volverá a proponer':'Nueva propuesta: '+r.action.title);return load()})
+  .catch(function(e){toast(e.message,1);busy(b,false)});
+}
+
+/* ── ✍️ ANUNCIOS ── */
+function adText(v){return v.primary_text+'\n\n'+v.headline+'\n'+v.description}
+function renderAds(){
+  var r=rep(),A=(r&&r.adsReady)||[];
+  var base={};(r&&r.sedes||[]).forEach(function(s){base[s.id]=s.bestAdId});
+  $('adsReady').innerHTML=A.length?A.map(function(v){
+    var can=!!base[v.sede];
+    return '<div class="ad"><div class="row"><span class="tag">'+esc(sedeName(v.sede))+'</span><span class="tag gold">'+esc(v.angle)+'</span></div>'+
+      '<div class="tx">'+esc(v.primary_text)+'</div><div class="hl">'+esc(v.headline)+' <span class="muted">· '+esc(v.description)+'</span></div>'+
+      (v.image_hint?'<div class="img">📷 '+esc(v.image_hint)+'</div>':'')+
+      '<div class="row"><button class="btn btn-s btn-sm" data-cp="'+v.id+'">📋 Copiar</button><button class="btn btn-s btn-sm" data-adj="'+v.id+'">✏️ Ajustar con IA</button>'+
+      (can?'<button class="btn btn-p btn-sm" data-lc="'+v.id+'">🚀 Lanzar en '+esc(sedeName(v.sede))+'</button>':'<button class="btn btn-p btn-sm" data-wz="'+esc(v.sede)+'" data-ad="'+v.id+'">🚀 Crear campaña con este texto</button>')+'</div>'+
+      '<div class="adjust" id="adj-'+v.id+'" hidden><div class="chips">'+['Más corto','Más urgencia','Menciona el precio','En catalán','En inglés'].map(function(x){return '<button class="chip" data-rw="'+v.id+'" data-i="'+esc(x)+'">'+esc(x)+'</button>'}).join('')+'</div>'+
+      '<div class="ask"><input id="adi-'+v.id+'" placeholder="O escribe: menciona la temporada de esquí…"><button class="btn btn-s btn-sm" data-rw="'+v.id+'">Rehacer</button></div></div></div>';
+  }).join(''):'<div class="empty">'+(r?'Los anuncios listos aparecen tras el análisis con IA (el de los lunes o "Analizar ahora").':'Pulsa "Analizar ahora" en Resumen.')+'</div>';
+}
+function findAd(id){return ((rep()&&rep().adsReady)||[]).filter(function(x){return x.id===id})[0]}
+function adCopy(id){var v=findAd(id);if(v)copy(adText(v))}
+function rewrite(b){
+  var id=b.dataset.rw,v=findAd(id),ins=b.dataset.i||($('adi-'+id)&&$('adi-'+id).value.trim());
+  if(!ins){toast('Escribe cómo quieres cambiarlo',1);return}
+  busy(b,true);
+  api('/rewrite',{variant:v,instruction:ins}).then(function(r){var n=r.variant;v.angle=n.angle||v.angle;v.primary_text=n.primary_text;v.headline=n.headline;v.description=n.description;renderAds();toast('Rehecho: '+ins)})
+  .catch(function(e){toast(e.message,1);busy(b,false)});
+}
+function launch(b){
+  var v=findAd(b.dataset.lc);if(!v)return;
+  if(!confirm('Se publicará este anuncio en '+sedeName(v.sede)+' junto a tu mejor anuncio de la sede (misma foto y público). ¿Lanzar?'))return;
+  busy(b,true,'Lanzando…');
+  api('/launch',{sede:v.sede,variant:v}).then(function(r){toast(r.action.result);return load()}).catch(function(e){toast(e.message,1);busy(b,false)});
+}
+
+/* Crear campaña (asistente) */
+var W={obj:'leads',geo:'sitges',img:'',vars:[],sede:''};
+var INTL=['GB','FR','DE','NL','BE','CH','SE','NO','DK','IE','IT','US','AE'];
+function openWizard(sede,adId){
+  go('ads');var box=$('wizBox');box.open=true;
+  if(sede&&sede!=='todas'){W.sede=sede;var chip=document.querySelector('#wGeo .chip[data-v="'+sede+'"]');if(chip)chip.click();$('wName').value=$('wName').value||('Leads · '+sedeName(sede))}
+  var v=adId&&findAd(adId);if(v){$('wText').value=v.primary_text;$('wHead').value=v.headline;$('wDesc').value=v.description;wPreview()}
+  setTimeout(function(){box.scrollIntoView({behavior:'smooth',block:'start'})},50);
+}
+qa('#wObj .opt').forEach(function(o){o.onclick=function(){W.obj=o.dataset.v;qa('#wObj .opt').forEach(function(x){x.classList.toggle('on',x===o)});$('wFormStep').hidden=W.obj!=='leads';wEstimate();wPreview()}});
+qa('#wGeo .chip').forEach(function(o){o.onclick=function(){W.geo=o.dataset.v;if(sedes().some(function(s){return s.id===W.geo}))W.sede=W.geo;qa('#wGeo .chip').forEach(function(x){x.classList.toggle('on',x===o)});var c=W.geo==='espana'||W.geo==='intl';$('wKmBox').hidden=c;$('wIntl').hidden=W.geo!=='intl';wEstimate()}});
+$('wBud').oninput=wEstimate;$('wKm').onchange=wEstimate;
+function targetFor(o){var r=rep();return (r&&r.targets&&r.targets[o])||(o==='leads'?30:0.6)}
+function wEstimate(){
+  var b=+$('wBud').value,T=targetFor(W.obj),wk=b*7/T;$('wBudV').textContent=b+' €';
+  var lo=Math.max(0,Math.floor(wk*0.7)),hi=Math.ceil(wk*1.3);
+  $('wEst').innerHTML='≈ <b>'+eur(b*30.4,0)+'/mes</b>. Con tu coste actual ('+eur(T)+' por '+LABEL1[W.obj]+') serían unos <b>'+lo+'–'+hi+' '+LABEL[W.obj]+' por semana</b>.'+(W.obj==='leads'&&b<15?'<br><span class="muted">Consejo: por debajo de 15 €/día Meta tarda más en aprender.</span>':'');
+  wSummary();
+}
+$('wDrop').onclick=function(){$('wFile').click()};
+$('wDrop').ondragover=function(e){e.preventDefault()};
+$('wDrop').ondrop=function(e){e.preventDefault();if(e.dataTransfer.files[0])readImg(e.dataTransfer.files[0])};
+$('wFile').onchange=function(){if(this.files[0])readImg(this.files[0])};
+function readImg(f){var rd=new FileReader();rd.onload=function(){var im=new Image();im.onload=function(){var max=1440,s=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext('2d').drawImage(im,0,0,c.width,c.height);W.img=c.toDataURL('image/jpeg',0.88);$('wDrop').innerHTML='<img src="'+W.img+'" alt="">';wPreview()};im.src=rd.result};rd.readAsDataURL(f)}
+$('wAi').onclick=function(){
+  var brief=$('wBrief').value.trim(),b=this;if(!brief){toast('Describe en 2 líneas qué anuncias',1);return}
+  busy(b,true,'Escribiendo…');
+  api('/copy',{brief:brief,objective:W.obj}).then(function(r){W.vars=r.variants;$('wVars').innerHTML=r.variants.map(function(v,i){return '<div class="variant" data-i="'+i+'"><em>'+esc(v.angle)+'</em>'+esc(v.primary_text)+'\n<b>'+esc(v.headline)+'</b> · '+esc(v.description)+'</div>'}).join('')+'<p class="muted">Elige una (luego puedes retocarla).</p>';pickVar(0)})
+  .catch(function(e){toast(e.message,1)}).then(function(){busy(b,false)});
+};
+$('wVars').onclick=function(e){var v=e.target.closest('.variant');if(v)pickVar(+v.dataset.i)};
+function pickVar(i){var v=W.vars[i];if(!v)return;qa('#wVars .variant').forEach(function(x){x.classList.toggle('on',+x.dataset.i===i)});$('wText').value=v.primary_text;$('wHead').value=v.headline;$('wDesc').value=v.description;wPreview()}
+['wText','wHead','wDesc','wName'].forEach(function(id){$(id).addEventListener('input',function(){wPreview();wSummary()})});
+function wPreview(){$('pvImg').style.backgroundImage=W.img?'url('+W.img+')':'';$('pvHead').textContent=$('wHead').value||'Tu titular';$('pvText').textContent=$('wText').value||'Aquí irá el texto del anuncio.'}
+function geoPayload(){if(W.geo==='espana')return {type:'countries',countries:['ES']};if(W.geo==='intl')return {type:'countries',countries:INTL};return {type:'radius',place:W.geo,km:+$('wKm').value}}
+function wSummary(){
+  var on=$('wGeo').querySelector('.on'),g=W.geo==='espana'?'Toda España':W.geo==='intl'?'Internacional ('+INTL.length+' países)':(on?on.textContent:'')+' + '+$('wKm').value+' km';
+  $('wSum').innerHTML='<b>'+(W.obj==='leads'?'Leads':'Visitas web')+'</b> · '+esc(g)+' · <b>'+$('wBud').value+' €/día</b><br><span class="muted">Público: Meta encuentra a los interesados (sin intereses manuales). Ubicaciones automáticas: Instagram + Facebook.</span>';
+}
+function loadForms(){if(!STATE||W.formsLoaded)return;W.formsLoaded=1;api('/forms').then(function(r){var s=$('wForm');(r.forms||[]).forEach(function(f){var o=document.createElement('option');o.value=f.id;o.textContent=f.name;s.appendChild(o)})}).catch(function(){})}
+function create(activate,btn){
+  var body={objective:W.obj,name:$('wName').value.trim(),dailyBudget:+$('wBud').value,geo:geoPayload(),sede:W.sede,image:W.img,primaryText:$('wText').value.trim(),headline:$('wHead').value.trim(),description:$('wDesc').value.trim(),link:$('wLink').value.trim()||(STATE&&STATE.settings.website)||'',formId:W.obj==='leads'?$('wForm').value:'',housing:$('wHousing').checked,activate:activate};
+  if(!body.image){toast('Sube una imagen',1);return}
+  if(!body.primaryText||!body.headline){toast('Falta el texto (o pulsa "Escribir textos con IA")',1);return}
+  if(activate&&!confirm('Se lanzará ya y empezará a gastar '+body.dailyBudget+' €/día. ¿Seguro?'))return;
+  busy(btn,true,'Creando…');$('wRes').innerHTML='';
+  api('/create',body).then(function(r){
+    $('wRes').innerHTML='<div class="est" style="background:#EEF6F1"><b class="ok">✓ Campaña creada'+(r.active?' y activa':' en pausa')+'.</b><br>'+(r.active?'Empieza a publicarse cuando Meta apruebe el anuncio (normalmente &lt; 24 h).':'Revísala y actívala desde "Sedes" o en Meta.')+'<br><a href="'+esc(r.url)+'" target="_blank" rel="noopener">Abrir en el Administrador de anuncios →</a></div>';
+    load();
+  }).catch(function(e){$('wRes').innerHTML='<div class="est" style="background:#FBEFEC"><b class="ko">No se pudo crear:</b> '+esc(e.message)+'</div>'}).then(function(){busy(btn,false)});
+}
+$('wCreate').onclick=function(){create(false,this)};
+$('wLaunch').onclick=function(){create(true,this)};
+
+/* ── 📲 LEADS ── */
+function me(){return ls('dc_ads_me')||(STATE&&STATE.settings.comercial)||''}
+function waLink(l){
+  var t=(STATE&&STATE.settings.waTemplate)||'Hola {nombre}, soy {comercial} de Durán Carasso. ¿Te va bien que te llame hoy?';
+  var msg=t.replace(/\{nombre\}/g,(l.name||'').split(' ')[0]).replace(/\{comercial\}/g,me()||'el equipo').replace(/\{sede\}/g,sedeName(l.sede));
+  return 'https://wa.me/'+String(l.phone||'').replace(/[^\d]/g,'')+'?text='+encodeURIComponent(msg);
+}
+function renderLeads(){
+  if(!LEADS){$('leads').innerHTML='<div class="empty">Cargando…</div>';return}
+  var T=LEADS.total||{},spend=rep()?rep().sedes.reduce(function(s,x){return s+(x.obj==='leads'?x.m7.spend||0:0)},0):0;
+  $('lStats').innerHTML=[
+    [num(T.n,0),'Leads 7 días',''],[num(T.pending,0),'Sin contactar',T.pending?'down':''],
+    [T.fastPct==null?'—':T.fastPct+'%','Contactados en < 1 h',T.fastPct>=80?'up':T.fastPct!=null?'down':''],
+    [T.goodPct==null?'—':T.goodPct+'%','Leads buenos','' ],[T.good?eur(spend/T.good):'—','Coste por lead bueno','']
+  ].map(function(x){return '<div class="kpi"><div class="v '+x[2]+'">'+x[0]+'</div><div class="l">'+x[1]+'</div></div>'}).join('');
+  renderFilter($('leadF'),F.lead,function(v){F.lead=v;renderLeads()});
+  var only=$('onlyNew').checked;
+  var L=LEADS.items.filter(function(l){return (F.lead==='all'||l.sede===F.lead)&&(!only||!l.contactedAt)});
+  $('leads').innerHTML=L.length?L.slice(0,80).map(function(l){
+    var late=!l.contactedAt&&Date.now()-l.ts>3600000;
+    return '<div class="lead'+(!l.contactedAt?' new':'')+'"><div class="row"><span class="nm">'+esc(l.name||'Sin nombre')+'</span><span class="tag">'+esc(sedeName(l.sede))+'</span>'+
+      '<span class="tag '+(late?'red':'')+'">'+ago(l.ts)+'</span>'+(l.contactedAt?'<span class="tag green">Contactado '+ago(l.contactedAt)+'</span>':'')+'<span class="sp"></span><span class="muted" style="font-size:11.5px">'+esc(l.ad||l.campaign)+'</span></div>'+
+      (l.answers||[]).map(function(a){return '<div class="qa"><b>'+esc(a.q)+':</b> '+esc(a.a)+'</div>'}).join('')+
+      '<div class="row">'+(l.phone?'<a class="btn btn-w btn-sm" target="_blank" rel="noopener" href="'+esc(waLink(l))+'" data-lwa="'+esc(l.id)+'">📲 WhatsApp</a><a class="btn btn-s btn-sm" href="tel:'+esc(l.phone)+'" data-lwa="'+esc(l.id)+'">📞 Llamar</a>':'')+
+      (l.email?'<a class="btn btn-s btn-sm" href="mailto:'+esc(l.email)+'" data-lwa="'+esc(l.id)+'">✉️ Email</a>':'')+
+      '<span class="sp"></span><span class="qsel">'+Object.keys(Q).map(function(k){return '<button class="'+(l.q===k?'on':'')+'" data-lid="'+esc(l.id)+'" data-lq="'+(l.q===k?'':k)+'">'+Q[k]+'</button>'}).join('')+'</span></div></div>';
+  }).join(''):'<div class="empty">'+(LEADS.items.length?'Nada con este filtro.':'Aún no hay leads. Pulsa "Traer leads nuevos" (necesita la página de Facebook conectada).')+'</div>';
+}
+$('onlyNew').onchange=renderLeads;
+$('lSync').onclick=function(){var b=this;busy(b,true,'Trayendo…');api('/leads?sync=1').then(function(d){LEADS=d;renderLeads();renderWeek();renderSedes();toast(d.total.n+' leads en 7 días')}).catch(function(e){toast(e.message,1)}).then(function(){busy(b,false)})};
+function leadMark(id,body,btn){
+  body.id=id;
+  api('/lead',body).then(function(r){var l=LEADS.items.filter(function(x){return x.id===id})[0];if(l){l.q=r.lead.q;l.contactedAt=r.lead.contactedAt}return api('/leads')}).then(function(d){LEADS=d;renderLeads();renderWeek();renderSedes()}).catch(function(e){toast(e.message,1)});
+}
+
+/* ── 🔍 COMPETENCIA ── */
+function libLink(term){return 'https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ES&search_type=keyword_unordered&q='+encodeURIComponent(term)}
+function compBox(sd,c,notes,max){
+  var term=(c&&c.term)||sd.market||sd.name;
+  var inner='';
+  if(!c)inner='<p class="muted">Sin datos todavía. Pulsa "Actualizar".</p>';
+  else if(c.error)inner='<p class="muted">No se pudo leer la Biblioteca de anuncios ('+esc(c.error)+'). Suele ser porque falta <b>confirmar tu identidad</b> en facebook.com/ID. Mientras tanto: <a href="'+libLink(term)+'" target="_blank" rel="noopener">ver en la Biblioteca →</a></p>';
+  else if(!c.pages.length)inner='<p class="muted">Nadie anuncia vivienda en '+esc(term)+' ahora mismo. Oportunidad: el espacio es tuyo.</p>';
+  else{var mx=Math.max.apply(null,c.pages.map(function(p){return p.ads}));inner=c.pages.slice(0,max||8).map(function(p){return '<div class="crow"><span><b style="color:var(--navy)">'+esc(p.name)+'</b></span><span class="cb"><i style="width:'+Math.round(p.ads/mx*100)+'%"></i></span><span class="muted">'+p.ads+' anuncio'+(p.ads>1?'s':'')+' · '+p.days+' d</span>'+(p.hook?'<span class="hk">“'+esc(p.hook)+'” '+(p.url?'<a href="'+esc(p.url)+'" target="_blank" rel="noopener">ver</a>':'')+'</span>':'')+'</div>'}).join('')}
+  return inner+(notes?'<div class="note"><b>Cómo diferenciarte:</b> '+esc(notes)+'</div>':'');
+}
+function renderComp(){
+  var r=rep(),notes={};(r&&r.sedes||[]).forEach(function(s){notes[s.id]=s.compNote});
+  $('comp').innerHTML=sedes().map(function(sd){var c=COMP&&COMP.sedes&&COMP.sedes[sd.id];return '<div class="cbox"><div class="row" style="justify-content:space-between"><h3>'+esc(sd.name)+'</h3><a class="muted" href="'+libLink((c&&c.term)||sd.market||sd.name)+'" target="_blank" rel="noopener">Biblioteca de anuncios ↗</a></div>'+compBox(sd,c,notes[sd.id])+'</div>'}).join('')+
+    (COMP&&COMP.ts?'<p class="muted">Actualizado '+ago(COMP.ts)+'</p>':'');
+}
+$('cRefresh').onclick=function(){var b=this;busy(b,true,'Buscando…');api('/competition?refresh=1').then(function(d){COMP=d;renderComp();renderSedeDetail()}).catch(function(e){toast(e.message,1)}).then(function(){busy(b,false)})};
+
+/* ── 📍 SEDES ── */
+function renderSedeDetail(){
+  var r=rep();if(!r||!r.sedes){$('sedeBody').innerHTML='<div class="empty">Pulsa "Analizar ahora" en Resumen.</div>';return}
+  var list=r.sedes;
+  $('sedeF').innerHTML=list.map(function(s){return '<button class="chip'+(s.id===F.sede?' on':'')+'" data-f="'+esc(s.id)+'">'+esc(s.name)+'</button>'}).join('');
+  qa('#sedeF .chip').forEach(function(b){b.onclick=function(){F.sede=b.dataset.f;renderSedeDetail()}});
+  var s=list.filter(function(x){return x.id===F.sede})[0]||list[0];if(!s)return;F.sede=s.id;
+  var L=LABEL[s.obj],L1=LABEL1[s.obj],ld=s.leads;
+  var kp=[[eur(s.spendAll,0),'Invertido 7d'],[num(s.m7.res,0),L+' 7d'],[eur(s.m7.cpa),'Coste por '+L1],[eur(s.budgetDaily,0),'Presupuesto/día'],[num(s.activeAds,0),'Anuncios activos']];
+  var html='<div class="kpis">'+kp.map(function(x){return '<div class="kpi"><div class="v">'+x[0]+'</div><div class="l">'+esc(x[1])+'</div></div>'}).join('')+'</div>';
+  html+='<h2>Checklist · '+s.score+'% <span class="aux">'+esc(s.goalText)+'</span></h2><div class="card"><ul class="checks" style="font-size:13.5px;gap:6px">'+s.checks.map(function(c){return '<li>'+checkIcon(c.ok)+'<span>'+esc(c.label)+(c.ok===null?' <span class="muted">(sin datos aún)</span>':'')+'</span></li>'}).join('')+'</ul>'+
+    (s.extraDaily&&s.activeSets?'<p class="tip" style="color:var(--gold);margin-top:10px">Para llegar a la meta: ≈ +'+eur(s.extraDaily,0)+'/día manteniendo el coste actual.</p>':'')+
+    (!s.activeSets?'<p style="margin-top:10px"><button class="btn btn-p btn-sm" data-wz="'+esc(s.id)+'">🚀 Crear campaña en '+esc(s.name)+'</button></p>':'')+
+    (ld&&ld.n?'<p class="muted" style="margin-top:8px">'+ld.n+' leads · '+ld.pending+' sin contactar · '+(ld.goodPct==null?'calidad sin marcar':ld.goodPct+'% buenos')+(s.cpaGood?' · '+eur(s.cpaGood)+' por lead bueno':'')+'</p>':'')+'</div>';
+  html+='<h2>Evolución semanal <span class="aux">8 semanas</span></h2><div class="chart"><div class="legend"><span><i style="background:rgba(13,53,80,.22)"></i>Inversión</span><span><i style="background:var(--gold)"></i>'+esc(L)+'</span></div>'+chart((s.weeks||[]).map(function(w){return {w:w.w,spend:w.spend,res:w.res}}),'w',L)+'</div>';
+  var sd=sedes().filter(function(x){return x.id===s.id})[0]||{name:s.name};
+  html+='<h2>Competencia en '+esc(s.name)+'</h2><div class="cbox">'+compBox(sd,COMP&&COMP.sedes&&COMP.sedes[s.id],s.compNote,4)+'</div>';
+  html+='<h2>Campañas, conjuntos y anuncios</h2><div class="tblw"><table class="tbl">'+campRows(s.id)+'</table></div>';
+  $('sedeBody').innerHTML=html;
+}
+function campRows(sedeId){
+  var r=rep(),act=function(x){return x.status==='ACTIVE'||(x.m7&&x.m7.spend>0)};
+  var h='<tr><th>Nombre</th><th>Presup./día</th><th>Invertido 7d</th><th>Resultados</th><th>Coste</th><th>CTR</th><th>Frec.</th><th></th></tr>';
+  var cells=function(x,lvl,holder){var m=x.m7||{};return '<td>'+eur(x.daily,0)+'</td><td>'+eur(m.spend,0)+'</td><td>'+num(m.res,0)+'</td><td>'+eur(m.cpa)+'</td><td>'+(m.ctr!=null?num(m.ctr,2)+'%':'—')+'</td><td>'+num(m.freq)+'</td><td><span class="mini">'+
+    (x.status==='ACTIVE'?'<button data-q="PAUSE" data-id="'+x.id+'" data-n="'+esc(x.name)+'" data-l="'+lvl+'">Pausar</button>':'<button data-q="ACTIVATE" data-id="'+x.id+'" data-n="'+esc(x.name)+'" data-l="'+lvl+'">Activar</button>')+
+    (holder&&x.daily?'<button data-q="BUDGET" data-p="-20" data-id="'+x.id+'" data-n="'+esc(x.name)+'" data-l="'+lvl+'">−20%</button><button data-q="BUDGET" data-p="20" data-id="'+x.id+'" data-n="'+esc(x.name)+'" data-l="'+lvl+'">+20%</button>':'')+'</span></td>'};
+  var nm=function(x){return '<span class="dot f-'+esc(x.flag||'idle')+'"></span>'+esc(x.name)+(x.status!=='ACTIVE'?' <span class="tag">'+esc(String(x.status).toLowerCase().replace(/_/g,' '))+'</span>':'')+(x.learning==='LEARNING'?' <span class="tag">aprendiendo</span>':'')};
+  var sets=r.adsets.filter(function(s){return s.sede===sedeId&&act(s)});
+  var cids={};sets.forEach(function(s){cids[s.campaign_id]=1});
+  var C=r.campaigns.filter(function(c){return cids[c.id]||(c.sede===sedeId&&act(c))});
+  if(!C.length)return '<tr><td class="muted" style="padding:16px">Sin campañas activas en esta sede.</td></tr>';
+  C.forEach(function(c){
+    h+='<tr class="c"><td>'+nm(c)+'</td>'+cells(c,'campaign',true)+'</tr>';
+    sets.filter(function(s){return s.campaign_id===c.id}).forEach(function(s){
+      h+='<tr class="s"><td>'+nm(s)+'</td>'+cells(s,'adset',true)+'</tr>';
+      r.ads.filter(function(a){return a.adset_id===s.id&&act(a)}).forEach(function(a){h+='<tr class="a"><td>'+nm(a)+'</td>'+cells(a,'ad',false)+'</tr>'});
+    });
+  });
+  return h;
+}
+function quick(b){
+  var type=b.dataset.q,pct=+b.dataset.p||0,name=b.dataset.n;
+  var msg=type==='PAUSE'?'¿Pausar "'+name+'"?':type==='ACTIVATE'?'¿Activar "'+name+'"?':'¿'+(pct>0?'Subir':'Bajar')+' un '+Math.abs(pct)+'% el presupuesto de "'+name+'"?';
+  if(!confirm(msg))return;busy(b,true);
+  api('/quick',{type:type,id:b.dataset.id,name:name,level:b.dataset.l,pct:pct,sede:F.sede}).then(function(r){toast(r.action.result||'Hecho');return load()}).catch(function(e){toast(e.message,1);busy(b,false)});
+}
+
+/* ── 🤖 ASISTENTE ── */
+var CHAT=[];
+function renderSugg(){
+  var S=sedes(),weak=rep()&&rep().sedes?rep().sedes.filter(function(s){return s.id!=='otras'}).sort(function(a,b){return a.score-b.score})[0]:null;
+  var qs=['¿Qué hago primero esta semana?','¿Qué anuncio funciona mejor y por qué?','¿Estoy gastando bien el dinero?'];
+  if(weak)qs.splice(1,0,'¿Cómo consigo más leads en '+weak.name+'?');
+  $('sugg').innerHTML=qs.map(function(q){return '<button class="chip" data-ask="'+esc(q)+'">'+esc(q)+'</button>'}).join('');
+  if(!CHAT.length)$('chat').innerHTML='<div class="msg a">Hola. Tengo los datos de tus campañas, sedes, leads y competencia de esta semana. Pregúntame lo que quieras.</div>';
+}
+function renderChat(){$('chat').innerHTML=CHAT.map(function(m){return '<div class="msg '+(m.role==='user'?'u':'a')+'">'+esc(m.text)+'</div>'}).join('')}
+function ask(q){
+  q=(q||$('askQ').value).trim();if(!q)return;$('askQ').value='';
+  var hist=CHAT.slice(-6);CHAT.push({role:'user',text:q});CHAT.push({role:'a',text:'…'});renderChat();go('chat');
+  api('/ask',{q:q,history:hist}).then(function(r){CHAT[CHAT.length-1].text=r.answer;renderChat()}).catch(function(e){CHAT[CHAT.length-1].text='No pude responder: '+e.message;renderChat()});
+}
+$('askGo').onclick=function(){ask()};
+$('askQ').addEventListener('keydown',function(e){if(e.key==='Enter')ask()});
+
+/* ── ⚙️ AJUSTES ── */
+var MODE='copiloto',SEDES=[];
+qa('#sMode button').forEach(function(b){b.onclick=function(){MODE=b.dataset.v;qa('#sMode button').forEach(function(x){x.classList.toggle('on',x===b)})}});
+function renderSedesEdit(){
+  $('sSedes').innerHTML=SEDES.map(function(s,i){return '<div class="sedit"><div><label>Sede</label><input data-si="'+i+'" data-k="name" value="'+esc(s.name)+'"></div><div><label>Palabras clave en los nombres</label><input data-si="'+i+'" data-k="kw" value="'+esc(s.kw)+'" placeholder="sitges, calma"></div><div><label>Meta leads/sem</label><input type="number" min="0" data-si="'+i+'" data-k="goal" value="'+(s.goal||0)+'"></div><div><label>Zona (competencia)</label><input data-si="'+i+'" data-k="market" value="'+esc(s.market||'')+'"></div><button class="btn btn-s btn-sm" data-sdel="'+i+'" title="Quitar">✕</button></div>'}).join('');
+  qa('#sSedes input').forEach(function(inp){inp.oninput=function(){var s=SEDES[+inp.dataset.si];s[inp.dataset.k]=inp.dataset.k==='goal'?+inp.value||0:inp.value}});
+  qa('#sSedes [data-sdel]').forEach(function(b){b.onclick=function(){SEDES.splice(+b.dataset.sdel,1);renderSedesEdit()}});
+}
+$('sAddSede').onclick=function(){SEDES.push({name:'',kw:'',goal:0,market:''});renderSedesEdit()};
+function renderAj(){
+  var s=STATE.settings,r=rep();MODE=s.mode;
+  qa('#sMode button').forEach(function(x){x.classList.toggle('on',x.dataset.v===s.mode)});
+  SEDES=JSON.parse(JSON.stringify(s.sedes||[]));renderSedesEdit();
+  $('tLeads').value=s.targets.leads||0;$('tTraffic').value=s.targets.traffic||0;$('tMsg').value=s.targets.messages||0;
+  if(r&&r.targets){var a=[];Object.keys(r.autoT||{}).forEach(function(k){a.push(LABEL1[k]+': '+eur(r.targets[k]))});$('tAuto').textContent='0 = automático: el agente usa la media de tu propia cuenta'+(a.length?' (ahora: '+a.join(', ')+').':'.')}
+  $('sCap').value=s.maxDailySpend||0;$('sStep').value=s.stepPct;$('sCalm').value=s.calmDays;$('sFreq').value=s.freqCap;$('sCtr').value=s.minCtr;$('sKill').value=s.killMultiple;
+  $('sMails').value=s.emails||'';$('sDaily').checked=!!s.dailyEmail;$('sBiz').value=s.business||'';$('sVoice').value=s.voice||'';$('sWeb').value=s.website||'';$('sPriv').value=s.privacyUrl||'';$('sHousing').checked=!!s.housing;
+  $('sMe').value=me();$('sWa').value=s.waTemplate||'';
+  $('wHousing').checked=!!s.housing;if(!$('wLink').value)$('wLink').value=s.website||'';
+}
+$('sSave').onclick=function(){
+  var b=this;
+  if(MODE==='autopiloto'&&STATE.settings.mode!=='autopiloto'&&!confirm('En autopiloto el agente pausará anuncios y moverá presupuestos él solo (con los límites de abajo). ¿Activar?'))return;
+  ls('dc_ads_me',$('sMe').value.trim());
+  var body={mode:MODE,targets:{leads:+$('tLeads').value||0,traffic:+$('tTraffic').value||0,messages:+$('tMsg').value||0,sales:STATE.settings.targets.sales||0,reach:STATE.settings.targets.reach||0},
+    maxDailySpend:+$('sCap').value||0,stepPct:+$('sStep').value||20,calmDays:+$('sCalm').value||3,freqCap:+$('sFreq').value||3.5,minCtr:+$('sCtr').value||0.8,killMultiple:+$('sKill').value||2.5,
+    emails:$('sMails').value.trim(),dailyEmail:$('sDaily').checked,business:$('sBiz').value.trim(),voice:$('sVoice').value.trim(),website:$('sWeb').value.trim(),privacyUrl:$('sPriv').value.trim(),housing:$('sHousing').checked,
+    sedes:SEDES.filter(function(s){return s.name}),waTemplate:$('sWa').value.trim()};
+  busy(b,true);api('/settings',body).then(function(r){STATE.settings=r.settings;render();toast('Ajustes guardados. Pulsa "Analizar ahora" para aplicarlos.')}).catch(function(e){toast(e.message,1)}).then(function(){busy(b,false)});
+};
+
+/* ── DEMO (datos ficticios, sin conexión) ── */
+var DEMO_STATE=null;
+function demoState(){
+  var D=86400000,H=3600000,now=Date.now();
+  var daily=[];for(var i=30;i>0;i--){var sp=48+Math.round(18*Math.sin(i/3)+i%5*3);daily.push({d:new Date(now-i*D).toISOString().slice(0,10),spend:sp,res:Math.max(0,Math.round(sp/27+Math.cos(i)*1.2))})}
+  var weeks=function(base,step){var w=[];for(var i=8;i>0;i--)w.push({w:new Date(now-i*7*D).toISOString().slice(0,10),spend:base*7+i*9,res:Math.max(0,Math.round(base/step+(8-i)*0.6+Math.sin(i)*1.5))});return w};
+  var m=function(spend,res,ctr,freq){return {spend:spend,res:res,cpa:res?Math.round(spend/res*100)/100:null,ctr:ctr,freq:freq,cpm:12.4}};
+  var ck=function(a,b,c,d,e,f){var L=['Campaña activa','Coste por lead ≤ 31,50 €','Meta semanal','Anuncios frescos (≥ 2 y sin fatiga)','Leads contactados en < 1 h','≥ 40 % de leads buenos'];return [a,b,c,d,e,f].map(function(x,i){return {k:'k'+i,label:L[i],ok:x}})};
+  var sedesR=[
+    {id:'barcelona',name:'Barcelona',obj:'leads',m7:m(98,3,0.9,1.7),mp:m(90,4,1,1.6),spendAll:98,activeSets:1,activeAds:2,budgetDaily:14,bestAdId:'B1',goal:5,gap:2,checks:ck(true,true,false,true,false,null),score:60,leads:{n:3,pending:1,fastPct:33,marked:2,good:1,goodPct:50},goalText:'3 leads → meta 5 (+2)',extraDaily:9,weeks:weeks(14,9),compNote:'Los grandes venden "exclusividad" genérica; tú, barrio concreto y visita privada el mismo día.'},
+    {id:'sitges',name:'Sitges',obj:'leads',m7:m(361,14,1.14,2.3),mp:m(318,11,1.21,2.0),spendAll:361,activeSets:1,activeAds:3,budgetDaily:30,bestAdId:'A1',goal:17,gap:3,checks:ck(true,true,false,false,true,true),score:67,leads:{n:14,pending:2,fastPct:86,marked:9,good:5,goodPct:56},goalText:'14 leads → meta 17 (+3)',extraDaily:11,weeks:weeks(45,25),compNote:'Costa Prime anuncia vistas al mar desde hace 60 días; diferénciate con jardín privado y entrega 2027.'},
+    {id:'cerdanya',name:'Cerdanya',obj:'leads',m7:m(60,2,1.2,1.5),mp:m(55,1,1.1,1.4),spendAll:60,activeSets:1,activeAds:1,budgetDaily:10,bestAdId:'D1',goal:3,gap:1,checks:ck(true,true,false,false,true,null),score:60,leads:{n:2,pending:0,fastPct:100,marked:1,good:1,goodPct:100},goalText:'2 leads → meta 3 (+1)',extraDaily:4,weeks:weeks(8,20),compNote:'Nadie habla de la temporada de esquí con entrega inmediata: ese es tu hueco.'},
+    {id:'andorra',name:'Andorra',obj:'leads',m7:m(0,0,0,0),mp:m(0,0,0,0),spendAll:0,activeSets:0,activeAds:0,budgetDaily:0,bestAdId:'',goal:3,gap:3,checks:ck(false,null,false,null,null,null),score:0,leads:{n:0,pending:0,fastPct:null,marked:0,good:0,goodPct:null},goalText:'0 leads → meta 3 (+3)',extraDaily:0,weeks:[],compNote:'Pirineu Luxe domina con 7 anuncios de fiscalidad; entra con calidad de vida y colegio internacional.'}
+  ];
+  var leads=[
+    {id:'L1',ts:now-25*60000,name:'Laura Ejemplo',phone:'+34600000001',email:'laura@example.com',sede:'sitges',ad:'Calma_fachada_v4',answers:[{q:'qué tipo de vivienda buscas',a:'planta baja con jardín'},{q:'habitaciones',a:'3 habitaciones (785.000 € – 902.000 €)'}],q:'',contactedAt:0},
+    {id:'L2',ts:now-3*H,name:'Jordi Prova',phone:'+34600000002',email:'',sede:'sitges',ad:'Calma_vistas_v2',answers:[{q:'qué tipo de vivienda buscas',a:'ático dúplex'}],q:'',contactedAt:0},
+    {id:'L3',ts:now-20*H,name:'Anna Demo',phone:'+34600000003',email:'anna@example.com',sede:'barcelona',ad:'BCN_Eixample_v1',answers:[{q:'presupuesto',a:'1-1,5 M€'}],q:'bueno',contactedAt:now-19.5*H},
+    {id:'L4',ts:now-2*D,name:'Marc Ficticio',phone:'+34600000004',email:'',sede:'cerdanya',ad:'Chalet_montaña',answers:[{q:'cuándo quieres comprar',a:'este año'}],q:'visita',contactedAt:now-2*D+30*60000},
+    {id:'L5',ts:now-3*D,name:'Test Lead',phone:'+34600000005',email:'',sede:'sitges',ad:'Calma_interior_v1',answers:[],q:'malo',contactedAt:now-3*D+20*60000}
+  ];
+  return {
+    brand:'Durán Carasso',
+    settings:{mode:'copiloto',targets:{leads:0,traffic:0,messages:0,sales:0,reach:0},maxDailySpend:120,stepPct:20,killMultiple:2.5,freqCap:3.5,minCtr:0.8,calmDays:3,maxAutoPerDay:5,dailyEmail:true,emails:'direccion@example.com',business:'Inmobiliaria de lujo con sedes en Barcelona, Sitges, Cerdanya y Andorra.',voice:'Lujo sobrio, cercano y preciso.',website:'https://www.durancarasso.com',privacyUrl:'',housing:true,comercial:'',
+      waTemplate:'Hola {nombre}, soy {comercial} de Durán Carasso. Gracias por tu interés en {sede}. ¿Te va bien que te llame hoy y te cuento los detalles?',
+      sedes:[{id:'barcelona',name:'Barcelona',kw:'barcelona,bcn',goal:0,market:'Barcelona'},{id:'sitges',name:'Sitges',kw:'sitges',goal:0,market:'Sitges'},{id:'cerdanya',name:'Cerdanya',kw:'cerdanya,puigcerda',goal:0,market:'Cerdanya'},{id:'andorra',name:'Andorra',kw:'andorra',goal:0,market:'Andorra'}]},
+    report:{ts:now-3*H,trigger:'cron',account:{name:'Durán Carasso',currency:'EUR',status:1},mainObj:'leads',targets:{leads:31.5,traffic:0.42},autoT:{leads:true,traffic:true},
+      kpi:{cur:{spend:519,spendAll:519,res:19,cpa:27.32,ctr:1.12,freq:2.1},prev:{spend:463,spendAll:463,res:16,cpa:28.94,ctr:1.18,freq:1.9}},
+      daily:daily,sedes:sedesR,
+      campaigns:[{id:'C1',name:'Prospecting_Leads_Sitges',obj:'leads',sede:'sitges',status:'ACTIVE',daily:null,m7:m(361,14,1.14,2.3),flag:'good'},{id:'C2',name:'Leads_BCN_Eixample',obj:'leads',sede:'barcelona',status:'ACTIVE',daily:14,m7:m(98,3,0.9,1.7),flag:'watch'},{id:'C3',name:'Leads_Cerdanya',obj:'leads',sede:'cerdanya',status:'ACTIVE',daily:null,m7:m(60,2,1.2,1.5),flag:'good'}],
+      adsets:[{id:'S1',name:'No_interests_Sitges_60km_SP',campaign_id:'C1',obj:'leads',sede:'sitges',status:'ACTIVE',daily:30,learning:'SUCCESS',m7:m(361,14,1.14,2.3),flag:'good'},{id:'S2',name:'BCN_Advantage',campaign_id:'C2',obj:'leads',sede:'barcelona',status:'ACTIVE',daily:null,m7:m(98,3,0.9,1.7),flag:'watch'},{id:'S3',name:'Puigcerdà_40km',campaign_id:'C3',obj:'leads',sede:'cerdanya',status:'ACTIVE',daily:10,m7:m(60,2,1.2,1.5),flag:'good'}],
+      ads:[{id:'A1',name:'Calma_fachada_v4',adset_id:'S1',obj:'leads',sede:'sitges',status:'ACTIVE',m7:m(151,12,1.5,1.8),flag:'good'},{id:'A2',name:'Calma_interior_v1',adset_id:'S1',obj:'leads',sede:'sitges',status:'ACTIVE',m7:m(120,0,0.44,1.9),flag:'bad'},{id:'A3',name:'Calma_vistas_v2',adset_id:'S1',obj:'leads',sede:'sitges',status:'ACTIVE',m7:m(90,2,1.0,4.2),flag:'bad'},{id:'B1',name:'BCN_Eixample_v1',adset_id:'S2',obj:'leads',sede:'barcelona',status:'ACTIVE',m7:m(60,2,1,1.7),flag:'good'},{id:'B2',name:'BCN_Eixample_v2',adset_id:'S2',obj:'leads',sede:'barcelona',status:'ACTIVE',m7:m(38,1,0.8,1.7),flag:'watch'},{id:'D1',name:'Chalet_montaña',adset_id:'S3',obj:'leads',sede:'cerdanya',status:'ACTIVE',m7:m(60,2,1.2,1.5),flag:'good'}],
+      adsReady:[
+        {id:'r1',sede:'sitges',angle:'jardín privado',primary_text:'Tu jardín, a diez minutos del mar.\nPlantas bajas en Sitges con 80 m² de jardín privado. Entrega 2027.',headline:'Jardín privado en Sitges',description:'Desde 785.000 €',image_hint:'Foto exterior del jardín con luz de tarde.'},
+        {id:'r2',sede:'barcelona',angle:'visita el mismo día',primary_text:'Eixample, techos de 3,5 m y luz de mañana.\nTe lo enseñamos hoy mismo, en privado.',headline:'Visita privada hoy',description:'Eixample · 3 dormitorios',image_hint:'Salón con techos altos y ventanales.'},
+        {id:'r3',sede:'cerdanya',angle:'temporada de esquí',primary_text:'Estrena casa antes de que abran las pistas.\nChalets en la Cerdanya con entrega inmediata.',headline:'Entrega antes del esquí',description:'Chalets en la Cerdanya',image_hint:'Chalet con montaña nevada al fondo.'},
+        {id:'r4',sede:'andorra',angle:'calidad de vida',primary_text:'Montaña, colegio internacional y 1 hora a Barcelona.\nViviendas en Andorra para vivir todo el año.',headline:'Vivir en Andorra',description:'Asesoramiento completo',image_hint:'Vista del valle desde una terraza.'}
+      ],
+      ai:{headline:'Semana sólida: 19 leads a 27,32 € (−6%). Sitges tira del carro; Andorra sigue sin campaña.',health:72,summary:'Sitges concentra el 74% de los leads y está a 3 de su meta. Un anuncio de Sitges se come 120 € sin traer nada y Andorra no capta: ahí están las dos palancas de la semana.',diagnosis:['Calma_fachada_v4 trae 12 de los 14 leads de Sitges a 12,58 € cada uno: es tu ganador.','Calma_interior_v1 lleva 120 € sin un solo lead; su CTR (0,44%) indica que la imagen no engancha.','Calma_vistas_v2 está cansado: la misma gente lo ha visto 4,2 veces.','Andorra no tiene campaña mientras la competencia tiene 7 anuncios activos.'],focus:'Pasar el dinero del perdedor al ganador en Sitges y lanzar Andorra con 20 €/día.',cost:0.061,model:'claude-opus-5-5'},
+      plan:['p1','p2','p3','p4','p5','p6']},
+    actions:[
+      {id:'p1',ts:now-3*H,type:'PAUSE',target_id:'A2',target_name:'Calma_interior_v1',title:'Pausar el anuncio "Calma_interior_v1"',sede:'sitges',when:'hoy',priority:1,steps:['Pulsa ⚡ Hacerlo ya','El dinero pasa solo a los anuncios que funcionan'],why:'Ha gastado 120 € en 7 días sin conseguir ni un lead (tu objetivo: 31,50 €).',impact:'≈ 120 €/semana que pasan a anuncios que sí convierten (+4 leads estimados).',status:'pending'},
+      {id:'p2',ts:now-3*H,type:'LAUNCH',target_id:'sede:andorra',target_name:'Campaña de leads en Andorra',title:'Lanzar la primera campaña de Andorra',sede:'andorra',when:'esta semana',priority:2,steps:['Pulsa 🚀 Crear campaña','Usa el anuncio listo "calidad de vida" y una foto del valle','Empieza con 20 €/día y créala en pausa para revisarla'],why:'Andorra no capta ni un lead mientras la competencia tiene 7 anuncios activos.',impact:'≈ 4-6 leads/semana con 20 €/día.',status:'pending'},
+      {id:'p3',ts:now-3*H,type:'SCALE_UP',target_id:'S1',target_name:'No_interests_Sitges_60km_SP',title:'Subir un 20% el presupuesto de Sitges',sede:'sitges',when:'esta semana',priority:3,pct:20,steps:['Pulsa ⚡ Hacerlo ya'],why:'Consigue leads a 25,79 €, un 18% por debajo de tu objetivo. Merece más presupuesto.',impact:'+6 €/día ≈ +2 leads por semana.',status:'pending'},
+      {id:'p4',ts:now-3*H,type:'MANUAL',target_id:'manual:llamar',target_name:'Llamar hoy a los 2 leads pendientes de Sitges',title:'Llamar hoy a los 2 leads pendientes de Sitges',sede:'sitges',when:'hoy',priority:4,steps:['Abre la pestaña 📲 Leads','Pulsa WhatsApp: el mensaje ya está escrito','Marca 👍 o 👎 cuando hables con ellos'],why:'Un lead contactado en la primera hora tiene muchas más opciones de visitar.',impact:'+1 visita estimada.',status:'pending'},
+      {id:'p5',ts:now-3*H,type:'NEW_AD',target_id:'A3',target_name:'Calma_vistas_v2',title:'Renovar el texto de "Calma_vistas_v2"',sede:'sitges',when:'esta semana',priority:5,steps:['Pulsa ⚡ Hacerlo ya','El agente crea un anuncio nuevo con la misma foto y este texto'],why:'La misma gente lo ha visto 4,2 veces de media: está cansado.',impact:'Recuperar los 22 € por lead que tenía hace dos semanas.',status:'pending',variant:{angle:'estilo de vida',primary_text:'Desayunar con el Mediterráneo delante, cada día.\nPlantas bajas con jardín y áticos en Sitges. Entrega 2027.',headline:'Vivir frente al mar en Sitges',description:'Obra nueva · 2 a 4 dormitorios'}},
+      {id:'p6',ts:now-3*H,type:'MANUAL',target_id:'manual:video',target_name:'Grabar un vídeo vertical de 15 s en Barcelona',title:'Grabar un vídeo vertical de 15 s del piso del Eixample',sede:'barcelona',when:'este mes',priority:6,steps:['Graba con el móvil en vertical: entrada, salón, ventana','Súbelo en ✍️ Anuncios → Crear campaña'],why:'Barcelona solo tiene fotos y su CTR está por debajo de lo sano (0,9%).',impact:'Los vídeos cortos suelen duplicar los clics.',status:'pending'},
+      {id:'h1',ts:now-9*D,type:'SCALE_UP',target_id:'S1',target_name:'No_interests_Sitges_60km_SP',title:'Subir un 20% el presupuesto de Sitges',sede:'sitges',why:'Coste por lead 21 € (objetivo 31 €).',status:'done',auto:true,result:'Presupuesto diario: 25 € → 30 €',undo:{kind:'budget'},doneAt:now-9*D}
+    ],
+    learnings:[
+      {ts:now-2*D,type:'SCALE_UP',verdict:'bien',text:'Subí presupuesto +20% en "No_interests_Sitges_60km_SP": resultados 9 → 12, coste 21 € → 23,40 €.'},
+      {ts:now-5*D,type:'NEW_AD',verdict:'bien',text:'Texto nuevo "precio/m² oportunidad" en "Calma_fachada_v3": coste 38 € → 12,58 €, CTR 0,9% → 1,5%.',angle:'precio/m² oportunidad'},
+      {ts:now-11*D,type:'NEW_AD',verdict:'mal',text:'Texto nuevo "exclusividad" en "Calma_interior_v1": coste 29 € → —, CTR 0,8% → 0,44%.',angle:'exclusividad'}
+    ],
+    feedback:[],
+    _leads:leads,
+    _comp:{ts:now-2*D,sedes:{
+      barcelona:{term:'Barcelona',pages:[{name:'BCN Exclusive Homes',ads:12,days:94,hook:'Exclusividad en el corazón de Barcelona. Descubre nuestra selección de propiedades únicas.',url:''},{name:'Eixample Living',ads:6,days:31,hook:'Pisos señoriales rehabilitados en el Eixample.',url:''},{name:'Diagonal Realty',ads:3,days:12,hook:'Tu nuevo hogar en Barcelona.',url:''}]},
+      sitges:{term:'Sitges',pages:[{name:'Costa Prime Homes',ads:5,days:60,hook:'Ático con vistas al mar en Sitges, 3 dormitorios y terraza de 40 m².',url:''},{name:'Garraf Villas',ads:2,days:18,hook:'Villas con piscina a 5 minutos de la playa.',url:''}]},
+      cerdanya:{term:'Cerdanya',pages:[{name:'Pirineu Cases',ads:3,days:40,hook:'Casas de piedra en la Cerdanya.',url:''}]},
+      andorra:{term:'Andorra',pages:[{name:'Pirineu Luxe Realty',ads:7,days:120,hook:'Residencia en Andorra: fiscalidad y seguridad para tu familia.',url:''},{name:'Andorra Nord Immo',ads:2,days:9,hook:'Pisos en Ordino con vistas.',url:''}]}
+    }}
+  };
+}
+function demoApi(path,body){
+  if(!DEMO_STATE)DEMO_STATE=demoState();
+  var S=DEMO_STATE,wait=function(ms,v){return new Promise(function(r){setTimeout(function(){r(v)},ms)})};
+  var find=function(id){return S.actions.filter(function(a){return a.id===id})[0]};
+  var clone=function(x){return JSON.parse(JSON.stringify(x))};
+  var lstats=function(sede){var L=S._leads.filter(function(l){return (!sede||l.sede===sede)&&Date.now()-l.ts<7*86400000});var f=L.filter(function(l){return l.contactedAt&&l.contactedAt-l.ts<=3600000}).length,mk=L.filter(function(l){return l.q}),g=mk.filter(function(l){return ['bueno','visita','cliente'].indexOf(l.q)>=0}).length;return {n:L.length,pending:L.filter(function(l){return !l.contactedAt}).length,fastPct:L.length?Math.round(f/L.length*100):null,marked:mk.length,good:g,goodPct:mk.length?Math.round(g/mk.length*100):null}};
+  if(path==='/state'){var o=clone(S);delete o._leads;delete o._comp;return wait(150,o)}
+  if(path==='/diag')return wait(300,{worker:true,kv:true,meta_token:true,meta_user:'Demo',account_id:true,account:'Durán Carasso',account_ok:true,page_id:true,ai:true,email:true,model:'claude-opus-5-5'});
+  if(path==='/run'){S.report.ts=Date.now();return wait(2500,{ok:true,emailed:body&&body.email?'enviado (demo)':''})}
+  if(path==='/approve'){var a=find(body.id);a.status='done';a.doneAt=Date.now();a.undo={kind:'x'};a.result=a.type==='PAUSE'?'Estado: ACTIVE → PAUSED':a.type==='SCALE_UP'?'Presupuesto diario: 30 € → 36 €':'Nuevo anuncio creado con el ángulo "'+(a.variant&&a.variant.angle)+'".';return wait(700,{ok:true,action:a})}
+  if(path==='/task'){var t=find(body.id);if(body.mark==='done'){t.status='done';t.doneAt=Date.now();t.result='Marcada como hecha';return wait(300,{ok:true,action:t})}
+    S.feedback.unshift({ts:Date.now(),title:t.title,mark:body.mark,note:body.note});
+    if(body.mark==='reject'){t.status='rejected';return wait(300,{ok:true,action:t})}
+    t.status='replaced';var n={id:'n'+Date.now(),ts:Date.now(),type:'MANUAL',target_name:'Pedir 3 fotos nuevas del interior',title:'Pedir 3 fotos nuevas del interior',sede:t.sede,when:'esta semana',priority:t.priority,steps:['Pide al equipo fotos con luz natural','Súbelas en ✍️ Anuncios → Crear campaña'],why:'Una imagen distinta suele bajar el coste más que cambiar el texto.',impact:'−10-20% coste por lead',status:'pending'};
+    S.actions.unshift(n);S.report.plan=S.report.plan.map(function(id){return id===t.id?n.id:id});return wait(1300,{ok:true,action:n,replaced:t.id})}
+  if(path==='/undo'){var u=find(body.id);u.status='undone';return wait(500,{ok:true,action:u})}
+  if(path==='/quick'){var q={id:'q'+Date.now(),ts:Date.now(),type:body.type,target_name:body.name,title:body.name,sede:body.sede,why:'Cambio manual desde el panel',status:'done',doneAt:Date.now(),undo:{kind:'x'},result:body.type==='BUDGET'?'Presupuesto '+(body.pct>0?'+':'')+body.pct+'%':'Hecho (demo)'};S.actions.unshift(q);return wait(500,{ok:true,action:q})}
+  if(path==='/settings'){for(var k in body)S.settings[k]=body[k];return wait(300,{ok:true,settings:S.settings})}
+  if(path==='/leads'||path==='/leads?sync=1'){var st={};S.settings.sedes.forEach(function(s){st[s.id]=lstats(s.id)});return wait(path==='/leads'?150:900,{items:clone(S._leads),lastSync:Date.now(),stats:st,total:lstats(null)})}
+  if(path==='/lead'){var l=S._leads.filter(function(x){return x.id===body.id})[0];if(body.q!==undefined)l.q=body.q;if(body.contacted&&!l.contactedAt)l.contactedAt=Date.now();return wait(150,{ok:true,lead:clone(l)})}
+  if(path==='/competition'||path==='/competition?refresh=1')return wait(path==='/competition'?150:1500,clone(S._comp));
+  if(path==='/rewrite'){var v=body.variant,i=body.instruction;var r={angle:v.angle,headline:v.headline,description:v.description,primary_text:v.primary_text};
+    if(/corto/i.test(i))r.primary_text=v.primary_text.split('\n')[0];else if(/catal/i.test(i)){r.primary_text='El teu jardí, a deu minuts del mar.\nPlantes baixes a Sitges amb 80 m² de jardí privat.';r.headline='Jardí privat a Sitges'}else if(/ingl/i.test(i)){r.primary_text='Your own garden, ten minutes from the sea.\nGround-floor homes in Sitges with 80 m² private gardens.';r.headline='Private garden in Sitges'}else r.primary_text=v.primary_text+'\n'+i+'.';
+    return wait(1100,{variant:r})}
+  if(path==='/launch'){var la={id:'l'+Date.now(),ts:Date.now(),type:'NEW_AD',target_name:'Anuncio nuevo en '+body.sede,title:'Lanzar anuncio "'+body.variant.angle+'"',sede:body.sede,why:'Lanzado desde "Anuncios listos"',status:'done',doneAt:Date.now(),undo:{kind:'x'},result:'Anuncio publicado junto al mejor de la sede (misma imagen y público).'};S.actions.unshift(la);return wait(900,{ok:true,action:la})}
+  if(path==='/ask')return wait(1200,{answer:/andorra/i.test(body.q)?'Andorra no tiene ninguna campaña activa: por eso 0 leads. La competencia (Pirineu Luxe, 7 anuncios) vende fiscalidad.\n\nRecomendación: lanza con 20 €/día el anuncio "calidad de vida" que tienes listo y una foto del valle. Con tu coste actual serían 4-6 leads/semana.':'Tu mejor anuncio es Calma_fachada_v4 (Sitges): 12 de 14 leads a 12,58 € cada uno, la mitad de tu media, y el 56% de sus leads los habéis marcado como buenos.\n\nRecomendación: aprueba subir su presupuesto y pausa Calma_interior_v1.'});
+  if(path==='/copy')return wait(1500,{variants:[
+    {angle:'estilo de vida',primary_text:'Despertar con el Mediterráneo delante, cada día.\nPlantas bajas con jardín y áticos con vistas en Sitges. Entrega 2027.',headline:'Vivir frente al mar en Sitges',description:'2 a 4 dormitorios'},
+    {angle:'precio/m² oportunidad',primary_text:'Desde 785.000 € en Sitges.\nÚltimas plantas bajas con jardín privado. Pide el dossier con planos y precios.',headline:'Obra nueva desde 785.000 €',description:'Dossier con planos'},
+    {angle:'escasez',primary_text:'Quedan 6 viviendas.\nObra nueva en Sitges con jardín o terraza con vistas. Reserva tu visita privada.',headline:'Últimas 6 viviendas en Sitges',description:'Visita privada'}]});
+  if(path==='/forms')return wait(300,{forms:[{id:'000000000000001',name:'CalmaR_condicional_ES_CHECK'}]});
+  if(path==='/create'){S.actions.forEach(function(a){if(a.type==='LAUNCH'&&a.sede===body.sede&&a.status==='pending'){a.status='done';a.doneAt=Date.now();a.result='Campaña creada'}});return wait(1800,{ok:true,campaign_id:'demo',active:!!body.activate,url:'https://adsmanager.facebook.com/'})}
+  return Promise.reject(new Error('No disponible en demo'));
+}
+
+/* ── Arranque ── */
+(function init(){
+  var c=cfg();
+  if(/[?&]demo\b/.test(location.search))DEMO=true;
+  if(!DEMO&&!c.url){showOnb(true);return}
+  if(c.url)$('cUrl').value=c.url;
+  showOnb(false);
+  var t=ls('dc_ads_tab');if(t&&document.querySelector('.tab[data-p="'+t+'"]'))go(t);
+  load();
+})();
+})();
+</script>
+</body>
+</html>

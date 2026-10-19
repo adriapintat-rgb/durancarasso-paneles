@@ -1,0 +1,1343 @@
+<meta name="robots" content="noindex, nofollow">
+<title>Carrusel Duran Carasso</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0D3550;--navy2:#0A2A40;--accent:#3E6E8E;--gold:#B8922A;--gold-soft:#CBA43C;
+  --bg:#FFFFFF;--card:#FFFFFF;--ink:#0D3550;--text:#274863;--sub:#9AA6B0;
+  --line:#ECEBE6;--line2:#F4F3EF;--soft:#F7F8FA;
+  --green:#2E7D4F;--red:#B03020;
+  --shadow:0 1px 1px rgba(13,53,80,.03);
+  --shadow-sm:none;
+  --r:14px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img{max-width:100%}
+
+/* ── HEADER ── */
+.hdr{background:var(--bg);padding:20px 26px 16px;display:flex;align-items:flex-end;gap:16px;position:sticky;top:env(safe-area-inset-top,0px);z-index:60;border-bottom:1px solid var(--line)}
+.hdr-logo{line-height:1}
+.hdr-logo b{display:block;font-family:'Playfair Display',serif;font-weight:500;font-size:22px;color:var(--navy);letter-spacing:.4px}
+.hdr-logo b span{display:block}
+.hdr-sub{font-size:9px;letter-spacing:3.5px;text-transform:uppercase;color:var(--sub);margin-top:7px}
+.hdr-spacer{flex:1}
+.hdr-chip{font-size:11px;color:var(--navy);border:1px solid var(--line);padding:6px 13px;border-radius:20px;max-width:46vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hdr-fmt{font-size:10px;color:var(--sub);letter-spacing:1px}
+
+/* ── LAYOUT ── */
+.wrap{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:36px;max-width:1440px;margin:0 auto;padding:30px 26px}
+@media(max-width:960px){.wrap{grid-template-columns:1fr;gap:8px;padding:20px 18px}}
+.col-r{position:sticky;top:calc(96px + env(safe-area-inset-top,0px))}
+@media(max-width:960px){.col-r{position:static}}
+
+/* Tarjetas planas: sin sombra, separadas por aire y hairline */
+.card{background:var(--card);border:none;border-bottom:1px solid var(--line);border-radius:0;margin-bottom:26px;overflow:visible}
+.card:last-child{border-bottom:none}
+@media(max-width:960px){.card{margin-bottom:20px}}
+.card-in{padding:2px 0 22px}
+.card-h{display:flex;align-items:center;gap:11px;padding:0 0 14px}
+.card-h .n{width:24px;height:24px;border-radius:50%;background:transparent;border:1px solid var(--navy);color:var(--navy);font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Playfair Display',serif}
+.card-h h2{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--navy);font-weight:600;flex:1}
+.card-h .aux{font-size:11px;color:var(--sub);font-variant-numeric:tabular-nums}
+
+label{display:block;font-size:10.5px;letter-spacing:.3px;color:var(--sub);margin-bottom:6px;font-weight:500;text-transform:uppercase}
+input,select,textarea{width:100%;font-family:'Inter',sans-serif;font-size:13.5px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:9px;padding:11px 13px;outline:none;transition:border-color .15s,box-shadow .15s}
+input::placeholder,textarea::placeholder{color:#C4CCD3}
+input:focus,select:focus,textarea:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(13,53,80,.07)}
+textarea{resize:vertical;line-height:1.6}
+select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%230D3550' stroke-width='1.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:30px}
+.row{display:grid;gap:11px;margin-bottom:12px}
+.row:last-child{margin-bottom:0}
+.row.c2{grid-template-columns:1fr 1fr}
+.row.c3{grid-template-columns:1fr 1fr 1fr}
+
+.btn{font-family:'Inter',sans-serif;font-size:13px;font-weight:500;border:none;border-radius:9px;padding:12px 18px;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;letter-spacing:.2px}
+.btn:active{transform:translateY(1px)}
+.btn-p{background:var(--navy);color:#fff}.btn-p:hover{background:var(--navy2)}
+.btn-g{background:var(--navy);color:#fff}.btn-g:hover{background:var(--navy2)}
+.btn-s{background:#fff;color:var(--navy);border:1px solid var(--line)}.btn-s:hover{border-color:var(--navy)}
+.btn-full{width:100%}
+.btn:disabled{opacity:.35;cursor:not-allowed;transform:none}
+.btn-mini{font-size:11.5px;padding:8px 12px;border-radius:8px;font-weight:500}
+.svg{width:15px;height:15px;flex-shrink:0}
+
+/* ── DROPZONE ── */
+.drop{border:1px dashed #D8D6CF;border-radius:11px;padding:30px 16px;text-align:center;cursor:pointer;transition:.15s;background:var(--soft)}
+.drop:hover,.drop.over{border-color:var(--navy);background:#fff}
+.drop-ic{width:30px;height:30px;margin:0 auto 9px;color:var(--navy);opacity:.55}
+.drop-t{font-size:13.5px;font-weight:500;margin-bottom:3px;color:var(--ink)}
+.drop-s{font-size:11px;color:var(--sub)}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:8px;margin-top:14px}
+.thumb{position:relative;aspect-ratio:4/5;border-radius:8px;overflow:hidden;border:1px solid var(--line);background:#eee;cursor:grab}
+.thumb.drag{opacity:.4}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.thumb .x{position:absolute;top:3px;right:3px;width:19px;height:19px;border-radius:50%;background:rgba(13,32,43,.65);color:#fff;border:none;font-size:12px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.thumb .i{position:absolute;bottom:3px;left:3px;background:rgba(13,32,43,.65);color:#fff;font-size:9px;padding:1px 5px;border-radius:5px;font-weight:500}
+
+/* ── SLIDE EDITOR ── */
+.sl{border:1px solid var(--line);border-radius:10px;margin-bottom:8px;overflow:hidden;background:#fff}
+.sl-h{background:#fff;padding:11px 13px;display:flex;align-items:center;gap:11px;cursor:pointer;-webkit-user-select:none;user-select:none}
+.sl-n{width:22px;height:22px;border-radius:50%;background:transparent;border:1px solid var(--line);color:var(--navy);font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Playfair Display',serif}
+.sl-t{flex:1;font-size:13px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.sl-t em{color:var(--sub);font-weight:400;font-style:normal}
+.sl-a{color:var(--sub);font-size:10px;transition:transform .2s;flex-shrink:0}
+.sl.open .sl-a{transform:rotate(180deg)}
+.sl.open .sl-h{border-bottom:1px solid var(--line2)}
+.sl-b{display:none;padding:14px}
+.sl.open .sl-b{display:block}
+.seg{display:inline-flex;background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:3px;gap:2px}
+.seg button{border:none;background:transparent;font-size:11px;color:var(--sub);padding:5px 11px;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif}
+.seg button.on{background:var(--navy);color:#fff;font-weight:500}
+.mini{font-size:11px;color:var(--sub);line-height:1.5}
+input[type=range]{padding:0;background:transparent;border:none;accent-color:var(--navy);cursor:pointer}
+input[type=range]:focus{box-shadow:none}
+
+/* ── PREVIEW ── */
+.pvtool{display:flex;align-items:center;gap:10px;padding:0 0 14px;flex-wrap:wrap}
+.pvtool .grow{flex:1}
+.style-row{display:flex;gap:16px;align-items:center;padding:14px 0;flex-wrap:wrap;border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);margin-bottom:16px}
+.style-row .grp{display:flex;align-items:center;gap:9px}
+.style-row label{margin:0;font-size:10px}
+.style-row select{width:auto;padding:8px 26px 8px 11px;font-size:12px}
+.style-row input[type=range]{width:92px}
+.pv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px;padding:0}
+.pv{border-radius:10px;overflow:hidden;background:#fff;box-shadow:0 6px 22px -14px rgba(13,53,80,.35);border:1px solid var(--line)}
+.pv canvas{width:100%;display:block;aspect-ratio:4/5;background:var(--navy)}
+.pv-f{padding:9px 11px;display:flex;align-items:center;gap:8px;border-top:1px solid var(--line2)}
+.pv-f b{font-size:9px;letter-spacing:1.2px;text-transform:uppercase;color:var(--sub);flex:1;font-weight:600}
+
+.out{position:relative}
+.out textarea{font-size:13px;line-height:1.65}
+.copy{position:absolute;top:9px;right:9px;background:#fff;color:var(--navy);border:1px solid var(--line);border-radius:7px;font-size:10.5px;padding:5px 11px;cursor:pointer;font-family:'Inter',sans-serif;font-weight:500}
+.copy:hover{border-color:var(--navy)}
+.copy.ok{background:var(--navy);color:#fff;border-color:var(--navy)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.tag{font-size:11.5px;background:#fff;color:var(--navy);border:1px solid var(--line);border-radius:20px;padding:4px 11px;cursor:pointer;-webkit-user-select:none;user-select:none;transition:.12s}
+.tag:hover{border-color:var(--navy)}
+.tag.off{opacity:.35;text-decoration:line-through}
+.cnt{font-size:10.5px;color:var(--sub);margin-top:7px;text-align:right;font-variant-numeric:tabular-nums}
+.cnt.over{color:var(--red);font-weight:600}
+.hint{font-size:12px;color:var(--text);line-height:1.6;background:var(--soft);padding:12px 14px;border-radius:9px;margin-bottom:14px}
+.hint b{color:var(--navy);font-weight:600}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(90px);background:var(--navy);color:#fff;font-size:12.5px;padding:12px 22px;border-radius:26px;z-index:99;transition:transform .28s cubic-bezier(.2,.8,.2,1);pointer-events:none;box-shadow:0 12px 34px -10px rgba(13,53,80,.5)}
+.toast.on{transform:translateX(-50%) translateY(0)}
+.divider{height:1px;background:var(--line2);margin:16px 0}
+
+/* ── TABS ── */
+.tabs{display:flex;gap:28px;padding:0 26px;max-width:1440px;margin:0 auto;border-bottom:1px solid var(--line)}
+@media(max-width:960px){.tabs{padding:0 18px}}
+.tab{border:none;background:transparent;font-family:inherit;font-size:13px;font-weight:500;letter-spacing:.4px;color:var(--sub);padding:15px 2px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:.12s}
+.tab:hover{color:var(--navy)}
+.tab.on{color:var(--navy);border-bottom-color:var(--gold)}
+.an-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:14px 0 4px}
+.an-tile{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 15px}
+.an-tile .k{font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--sub)}
+.an-tile .val{font-family:'Playfair Display',serif;font-size:26px;color:var(--navy);margin-top:3px;line-height:1}
+.an-sec{font-size:12px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--gold);margin:22px 0 11px}
+.an-bar{display:grid;grid-template-columns:96px 1fr auto;align-items:center;gap:10px;margin:7px 0;font-size:13px}
+.an-bar .lbl{color:var(--text);text-transform:capitalize}
+.an-track{background:var(--line2);border-radius:6px;height:14px;overflow:hidden}
+.an-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--navy));border-radius:6px}
+.an-bar .num{color:var(--sub);font-variant-numeric:tabular-nums;min-width:44px;text-align:right}
+.an-post{border:1px solid var(--line);border-radius:11px;padding:12px 14px;margin:9px 0;background:var(--card)}
+.an-post .cap{color:var(--text);font-size:13px;line-height:1.5}
+.an-post .meta{color:var(--sub);font-size:11px;margin-top:6px;display:flex;gap:14px;align-items:center}
+.an-post .meta a{color:var(--accent);text-decoration:none}
+.an-reco{background:linear-gradient(180deg,#FCFAF3,#F7F8FA);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:11px;padding:15px 17px;margin-top:8px}
+.an-reco h4{margin:0 0 9px;font-family:'Playfair Display',serif;font-size:18px;color:var(--navy)}
+.an-reco li{color:var(--text);font-size:13px;line-height:1.7;margin-left:2px}
+.an-empty{text-align:center;padding:34px 18px;color:var(--sub)}
+.hv-card{border:1px solid var(--line);border-radius:11px;padding:11px 13px;margin-top:8px;cursor:pointer;background:var(--card);transition:.12s}
+.hv-card:hover{border-color:var(--gold);background:#FCFAF3}
+.hv-card .t{font-family:'Playfair Display',serif;font-size:16px;color:var(--navy);line-height:1.25}
+.hv-card .f{color:var(--text);font-size:12px;margin-top:4px;line-height:1.4}
+.hv-card .a{color:var(--sub);font-size:10px;letter-spacing:.5px;text-transform:uppercase;margin-top:5px}
+
+/* ── TARJETA IA (caja fina destacada) ── */
+.ai-card{border:1px solid var(--line);border-radius:12px;background:#fff;padding:20px 20px 8px;margin-bottom:26px}
+.ai-card .card-h{padding-bottom:12px}
+.ai-card .card-in{padding:0}
+.ai-card .card-h .n{border-color:var(--gold);color:var(--gold)}
+
+/* ── CALENDARIO ── */
+.calwrap{max-width:960px;margin:0 auto;padding:30px 26px}
+@media(max-width:960px){.calwrap{padding:20px 18px}}
+.calwrap .card{border:1px solid var(--line);border-radius:14px;padding:22px}
+.calwrap .card-in{padding:2px 0 0}
+.cal-h{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.cal-h b{font-size:17px;font-family:'Playfair Display',serif;flex:1;text-transform:capitalize;font-weight:600}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.cal-dow{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--sub);text-align:center;padding:4px 0;font-weight:600}
+.cal-cell{min-height:76px;border:1px solid var(--line);border-radius:10px;background:#fff;padding:6px;cursor:pointer;transition:.12s;display:flex;flex-direction:column;gap:3px;overflow:hidden}
+.cal-cell:hover{border-color:var(--gold)}
+.cal-cell.out{background:#FAF9F6;opacity:.45;cursor:default}
+.cal-cell.sel{border-color:var(--navy);box-shadow:0 0 0 2px rgba(13,53,80,.12)}
+.cal-cell .dn{font-size:11px;color:var(--sub);font-weight:600}
+.cal-cell.today .dn{color:var(--gold)}
+.cal-chip{font-size:8.5px;padding:2px 5px;border-radius:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#fff;font-weight:500}
+.cal-chip.scheduled{background:var(--accent)}
+.cal-chip.published{background:var(--green)}
+.cal-chip.error{background:var(--red)}
+.cal-chip.cancelled{background:#9AA0A6;text-decoration:line-through}
+.cal-chip.publishing{background:var(--gold)}
+.cal-chip.plan{background:#fff;color:var(--navy);border:1px solid var(--gold)}
+@media(max-width:520px){.cal-cell{min-height:56px}.cal-chip{font-size:0;padding:3px}.cal-chip:before{content:"•";font-size:12px}}
+</style>
+
+<div class="hdr">
+  <div class="hdr-logo"><b><span>Durán</span><span>Carasso</span></b><div class="hdr-sub">Carrusel Studio</div></div>
+  <div class="hdr-spacer"></div>
+  <div class="hdr-chip" id="chip">Nueva propiedad</div>
+  <div class="hdr-fmt">1080×1350</div>
+</div>
+
+<div class="tabs">
+  <button class="tab on" id="tab_create">✦ Crear</button>
+  <button class="tab" id="tab_cal">🗓 Calendario</button>
+  <button class="tab" id="tab_an">📊 Análisis</button>
+</div>
+
+<div class="wrap" id="view_create">
+
+  <!-- ══ IZQUIERDA ══ -->
+  <div class="col-l">
+
+    <div class="card ai-card" id="ai_card">
+      <div class="card-h"><span class="n">✦</span><h2>Generar con IA</h2><span class="aux" id="ai_mem"></span></div>
+      <div class="card-in">
+        <div id="conn_banner" style="display:none;background:#FCF4F2;border:1px solid #EDC9C1;border-radius:11px;padding:13px 15px;margin-bottom:12px">
+          <div id="conn_msg" style="font-size:13px;color:var(--navy);line-height:1.5">La IA necesita conectar el publicador para funcionar.</div>
+          <div class="row c2" style="margin-top:10px">
+            <button class="btn btn-p btn-mini" id="conn_go">⚙ Conectar publicador</button>
+            <button class="btn btn-s btn-mini" id="conn_test">Probar conexión</button>
+          </div>
+        </div>
+        <div class="hint">Pega la <b>ficha</b>, un <b>link + su contenido</b> o tus <b>notas</b>. La IA escribe los 5 slides, la caption y los hashtags con el tono Duran Carasso — y aprende de cada post que apruebas.</div>
+        <textarea id="ai_in" rows="4" placeholder="Ej.: Piso 320 m² en Les Tres Torres, 4 hab, 5 baños, terraza 40 m², a estrenar, cocina italiana, garaje…"></textarea>
+        <label style="display:flex;align-items:center;gap:8px;margin:11px 0 0;font-size:12px;color:var(--ink);cursor:pointer"><input type="checkbox" id="ai_photos" style="width:auto"> Analizar mis fotos como contexto visual</label>
+        <button class="btn btn-g btn-full" id="ai_go" style="margin-top:11px">✦ Generar carrusel con IA</button>
+        <button class="btn btn-s btn-full btn-mini" id="ai_scrape" style="margin-top:8px">⇩ Traer fotos + info del enlace</button>
+        <button class="btn btn-s btn-full btn-mini ai-only" id="ai_learn" style="margin-top:8px;display:none">🎓 Aprender de mi Instagram (modelo real)</button>
+        <div id="ai_model" class="mini" style="margin-top:7px;text-align:center;min-height:14px;color:var(--gold)"></div>
+        <div id="ai_status" class="mini" style="margin-top:6px;text-align:center;min-height:15px"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-h"><span class="n">1</span><h2>Fotos</h2><span class="aux" id="ph_cnt">0</span></div>
+      <div class="card-in">
+        <div class="drop" id="drop">
+          <svg class="drop-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 16V4m0 0L7 9m5-5l5 5"/><path d="M4 15v3a2 2 0 002 2h12a2 2 0 002-2v-3"/></svg>
+          <div class="drop-t">Arrastra tus fotos</div>
+          <div class="drop-s">haz clic, arrastra o pega (Ctrl/⌘+V) · 3–10 imágenes</div>
+        </div>
+        <input type="file" id="file" accept="image/*" multiple hidden>
+        <div class="thumbs" id="thumbs"></div>
+        <button class="btn btn-s btn-full btn-mini" id="btn_clear" style="margin-top:11px;display:none">Vaciar todas las fotos</button>
+        <div class="mini" style="margin-top:9px">El orden de las fotos = orden de los slides. Arrástralas para reordenar.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-h"><span class="n">2</span><h2>Datos de la propiedad</h2></div>
+      <div class="card-in">
+        <div class="row"><div><label>Nombre / titular corto</label><input id="f_name" placeholder="Piso en Les Tres Torres"></div></div>
+        <div class="row c2">
+          <div><label>Ubicación</label><input id="f_loc" placeholder="Les Tres Torres, Barcelona"></div>
+          <div><label>Mercado</label><select id="f_mkt"><option value="barcelona">Barcelona ciudad</option><option value="andorra">Andorra</option><option value="sitges">Sitges / Costa Dorada</option><option value="general">General lujo</option></select></div>
+        </div>
+        <div class="row c2">
+          <div><label>Tipología</label><input id="f_type" placeholder="Piso / Villa / Parcela"></div>
+          <div><label>Superficie</label><input id="f_m2" placeholder="320 m²"></div>
+        </div>
+        <div class="row c3">
+          <div><label>Habitaciones</label><input id="f_hab" placeholder="4"></div>
+          <div><label>Baños</label><input id="f_ban" placeholder="5"></div>
+          <div><label>Extra</label><input id="f_ext" placeholder="terraza 40 m²"></div>
+        </div>
+        <div class="row"><div><label>Amenidades</label><input id="f_amen" placeholder="Cocina italiana, parquet, clima, mobiliario incluido"></div></div>
+        <div class="row"><div><label>Distancias / entorno</label><input id="f_dist" placeholder="Sarrià-Sant Gervasi · totalmente exterior · garaje"></div></div>
+        <div class="row c2">
+          <div><label>Cuenta Instagram</label><input id="f_ig" placeholder="@durancarasso"></div>
+          <div><label>Web</label><input id="f_web" placeholder="durancarasso.es"></div>
+        </div>
+        <div class="divider"></div>
+        <div class="row c2">
+          <button class="btn btn-s btn-mini" id="btn_tpl">↻ Rellenar slides</button>
+          <button class="btn btn-s btn-mini" id="btn_cap">✎ Generar caption</button>
+        </div>
+        <div class="mini" style="text-align:center;margin-top:8px">Base editable. El copy fino lo afina Claude.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-h"><span class="n">3</span><h2>Copy de los slides</h2></div>
+      <div class="card-in">
+        <div class="hint">Pega el bloque <b>━━━ CARRUSEL ━━━</b> que te da Claude y se reparte solo en los 5 slides.</div>
+        <textarea id="paste" rows="3" placeholder="Pega aquí el bloque CARRUSEL…"></textarea>
+        <button class="btn btn-s btn-full btn-mini" style="margin-top:9px" id="btn_parse">Importar copy pegado</button>
+        <div id="slides" style="margin-top:14px"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══ DERECHA ══ -->
+  <div class="col-r">
+    <div class="card">
+      <div class="pvtool">
+        <span class="card-h" style="padding:0;border:none"><span class="n">4</span><h2 style="letter-spacing:1.5px">Previsualización</h2></span>
+        <span class="grow"></span>
+        <button class="btn btn-g btn-mini" id="btn_dl" disabled>⤓ Descargar todas</button>
+      </div>
+      <div class="style-row">
+        <div class="grp"><label>Overlay</label><select id="f_theme"><option value="dark">Oscuro</option><option value="light">Claro</option><option value="none">Sin overlay</option></select></div>
+        <div class="grp"><label>Intensidad</label><input type="range" id="f_scrim" min="20" max="100" value="70"></div>
+        <div class="grp"><label>Marca</label><select id="f_logo"><option value="on">Con logo</option><option value="off">Sin logo</option></select></div>
+      </div>
+      <div class="pv-grid" id="pv"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-h"><span class="n">5</span><h2>Caption</h2><span class="aux" id="cap_cnt">0 / 2.200</span></div>
+      <div class="card-in">
+        <div class="out">
+          <button class="copy" data-copy="caption">Copiar</button>
+          <textarea id="caption" rows="9" placeholder="Párrafo 1 — gancho emocional…"></textarea>
+        </div>
+        <button class="btn btn-s btn-full btn-mini ai-only" id="btn_hookia" style="margin-top:10px;display:none">✦ Mejorar gancho (viral) con IA</button>
+        <button class="btn btn-s btn-full btn-mini ai-only" id="btn_variants" style="margin-top:8px;display:none">✦ Dame 3 ganchos alternativos</button>
+        <div id="hook_variants"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-h"><span class="n">6</span><h2>Hashtags</h2><span class="aux" id="hash_cnt">0 / 30</span></div>
+      <div class="card-in">
+        <button class="btn btn-s btn-full btn-mini ai-only" id="btn_htia" style="margin-bottom:11px;display:none">✦ Optimizar hashtags con IA</button>
+        <div class="tags" id="tags"></div>
+        <div class="out">
+          <button class="copy" data-copy="hash">Copiar</button>
+          <textarea id="hash" rows="4"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-h"><span class="n">7</span><h2>Listo para publicar</h2></div>
+      <div class="card-in">
+        <div class="out">
+          <button class="copy" data-copy="full">Copiar todo</button>
+          <textarea id="full" rows="5" placeholder="Caption + hashtags para Metricool / Instagram"></textarea>
+        </div>
+        <button class="btn btn-s btn-full btn-mini ai-only" id="polish_btn" style="margin-top:11px;display:none;border-color:var(--gold);color:var(--gold)">✦ Pulir copy con Opus (premium)</button>
+        <div class="mini" id="polish_note" style="margin-top:6px;text-align:center;min-height:13px;color:var(--gold)"></div>
+        <div class="row c2 ai-only" id="learn_row" style="margin-top:11px;display:none">
+          <button class="btn btn-s btn-mini" id="btn_up" style="color:var(--green);border-color:#BEE3C9">👍 Guardar como aprobado</button>
+          <button class="btn btn-s btn-mini" id="btn_down" style="color:var(--red);border-color:#EDC9C1">👎 Descartar</button>
+        </div>
+        <div class="mini" style="margin-top:9px">Descarga las imágenes o ve a <b>Calendario</b> para agendar la publicación. Cada post que apruebas afina a la IA.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ VISTA CALENDARIO ══ -->
+<div id="view_cal" class="calwrap" hidden>
+  <div class="card">
+    <div class="card-h"><span class="n">🗓</span><h2>Calendario de publicaciones</h2><button class="btn btn-s btn-mini" id="pub_cfg_btn" style="padding:6px 11px">⚙ Conectar</button></div>
+    <div class="card-in">
+      <div class="hint" id="cal_note">Prepara el carrusel en <b>Crear</b>, vuelve aquí, elige un <b>día</b> y una <b>hora</b> y pulsa <b>Agendar</b>: se publicará solo, ese día. También puedes <b>publicar ahora</b>.</div>
+      <button class="btn btn-p btn-full" id="pub_now" style="margin-bottom:14px">↗ Publicar el carrusel actual ahora</button>
+      <div class="cal-h">
+        <button class="btn btn-s btn-mini" id="cal_prev" style="padding:6px 11px">‹</button>
+        <b id="cal_title"></b>
+        <button class="btn btn-s btn-mini" id="cal_today">Hoy</button>
+        <button class="btn btn-s btn-mini" id="cal_next" style="padding:6px 11px">›</button>
+      </div>
+      <div class="cal-grid" id="cal_dows"></div>
+      <div class="cal-grid" id="cal_grid" style="margin-top:6px"></div>
+      <div id="cal_day" style="margin-top:16px"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ VISTA ANÁLISIS ══ -->
+<div id="view_an" class="calwrap" hidden>
+  <div class="card">
+    <div class="card-h"><span class="n">📊</span><h2>Análisis de tu Instagram</h2><button class="btn btn-s btn-mini" id="an_refresh" style="padding:6px 11px">↻ Actualizar</button></div>
+    <div class="card-in">
+      <div class="hint">Convierte tus posts reales en decisiones: qué tipo de contenido rinde más, qué ganchos funcionan y la fórmula ganadora. Sin coste de IA.</div>
+      <div id="an_body"></div>
+    </div>
+  </div>
+</div>
+
+<div id="lb" hidden style="position:fixed;inset:0;background:rgba(13,32,43,.92);z-index:120;display:flex;align-items:center;justify-content:center;padding:24px;cursor:zoom-out">
+  <img id="lb_img" alt="Slide" style="max-width:100%;max-height:100%;border-radius:10px;box-shadow:0 24px 70px rgba(0,0,0,.55)">
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+'use strict';
+var LW=1080,LH=1350,SCALE=2;
+var C={navy:'#0D3550',gold:'#B8922A',goldSoft:'#CBA43C',white:'#FFFFFF'};
+var HASHBANK={
+  barcelona:['#LesTresTorres','#Barcelona','#BarcelonaRealEstate','#SarriaSantGervasi','#PisoDeLujo','#BarcelonaLiving','#InmobiliariaDeLujo','#PropiedadLujo','#LuxuryBarcelona','#DuranCarasso','#LuxuryRealEstate','#ExclusiveProperties','#HighEndRealEstate','#LuxuryLiving','#CasasDeLujo'],
+  andorra:['#Andorra','#AndorraLaVella','#AndorraRealEstate','#AndorraLiving','#ResidenciaAndorra','#LuxuryAndorra','#PropiedadAndorra','#InversionAndorra','#AndorraPropietat','#DuranCarasso','#LuxuryRealEstate','#ExclusiveProperties','#HighEndRealEstate','#MountainLiving','#PrivateResidence'],
+  sitges:['#Sitges','#CostaDorada','#SitgesRealEstate','#SitgesMediterraneo','#VillaSitges','#LuxurySitges','#CasaSitges','#PropiedadLujo','#InmobiliariaDeLujo','#DuranCarasso','#LuxuryRealEstate','#ExclusiveProperties','#MediterraneanLiving','#BarcelonaRealEstate','#CasasDeLujo'],
+  general:['#DuranCarasso','#LuxuryRealEstate','#ExclusiveProperties','#HighEndRealEstate','#LuxuryHome','#DreamHome','#PropertyForSale','#RealEstateLife','#LuxuryLiving','#InmobiliariaDeLujo','#PropiedadesExclusivas']
+};
+var LABELS=['Gancho','Proyecto','Interior','Lifestyle','Consulta'];
+var LAYOUTS=['hook','info','info','info','cta'];
+var photos=[], slides=[], off=[], curTags=null;
+
+function $(id){return document.getElementById(id)}
+function v(id){return ($(id)&&$(id).value||'').trim()}
+function toast(m){var t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('on')},1900)}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+function blankSlides(){slides=[];for(var i=0;i<5;i++)slides.push({kicker:'',title:'',body:'',photo:i,focus:50,layout:LAYOUTS[i]})}
+blankSlides();
+
+/* ══ FOTOS ══ */
+var drop=$('drop'),file=$('file');
+drop.addEventListener('click',function(){file.click()});
+drop.addEventListener('dragover',function(e){e.preventDefault();drop.classList.add('over')});
+drop.addEventListener('dragleave',function(){drop.classList.remove('over')});
+drop.addEventListener('drop',function(e){e.preventDefault();drop.classList.remove('over');if(e.dataTransfer.files&&e.dataTransfer.files.length)addFiles(e.dataTransfer.files)});
+file.addEventListener('change',function(e){addFiles(e.target.files);file.value=''});
+document.addEventListener('paste',function(e){
+  var items=(e.clipboardData&&e.clipboardData.items)||[], files=[];
+  for(var i=0;i<items.length;i++){if(items[i].type&&items[i].type.indexOf('image')===0){var f=items[i].getAsFile();if(f)files.push(f)}}
+  if(files.length){e.preventDefault();addFiles(files);toast(files.length+' foto'+(files.length>1?'s':'')+' pegada'+(files.length>1?'s':''));if(typeof showTab==='function')showTab('create')}
+});
+
+function addFiles(list){
+  var arr=Array.prototype.slice.call(list).filter(function(f){return /^image\//.test(f.type)});
+  if(!arr.length)return;
+  var pend=arr.length;
+  arr.forEach(function(f){
+    var r=new FileReader();
+    r.onload=function(ev){
+      var im=new Image();
+      im.onload=function(){photos.push({src:ev.target.result,img:im});done()};
+      im.onerror=done; im.src=ev.target.result;
+    };
+    function done(){if(--pend===0){renderThumbs();autoAssign();renderSlides();scheduleRender();save()}}
+    r.readAsDataURL(f);
+  });
+}
+function renderThumbs(){
+  $('thumbs').innerHTML=photos.map(function(p,i){
+    return '<div class="thumb" draggable="true" data-idx="'+i+'"><img src="'+p.src+'"><span class="i">'+(i+1)+'</span><button class="x" data-rm="'+i+'">×</button></div>';
+  }).join('');
+  $('btn_clear').style.display=photos.length?'block':'none';
+  $('ph_cnt').textContent=photos.length?photos.length+' fotos':'0';
+}
+$('thumbs').addEventListener('click',function(e){
+  var i=e.target.getAttribute('data-rm'); if(i===null)return;
+  photos.splice(+i,1);
+  slides.forEach(function(s){if(s.photo>=photos.length)s.photo=photos.length?photos.length-1:0});
+  renderThumbs();renderSlides();scheduleRender();save();
+});
+/* drag para reordenar */
+var dragI=null;
+$('thumbs').addEventListener('dragstart',function(e){var t=e.target.closest('.thumb');if(!t)return;dragI=+t.getAttribute('data-idx');t.classList.add('drag')});
+$('thumbs').addEventListener('dragend',function(e){var t=e.target.closest('.thumb');if(t)t.classList.remove('drag')});
+$('thumbs').addEventListener('dragover',function(e){e.preventDefault()});
+$('thumbs').addEventListener('drop',function(e){
+  e.preventDefault();var t=e.target.closest('.thumb');if(t===null||dragI===null)return;
+  var to=+t.getAttribute('data-idx');if(to===dragI)return;
+  var m=photos.splice(dragI,1)[0];photos.splice(to,0,m);
+  dragI=null;renderThumbs();renderSlides();scheduleRender();save();
+});
+$('btn_clear').addEventListener('click',function(){
+  if(!photos.length)return;
+  photos=[];slides.forEach(function(s){s.photo=0});
+  renderThumbs();renderSlides();scheduleRender();
+  $('btn_dl').disabled=true;save();toast('Fotos eliminadas');
+});
+function autoAssign(){slides.forEach(function(s,i){s.photo=Math.min(i,Math.max(0,photos.length-1))})}
+
+/* ══ PLANTILLA ══ */
+$('btn_tpl').addEventListener('click',function(){
+  var name=v('f_name')||'La propiedad',loc=v('f_loc'),type=v('f_type'),m2=v('f_m2');
+  var hab=v('f_hab'),ban=v('f_ban'),ext=v('f_ext'),amen=v('f_amen'),dist=v('f_dist');
+  var ig=v('f_ig'),web=v('f_web'),mkt=$('f_mkt').value;
+  var rooms=[hab?hab+' habitaciones':'',ban?ban+' baños':''].filter(Boolean).join(' · ');
+  slides[0].kicker=loc;slides[0].title=name;slides[0].body='';
+  slides[1].kicker='El proyecto';slides[1].title=type||'El proyecto';
+  slides[1].body=[m2?'Superficie · '+m2:'',ext,rooms].filter(Boolean).join('\n');
+  slides[2].kicker='El interior';slides[2].title='Diseño y acabados';
+  slides[2].body=amen||'Materiales exclusivos y acabados de autor';
+  slides[3].kicker='El lifestyle';slides[3].title='Vivir aquí';
+  slides[3].body=[dist,mkt==='andorra'?'Residencia y fiscalidad favorable':''].filter(Boolean).join('\n')||'Ubicación consolidada y privada';
+  slides[4].kicker='Consulta privada';slides[4].title='Hablemos en privado';
+  slides[4].body=[type&&m2?type+' · '+m2:'','Consulta privada sin compromiso',[web,ig].filter(Boolean).join(' · ')].filter(Boolean).join('\n');
+  renderSlides();scheduleRender();save();toast('Plantilla aplicada');
+});
+
+/* ══ IMPORTAR COPY ══ */
+$('btn_parse').addEventListener('click',function(){
+  var txt=$('paste').value; if(!txt.trim()){toast('Pega antes el copy');return}
+  var blocks=txt.split(/\[?\s*SLIDE\s*(\d)\s*[\]—·-]*/i); var found=0;
+  for(var i=1;i<blocks.length;i+=2){
+    var n=parseInt(blocks[i],10)-1, body=(blocks[i+1]||'').trim(); if(n<0||n>4)continue;
+    body=body.replace(/^[·—–\-\s]*\(?[A-Za-zÁÉÍÓÚÑáéíóúñ ]{3,}\)?\n/,function(m){slides[n].kicker=m.trim().replace(/^[·—–\-\s]+/,'').replace(/[()]/g,'');return''});
+    var lines=body.split('\n').map(function(l){return l.replace(/^[-•*·]\s*/,'').trim()}).filter(Boolean);
+    if(!lines.length)continue;
+    slides[n].title=lines.shift();slides[n].body=lines.join('\n');found++;
+  }
+  if(!found){toast('No encontré marcas [SLIDE n]');return}
+  renderSlides();scheduleRender();save();toast(found+' slides importados');
+});
+
+/* ══ EDITOR SLIDES ══ */
+function renderSlides(){
+  $('slides').innerHTML=slides.map(function(s,i){
+    var opts=photos.map(function(p,j){return '<option value="'+j+'"'+(s.photo===j?' selected':'')+'>Foto '+(j+1)+'</option>'}).join('')||'<option value="0">— sin fotos —</option>';
+    var lay=s.layout||LAYOUTS[i];
+    return '<div class="sl'+(i===0?' open':'')+'" data-sl="'+i+'">'+
+      '<div class="sl-h"><span class="sl-n">'+(i+1)+'</span><span class="sl-t">'+esc(s.title||LABELS[i])+' <em>'+(s.title?LABELS[i]:'')+'</em></span><span class="sl-a">▼</span></div>'+
+      '<div class="sl-b">'+
+        '<div class="row c2"><div><label>Etiqueta (oro)</label><input data-f="kicker" value="'+esc(s.kicker)+'" placeholder="'+LABELS[i]+'"></div>'+
+        '<div><label>Foto</label><select data-f="photo">'+opts+'</select></div></div>'+
+        '<div class="row"><div><label>Titular</label><input data-f="title" value="'+esc(s.title)+'" placeholder="≤ 8 palabras"></div></div>'+
+        '<div class="row"><div><label>Líneas (una por fila)</label><textarea data-f="body" rows="4" placeholder="Una línea por bullet">'+esc(s.body)+'</textarea></div></div>'+
+        '<div class="row c2" style="align-items:center"><div><label>Composición</label><div class="seg" data-seg="layout">'+
+          ['hook','info','cta'].map(function(L){return '<button data-v="'+L+'"'+(lay===L?' class="on"':'')+'>'+({hook:'Portada',info:'Datos',cta:'Cierre'}[L])+'</button>'}).join('')+
+        '</div></div>'+
+        '<div><label>Encuadre foto</label><input type="range" min="0" max="100" data-f="focus" value="'+s.focus+'" style="width:100%"></div></div>'+
+      '</div></div>';
+  }).join('');
+}
+$('slides').addEventListener('click',function(e){
+  var seg=e.target.closest('[data-seg]');
+  if(seg&&e.target.hasAttribute('data-v')){
+    var i=+e.target.closest('.sl').getAttribute('data-sl');
+    slides[i].layout=e.target.getAttribute('data-v');
+    seg.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',b===e.target)});
+    scheduleRender();save();return;
+  }
+  var h=e.target.closest('.sl-h'); if(h)h.parentNode.classList.toggle('open');
+});
+$('slides').addEventListener('input',function(e){
+  var f=e.target.getAttribute('data-f'); if(!f)return;
+  var i=+e.target.closest('.sl').getAttribute('data-sl');
+  slides[i][f]=(f==='photo'||f==='focus')?+e.target.value:e.target.value;
+  if(f==='title'){var t=e.target.closest('.sl').querySelector('.sl-t');t.innerHTML=esc(e.target.value||LABELS[i])+' <em>'+(e.target.value?LABELS[i]:'')+'</em>'}
+  if(f==='name'){}
+  scheduleRender();save();
+});
+
+/* ══ RENDER CANVAS (2× supersampling) ══ */
+function wrap(ctx,text,max){
+  var words=String(text).split(/\s+/),lines=[],cur='';
+  for(var i=0;i<words.length;i++){var t=cur?cur+' '+words[i]:words[i];if(ctx.measureText(t).width>max&&cur){lines.push(cur);cur=words[i]}else cur=t}
+  if(cur)lines.push(cur);return lines;
+}
+function cover(ctx,img,focus){
+  var ir=img.width/img.height, cr=LW/LH, dw,dh,dx,dy;
+  if(ir>cr){dh=LH;dw=LH*ir;dy=0;dx=(LW-dw)/2}else{dw=LW;dh=LW/ir;dx=0;dy=(LH-dh)*(focus/100)}
+  ctx.drawImage(img,dx,dy,dw,dh);
+}
+function drawSlide(cv,s,idx){
+  cv.width=LW*SCALE;cv.height=LH*SCALE;
+  var ctx=cv.getContext('2d');
+  ctx.setTransform(SCALE,0,0,SCALE,0,0);
+  ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
+  var theme=$('f_theme').value, scrim=(+$('f_scrim').value)/100, showLogo=$('f_logo').value!=='off';
+  var lay=s.layout||LAYOUTS[idx], p=photos[s.photo];
+
+  ctx.fillStyle=C.navy;ctx.fillRect(0,0,LW,LH);
+  if(p&&p.img)cover(ctx,p.img,s.focus);
+
+  if(theme!=='none'){
+    var g=ctx.createLinearGradient(0,0,0,LH);
+    if(theme==='dark'){
+      // franja superior leve (logo) · centro limpio (la foto luce) · banda inferior sólida (texto legible)
+      g.addColorStop(0,'rgba(9,28,44,'+(0.36*scrim).toFixed(3)+')');
+      g.addColorStop(.30,'rgba(9,28,44,'+(0.04*scrim).toFixed(3)+')');
+      g.addColorStop(.52,'rgba(8,24,38,'+(0.20*scrim).toFixed(3)+')');
+      g.addColorStop(.72,'rgba(7,21,34,'+(0.60*scrim).toFixed(3)+')');
+      g.addColorStop(.88,'rgba(6,18,30,'+(0.86*scrim).toFixed(3)+')');
+      g.addColorStop(1,'rgba(5,15,26,'+(0.97*scrim).toFixed(3)+')');
+    }else{
+      g.addColorStop(0,'rgba(255,255,255,'+(0.24*scrim).toFixed(3)+')');
+      g.addColorStop(.40,'rgba(255,255,255,'+(0.03*scrim).toFixed(3)+')');
+      g.addColorStop(.66,'rgba(13,45,68,'+(0.42*scrim).toFixed(3)+')');
+      g.addColorStop(.86,'rgba(11,38,58,'+(0.82*scrim).toFixed(3)+')');
+      g.addColorStop(1,'rgba(9,32,50,'+(0.95*scrim).toFixed(3)+')');
+    }
+    ctx.fillStyle=g;ctx.fillRect(0,0,LW,LH);
+  }
+
+  var light=theme==='light';
+  var main=light?'#0D3550':'#FFFFFF';
+  var soft=light?'rgba(13,53,80,.62)':'rgba(255,255,255,.72)';
+  var PAD=86, PADB=118;
+
+  // logo apilado
+  ctx.textBaseline='alphabetic';
+  if(showLogo){
+    ctx.fillStyle=light?'rgba(13,53,80,.95)':'rgba(255,255,255,.96)';
+    ctx.font='500 40px "Playfair Display", serif';ctx.letterSpacing='.5px';
+    ctx.fillText('Durán',PAD,PAD+8);ctx.fillText('Carasso',PAD,PAD+8+42);ctx.letterSpacing='0px';
+  }
+  // dots de progreso
+  var dn=slides.length, dr=5, gap=17, tot=(dn-1)*gap, x0=LW-PAD-tot;
+  for(var d=0;d<dn;d++){
+    ctx.beginPath();ctx.arc(x0+d*gap,PAD-2,d===idx?dr:dr-1.5,0,7);
+    ctx.fillStyle=d===idx?C.gold:(light?'rgba(13,53,80,.28)':'rgba(255,255,255,.4)');ctx.fill();
+  }
+
+  var maxW=LW-PAD*2;
+  var bodyLines=String(s.body||'').split('\n').map(function(x){return x.trim()}).filter(Boolean);
+  var hook=(lay==='hook'), cta=(lay==='cta');
+  var tSize=hook?82:(cta?66:60), tLead=tSize*1.12, bSize=35, bLead=54;
+
+  ctx.font='600 '+tSize+'px "Playfair Display", serif';
+  var tLines=s.title?wrap(ctx,s.title,maxW):[];
+
+  // altura del bloque
+  var kH=s.kicker?52:0;
+  var tH=tLines.length*tLead;
+  var bH=bodyLines.length?(cta?30:24)+bodyLines.length*bLead:0;
+  var ruleH=cta?30:0;
+  var blockH=kH+tH+bH+ruleH;
+
+  // Todo el texto va anclado abajo, sobre la banda oscura → nunca en medio de la foto
+  var y=LH-PADB-blockH+tSize*0.05;
+  function shadowOn(){ctx.shadowColor='rgba(0,0,0,'+(light?0.18:0.45)+')';ctx.shadowBlur=16;ctx.shadowOffsetX=0;ctx.shadowOffsetY=1}
+  function shadowOff(){ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0}
+
+  if(s.kicker){
+    shadowOff();
+    ctx.fillStyle=light?'#9A7A1E':C.goldSoft;
+    ctx.font='600 23px Inter, sans-serif';ctx.letterSpacing='4px';
+    ctx.fillText(s.kicker.toUpperCase(),PAD,y);ctx.letterSpacing='0px';
+    var kw=ctx.measureText(s.kicker.toUpperCase()).width;
+    ctx.strokeStyle=light?'rgba(154,122,30,.5)':'rgba(203,164,60,.6)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(PAD+kw+18,y-7);ctx.lineTo(Math.min(PAD+kw+90,LW-PAD),y-7);ctx.stroke();
+    y+=kH;
+  }
+  shadowOn();
+  ctx.fillStyle=main;ctx.font='600 '+tSize+'px "Playfair Display", serif';
+  tLines.forEach(function(l){y+=tLead*0.78;ctx.fillText(l,PAD,y);y+=tLead*0.22});
+  shadowOff();
+
+  if(cta){ y+=16;ctx.strokeStyle=C.gold;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(PAD,y);ctx.lineTo(PAD+56,y);ctx.stroke();y+=14; }
+  if(bodyLines.length){
+    if(!cta)y+=24;
+    ctx.font='300 '+bSize+'px Inter, sans-serif';
+    bodyLines.forEach(function(l){
+      y+=bLead*0.7;
+      ctx.fillStyle=C.gold;ctx.fillRect(PAD,y-bSize*0.36,22,2.4);
+      shadowOn();
+      ctx.fillStyle=light?'rgba(13,45,68,.95)':'rgba(255,255,255,.95)';
+      var ls=wrap(ctx,l,maxW-42);
+      ctx.fillText(ls[0],PAD+42,y);
+      for(var k=1;k<ls.length;k++){y+=bLead*0.78;ctx.fillText(ls[k],PAD+42,y)}
+      shadowOff();
+      y+=bLead*0.3;
+    });
+  }
+  if(hook){
+    ctx.fillStyle=soft;ctx.font='500 24px Inter, sans-serif';ctx.textAlign='right';
+    ctx.fillText('Desliza  →',LW-PAD,LH-PADB+40);ctx.textAlign='left';
+  }
+}
+
+/* ══ PREVIEW EN VIVO ══ */
+var rT;
+function scheduleRender(){clearTimeout(rT);rT=setTimeout(renderAll,200)}
+function renderAll(){
+  document.fonts.ready.then(function(){
+    var host=$('pv');host.innerHTML='';
+    if(!photos.length){
+      host.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:44px 22px;border:1px dashed #D8D6CF;border-radius:12px;background:var(--soft)">'
+        +'<div style="font-size:15px;color:var(--ink);font-family:\'Playfair Display\',serif;margin-bottom:6px">Aún no ves el post real</div>'
+        +'<div class="mini" style="max-width:360px;margin:0 auto 16px">Sube o pega tus fotos y aquí verás el carrusel montado con ellas, listo para publicar.</div>'
+        +'<button class="btn btn-p" id="pv_up">Subir fotos ahora</button></div>';
+      $('btn_dl').disabled=true;
+      var u=$('pv_up'); if(u)u.onclick=function(){file.click()};
+      return;
+    }
+    slides.forEach(function(s,i){
+      var d=document.createElement('div');d.className='pv';
+      var cv=document.createElement('canvas');cv.style.cursor='zoom-in';cv.title='Clic para ver grande';d.appendChild(cv);
+      var f=document.createElement('div');f.className='pv-f';
+      f.innerHTML='<b>'+(i+1)+' · '+LABELS[i]+'</b>';
+      var b=document.createElement('button');b.className='btn btn-s btn-mini';b.textContent='PNG';
+      b.onclick=function(){dl(cv,i)};f.appendChild(b);d.appendChild(f);host.appendChild(d);
+      drawSlide(cv,s,i);
+      cv.onclick=function(){openLB(cv)};
+    });
+    $('btn_dl').disabled=false;
+  });
+}
+function openLB(cv){var m=$('lb');if(!m)return;try{$('lb_img').src=cv.toDataURL('image/png')}catch(e){}m.hidden=false}
+if($('lb'))$('lb').addEventListener('click',function(){this.hidden=true});
+
+/* ══ DESCARGA ══ */
+var DL;
+if(window.claude&&claude.use){try{claude.use('downloads').then(function(d){DL=d||undefined}).catch(function(){})}catch(e){}}
+function baseName(){return (v('f_name')||'carrusel').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'carrusel'}
+function blobFor(cv){return new Promise(function(res){cv.toBlob(function(b){res(b)},'image/png',0.97)})}
+function saveBlob(b,name){
+  if(DL&&DL.save)return DL.save({filename:name,data:b}).then(function(){return true}).catch(function(){return false});
+  var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;
+  document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},1500);
+  return Promise.resolve(true);
+}
+function dl(cv,i){blobFor(cv).then(function(b){saveBlob(b,baseName()+'-'+(i+1)+'.png')})}
+$('btn_dl').addEventListener('click',async function(){
+  var cvs=$('pv').querySelectorAll('canvas'); if(!cvs.length)return;
+  toast('Preparando descargas…');
+  for(var i=0;i<cvs.length;i++){var b=await blobFor(cvs[i]);var ok=await saveBlob(b,baseName()+'-'+(i+1)+'.png');if(ok===false)break}
+  toast('Descarga lista');
+});
+
+/* ══ CAPTION ══ */
+$('btn_cap').addEventListener('click',function(){
+  var name=v('f_name')||'Esta propiedad',loc=v('f_loc'),type=v('f_type'),m2=v('f_m2');
+  var amen=v('f_amen'),dist=v('f_dist'),web=v('f_web'),mkt=$('f_mkt').value;
+  var p1=name+(loc?' · '+loc:'')+'.\nUn espacio pensado para vivir con privacidad, sin renunciar a nada.';
+  var p2=[type,m2].filter(Boolean).join(' de ')+(amen?'. '+amen+'.':'.');
+  var p3=mkt==='andorra'?'Andorra combina calidad de vida, seguridad y un marco fiscal atractivo para una inversión inteligente.':(dist?dist+'.':'Una ubicación consolidada, difícil de repetir.');
+  $('caption').value=p1+'\n\n'+p2+'\n\n'+p3+'\n\n✉️ Escríbenos para una visita privada.'+(web?'\n\n🔗 '+web:'');
+  sync();toast('Caption base — revísala');
+});
+$('caption').addEventListener('input',sync);
+$('hash').addEventListener('input',sync);
+
+/* ══ HASHTAGS ══ */
+function tagList(){return (curTags&&curTags.length)?curTags:(HASHBANK[$('f_mkt').value]||[])}
+function renderTags(){
+  var list=tagList();
+  $('tags').innerHTML=list.map(function(t){return '<span class="tag'+(off.indexOf(t)>=0?' off':'')+'" data-t="'+t+'">'+t+'</span>'}).join('');
+  $('hash').value=list.filter(function(t){return off.indexOf(t)<0}).join(' ');
+  sync();
+}
+$('tags').addEventListener('click',function(e){
+  var t=e.target.getAttribute('data-t'); if(!t)return;
+  var i=off.indexOf(t);if(i<0)off.push(t);else off.splice(i,1);renderTags();save();
+});
+$('f_mkt').addEventListener('change',function(){off=[];curTags=null;renderTags();save()});
+
+function sync(){
+  var cap=$('caption').value,h=$('hash').value,n=cap.length+h.length+6;
+  $('cap_cnt').textContent=n.toLocaleString('es')+' / 2.200';$('cap_cnt').className='aux cnt'+(n>2200?' over':'');
+  var hc=(h.match(/#/g)||[]).length;
+  $('hash_cnt').textContent=hc+' / 30';$('hash_cnt').className='aux cnt'+(hc>30?' over':'');
+  $('full').value=cap+'\n.\n.\n.\n'+h;save();
+}
+document.addEventListener('click',function(e){
+  var k=e.target.getAttribute('data-copy'); if(!k)return;
+  var ta=$(k); if(!ta)return;
+  navigator.clipboard.writeText(ta.value).then(function(){
+    e.target.classList.add('ok');e.target.textContent='Copiado';
+    setTimeout(function(){e.target.classList.remove('ok');e.target.textContent=k==='full'?'Copiar todo':'Copiar'},1400);
+  });
+});
+
+/* ══ ESTILO / CHIP ══ */
+['f_theme','f_scrim','f_logo'].forEach(function(id){$(id).addEventListener('input',function(){scheduleRender();save()})});
+$('f_name').addEventListener('input',function(){$('chip').textContent=v('f_name')||'Nueva propiedad'});
+
+/* ══ IA (cerebro en vivo vía capability sample) + MEMORIA (db) ══ */
+var SAMPLE=null, DB=null, AICtx={examples:[],count:0}, LASTAI=null;
+function fmtCost(c){return c<0.01?('<0,01 €'):(c.toFixed(3).replace('.',',')+' €')}
+var BRAND={posts:[],updatedAt:0};
+try{BRAND=JSON.parse(localStorage.getItem('dc_brand')||'null')||BRAND}catch(e){}
+var BRAND_RULES=[
+'Eres el copywriter senior de Duran Carasso, inmobiliaria de lujo (Andorra, Sitges/Costa Dorada, Barcelona). Escribe EXACTAMENTE con su estilo de Instagram.',
+'VOZ DE MARCA: exclusiva, aspiracional, cálida y sobria. Elegante, nunca agresiva ni de venta dura. Frases cortas y con ritmo. Evocas una sensación (luz, calma, privacidad, hogar), no listas de portal inmobiliario.',
+'PROHIBIDO: precio (salvo que el material lo pida), superlativos vacíos ("increíble","oportunidad única","no te lo pierdas"), signos de exclamación en cadena, jerga de anuncio.',
+'OBLIGATORIO: privacidad y exclusividad presentes; CTA suave ("consulta privada","visita privada, bajo cita"); máximo 3 emojis en toda la caption (sobrios: 🌿🏛️🌇✨); reescribe siempre, nunca copies literal la ficha.',
+'IDIOMA: castellano por defecto. Andorra: puedes mezclar algún matiz en català. Barcelona/Sitges: castellano.',
+'CARRUSEL (5 slides): [1] GANCHO — una frase evocadora ≤9 palabras + ubicación; sin bullets. [2] EL PROYECTO — 3-4 líneas: m², plantas/año, habitaciones/baños, autoría si la hay. [3] EL INTERIOR — materiales, acabados, luz, detalles de autor. [4] LIFESTYLE/VALOR — entorno, distancias, en Andorra el ángulo residencia/fiscal. [5] CONSULTA PRIVADA — tipología+m², "consulta privada sin compromiso", web + @cuenta.',
+'CADA LÍNEA del cuerpo: una sola idea, corta, sin viñetas ni puntos finales innecesarios.',
+'CAPTION: 3 párrafos breves separados por línea en blanco (gancho emocional / producto / ángulo diferencial) + línea de CTA ("✉️ Escríbenos para una visita privada.") + web. Tono editorial, no telegrama.',
+'HASHTAGS: 15, mezcla amplio/medio/nicho del mercado, incluye #DuranCarasso.'
+].join('\n');
+var OUTPUT_SPEC='Devuelve SOLO un JSON válido, sin texto alrededor, con esta forma exacta:\n{"market":"barcelona|andorra|sitges|general","name":"titular corto de la propiedad","slides":[{"kicker":"etiqueta corta","title":"titular","body":"linea1\\nlinea2","layout":"hook|info|cta","photo":0,"focus":50}],"caption":"texto con saltos \\n","hashtags":["#Uno","#Dos"]}\nReglas: exactamente 5 slides en este orden -> [0] gancho (layout "hook", body ""), [1] proyecto, [2] interior, [3] lifestyle (los tres layout "info"), [4] cierre (layout "cta"). body: máximo 4 líneas, una idea por línea, sin viñetas. caption: 3 párrafos + CTA suave + web, máximo 3 emojis. hashtags: 15, mezcla de alcance amplio, medio y nicho del mercado, incluye #DuranCarasso.\nCURADURÍA DE FOTOS (si te adjunto imágenes): están numeradas 0,1,2… en el orden que las recibes. Para cada slide elige en "photo" el índice de la foto que MEJOR encaje con ese texto (la más impactante y luminosa en el slide 1; usa fotos DISTINTAS en cada slide, evita repetir). En "focus" indica el encuadre vertical ideal de esa foto: 0=parte superior, 50=centro, 100=parte inferior (elige para que se vea lo importante). Adapta el copy a lo que realmente se ve en las fotos.';
+
+function aiBusy(id,t){var b=$(id);if(b){b.textContent=t;b.disabled=true}}
+function aiIdle(id,t){var b=$(id);if(b){b.textContent=t;b.disabled=false}}
+function aiErr(code){var m={not_granted:'Activa el acceso de IA para esta app',sampling_disabled:'IA no disponible en esta cuenta',rate_limited:'Demasiadas peticiones, prueba en un momento',invalid_json:'Respuesta no válida, reintenta',prompt_too_large:'Material demasiado largo, resúmelo',refused:'No pude generarlo, cambia el material'};return m[code]||'Error de IA, reintenta'}
+function photoBlobs(){var jobs=[];for(var i=0;i<Math.min(4,photos.length);i++)jobs.push(fetch(photos[i].src).then(function(r){return r.blob()}).catch(function(){return null}));return Promise.all(jobs).then(function(a){return a.filter(Boolean)})}
+
+function applyAI(r){
+  if(!r||typeof r!=='object')return;
+  if(r.market&&['barcelona','andorra','sitges','general'].indexOf(r.market)>=0)$('f_mkt').value=r.market;
+  if(r.name){$('f_name').value=r.name;$('chip').textContent=r.name}
+  var sl=Array.isArray(r.slides)?r.slides:[];
+  for(var i=0;i<5;i++){
+    var a=sl[i]||{};
+    slides[i].kicker=(a.kicker!=null?a.kicker:slides[i].kicker)||'';
+    slides[i].title=(a.title!=null?a.title:slides[i].title)||'';
+    slides[i].body=(a.body!=null?a.body:slides[i].body)||'';
+    slides[i].layout=(['hook','info','cta'].indexOf(a.layout)>=0)?a.layout:LAYOUTS[i];
+    var ph=(typeof a.photo==='number')?a.photo:a.photoHint;
+    if(typeof ph==='number'&&photos.length)slides[i].photo=Math.max(0,Math.min(photos.length-1,ph|0));
+    if(typeof a.focus==='number')slides[i].focus=Math.max(0,Math.min(100,a.focus|0));
+  }
+  if(r.caption)$('caption').value=String(r.caption);
+  if(Array.isArray(r.hashtags)&&r.hashtags.length){curTags=r.hashtags.map(function(t){t=String(t).trim();return t[0]==='#'?t:'#'+t}).slice(0,30);off=[]}
+  renderSlides();renderTags();scheduleRender();save();
+}
+
+/* ── Capa de IA: usa el cerebro de Claude si está, o tu servidor (versión alojada) ── */
+function aiWorker(){var c=pubCfg();return !!(c.url&&c.secret)}
+function aiReady(){return !!SAMPLE || aiWorker()}
+function parseJsonLoose(t){
+  if(t==null)return null;
+  try{return JSON.parse(t)}catch(e){}
+  var f=t.match(/```(?:json)?\s*([\s\S]*?)```/); if(f){try{return JSON.parse(f[1])}catch(e){}}
+  var a=t.indexOf('{'),b=t.lastIndexOf('}'); if(a>=0&&b>a){try{return JSON.parse(t.slice(a,b+1))}catch(e){}}
+  var c=t.indexOf('['),d=t.lastIndexOf(']'); if(c>=0&&d>c){try{return JSON.parse(t.slice(c,d+1))}catch(e){}}
+  var er=new Error('invalid_json');er.code='invalid_json';throw er;
+}
+// Reduce una imagen a máx N px (lado largo) + JPEG: la IA sólo necesita "verla"
+// para encuadrar/adaptar el copy. Recorta el coste de visión ~4-6x. El canvas final
+// sigue usando la foto original a resolución completa.
+function downscaleForAI(src,max){return new Promise(function(res){max=max||512;var im=new Image();try{im.crossOrigin='anonymous'}catch(e){}
+  im.onload=function(){var w=im.naturalWidth||im.width,h=im.naturalHeight||im.height;if(!w||!h)return res(src);
+    var sc=Math.min(1,max/Math.max(w,h)),cw=Math.max(1,Math.round(w*sc)),ch=Math.max(1,Math.round(h*sc));
+    var c=document.createElement('canvas');c.width=cw;c.height=ch;c.getContext('2d').drawImage(im,0,0,cw,ch);
+    try{res(c.toDataURL('image/jpeg',0.72))}catch(e){res(src)}};
+  im.onerror=function(){res(src)};im.src=src})}
+async function smallImages(urls){var out=[];for(var i=0;i<urls.length&&i<6;i++){try{out.push(await downscaleForAI(urls[i]))}catch(e){out.push(urls[i])}}return out}
+async function aiJson(prompt,opts){
+  opts=opts||{};
+  var imgs=(opts.imageUrls&&opts.imageUrls.length)?await smallImages(opts.imageUrls):null;
+  if(SAMPLE){
+    var o={}; if(opts.signal)o.signal=opts.signal;
+    if(imgs){var bl=[];for(var i=0;i<imgs.length;i++){try{bl.push(await (await fetch(imgs[i])).blob())}catch(e){}}if(bl.length)o.images=bl;}
+    return await SAMPLE.json(prompt,o);
+  }
+  var c=pubCfg();
+  var body={prompt:prompt}; if(imgs)body.images=imgs; if(opts.model)body.model=opts.model;
+  var r=await fetch(pubBase()+'/ai',{method:'POST',headers:{'Content-Type':'application/json','x-app-secret':c.secret},body:JSON.stringify(body),signal:opts.signal});
+  var d=await r.json();
+  if(d.error){var msg=(d.detail&&(d.detail.message||JSON.stringify(d.detail)))||d.error;var er=new Error(String(msg));er.code=(d.error==='no_ai_key')?'not_granted':'upstream_error';throw er;}
+  if(typeof d.cost==='number')LASTAI={cost:d.cost,model:d.model||''};
+  return parseJsonLoose(d.text);
+}
+function urlToText(s){
+  // La IA no navega: si es un enlace, extraemos la info legible del propio URL
+  var m=s.match(/https?:\/\/[^\s]+/i); if(!m)return null;
+  try{
+    var u=new URL(m[0]);
+    var parts=(u.pathname||'').split('/').filter(Boolean).map(function(p){return decodeURIComponent(p).replace(/\.[a-z]{2,4}$/i,'').replace(/[-_]+/g,' ')});
+    var txt=parts.join(' · ').replace(/\s+/g,' ').trim();
+    return txt?('Propiedad (datos extraídos del enlace '+u.hostname+'): '+txt):null;
+  }catch(e){return null}
+}
+/* ── Modelo real: aprende de TU Instagram (Graph API lee tu propia cuenta) ── */
+function classifyType(t){
+  t=(t||'').toLowerCase();
+  if(/alquiler|rent|arrenda|temporada/.test(t))return 'alquiler';
+  if(/promoci[oó]n|obra nueva|nueva construcci|pisos? nuevos|de obra/.test(t))return 'promocion';
+  if(/villa|casa|chalet|masia|mas[ií]a|torre|finca/.test(t))return 'villa';
+  if(/[aá]tico|apartamento|piso|d[uú]plex|estudio|loft/.test(t))return 'apartamento';
+  if(/vida|lifestyle|experiencia|descubre|zona|entorno|rinc[oó]n|verano|invierno/.test(t))return 'lifestyle';
+  return 'general';
+}
+var TYPE_ES={villa:'villa/casa',apartamento:'piso/ático',promocion:'promoción',alquiler:'alquiler',lifestyle:'lifestyle/zona',general:'general'};
+function brandSave(){try{localStorage.setItem('dc_brand',JSON.stringify(BRAND))}catch(e){}}
+function brandBadge(){
+  var el=$('ai_model');if(!el)return;
+  el.textContent=BRAND.posts&&BRAND.posts.length?('Modelo IG · '+BRAND.posts.length+' posts reales aprendidos'):'';
+}
+// Devuelve los mejores ejemplos reales del tipo pedido (por engagement)
+function brandExamples(type,n){
+  var ps=(BRAND.posts||[]).filter(function(p){return p.caption&&p.caption.length>20});
+  if(!ps.length)return [];
+  var f=ps.filter(function(p){return p.type===type});
+  if(f.length<2)f=ps;
+  f=f.slice().sort(function(a,b){return (b.likes+b.comments*3)-(a.likes+a.comments*3)});
+  return f.slice(0,n||3);
+}
+async function learnFromIG(){
+  var c=pubCfg();
+  if(!c.url||!c.secret){toast('Conecta el publicador (⚙, en Calendario) y pon el token de Instagram');return}
+  aiBusy('ai_learn','Leyendo tu Instagram…');
+  try{
+    var r=await fetch(pubBase()+'/learn',{method:'POST',headers:{'Content-Type':'application/json','x-app-secret':c.secret}});
+    var d=await r.json();
+    if(d.error){toast('IG: '+((d.detail&&(d.detail.message||d.detail.error&&d.detail.error.message))||d.error));}
+    else{
+      var b=await fetch(pubBase()+'/brand',{headers:{'x-app-secret':c.secret}});
+      var bd=await b.json();
+      BRAND={posts:bd.posts||[],updatedAt:bd.updatedAt||Date.now()};brandSave();brandBadge();
+      var tt=Object.keys(d.byType||{}).map(function(k){return (TYPE_ES[k]||k)+' '+d.byType[k]}).join(' · ');
+      toast('Aprendidos '+d.count+' posts reales ✦');
+      if(tt)$('ai_status').textContent='Tu feed: '+tt;
+    }
+  }catch(e){toast('Sin conexión con el lector (usa la versión alojada)');}
+  aiIdle('ai_learn','🎓 Aprender de mi Instagram (modelo real)');
+}
+/* ── Pulido premium: eleva el copy con el mejor modelo, solo cuando tú quieres ── */
+async function polishCopy(){
+  if(!aiReady()){toast('Conecta el publicador (⚙) o abre dentro de Claude');return}
+  var has=slides.some(function(s){return s.title||s.body})||$('caption').value.trim();
+  if(!has){toast('Genera un borrador primero, luego púlelo');return}
+  aiBusy('polish_btn','Puliendo con Opus…');$('polish_note').textContent='';
+  var type=classifyType($('caption').value+' '+v('f_type')+' '+v('f_name'));
+  var ex=brandExamples(type,2);
+  var cur={name:v('f_name'),market:$('f_mkt').value,slides:slides.map(function(s){return {kicker:s.kicker,title:s.title,body:s.body,layout:s.layout}}),caption:$('caption').value,hashtags:tagList()};
+  var p=BRAND_RULES+(ex.length?'\n\nNIVEL A IGUALAR (posts reales de Duran Carasso):\n'+ex.map(function(e){return String(e.caption).slice(0,500)}).join('\n---\n'):'')+'\n\nEres el DIRECTOR CREATIVO. Eleva a máxima calidad el copy de este carrusel SIN inventar datos ni cambiar la estructura: afina cada titular (evocador, ≤9 palabras), cada línea del cuerpo (una idea, ritmo, cero relleno) y la caption (editorial: emoción → producto → diferencial → CTA suave + web). Mantén el idioma del mercado y máximo 3 emojis sobrios. Devuelve SOLO JSON {"slides":[{"kicker":"","title":"","body":"linea1\\nlinea2"}],"caption":"...","hashtags":["#.."]}, con 5 slides en el mismo orden.\n\nCOPY ACTUAL:\n'+JSON.stringify(cur);
+  var ctl=new AbortController(); var killer=setTimeout(function(){ctl.abort()},95000);
+  try{
+    LASTAI=null;
+    var r=await aiJson(p,{model:'claude-opus-5',signal:ctl.signal});
+    if(r){
+      if(Array.isArray(r.slides))for(var i=0;i<5&&i<r.slides.length;i++){var a=r.slides[i]||{};if(a.kicker!=null)slides[i].kicker=String(a.kicker);if(a.title!=null)slides[i].title=String(a.title);if(a.body!=null)slides[i].body=String(a.body)}
+      if(r.caption)$('caption').value=String(r.caption);
+      if(Array.isArray(r.hashtags)&&r.hashtags.length){curTags=r.hashtags.map(function(t){t=String(t).trim();return t[0]==='#'?t:'#'+t}).slice(0,30);off=[]}
+      renderSlides();renderTags();scheduleRender();save();
+      $('polish_note').textContent=LASTAI?('Pulido · '+fmtCost(LASTAI.cost)+' · opus 5'):'';
+      toast('Copy elevado con Opus ✦');
+    }
+  }catch(e){toast('No se pudo pulir, reintenta')}
+  clearTimeout(killer);
+  aiIdle('polish_btn','✦ Pulir copy con Opus (premium)');
+}
+
+/* ── Análisis del feed: tus posts reales → decisiones de marketing (0 € IA) ── */
+function anAvg(a){return a.length?a.reduce(function(x,y){return x+y},0)/a.length:0}
+function anEng(p){return (p.likes||0)+(p.comments||0)*3}
+var DOW=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+function renderAnalytics(){
+  var el=$('an_body');if(!el)return;
+  var ps=(BRAND.posts||[]).filter(function(p){return p.caption});
+  if(!ps.length){el.innerHTML='<div class="an-empty">Aún no hay datos de tu feed.<br><br>Ve a <b>Crear</b> → pulsa <b>🎓 Aprender de mi Instagram</b> para traer tus posts reales (necesita el token de Instagram en Cloudflare).</div>';return}
+  var likes=ps.map(function(p){return p.likes||0}),coms=ps.map(function(p){return p.comments||0});
+  var avgL=Math.round(anAvg(likes)),avgC=Math.round(anAvg(coms));
+  // por tipo
+  var T={};ps.forEach(function(p){var t=p.type||'general';(T[t]=T[t]||{n:0,l:0}).n++;T[t].l+=p.likes||0});
+  var rows=Object.keys(T).map(function(t){return {t:TYPE_ES[t]||t,n:T[t].n,avg:T[t].l/T[t].n}}).sort(function(a,b){return b.avg-a.avg});
+  var maxA=Math.max.apply(null,rows.map(function(r){return r.avg}).concat([1]));
+  // top posts + ganchos
+  var byE=ps.slice().sort(function(a,b){return anEng(b)-anEng(a)});
+  var top=byE.slice(0,5);
+  var q=Math.max(1,Math.round(byE.length/4)),topQ=byE.slice(0,q);
+  var topLen=Math.round(anAvg(topQ.map(function(p){return p.caption.length})));
+  var topSlides=Math.round(anAvg(topQ.map(function(p){return p.slides||1}))*10)/10;
+  // mejor día
+  var D={};ps.forEach(function(p){if(!p.ts)return;var d=new Date(p.ts);if(isNaN(d))return;var k=d.getDay();(D[k]=D[k]||{n:0,e:0}).n++;D[k].e+=anEng(p)});
+  var bestDay='';var bd=-1;Object.keys(D).forEach(function(k){var m=D[k].e/D[k].n;if(m>bd){bd=m;bestDay=DOW[k]}});
+  var meanAvg=anAvg(ps.map(function(p){return p.likes||0}));
+  var lift=rows[0]&&meanAvg?Math.round((rows[0].avg/meanAvg-1)*100):0;
+
+  var h='';
+  h+='<div class="an-stats">';
+  h+='<div class="an-tile"><div class="k">Posts</div><div class="val">'+ps.length+'</div></div>';
+  h+='<div class="an-tile"><div class="k">Me gusta / post</div><div class="val">'+avgL+'</div></div>';
+  h+='<div class="an-tile"><div class="k">Comentarios / post</div><div class="val">'+avgC+'</div></div>';
+  if(bestDay)h+='<div class="an-tile"><div class="k">Mejor día</div><div class="val">'+bestDay+'</div></div>';
+  h+='</div>';
+
+  h+='<div class="an-sec">Rendimiento por tipo (me gusta de media)</div>';
+  rows.forEach(function(r){var w=Math.round(r.avg/maxA*100);h+='<div class="an-bar"><span class="lbl">'+esc(r.t)+'</span><span class="an-track"><span class="an-fill" style="width:'+w+'%"></span></span><span class="num">'+Math.round(r.avg)+'</span></div>'});
+
+  h+='<div class="an-sec">Tus 5 posts con más tirón</div>';
+  top.forEach(function(p){var line=String(p.caption).split('\n').filter(Boolean)[0]||'';h+='<div class="an-post"><div class="cap">'+esc(line.slice(0,140))+'</div><div class="meta"><span>❤ '+(p.likes||0)+'</span><span>💬 '+(p.comments||0)+'</span><span>'+esc(TYPE_ES[p.type]||p.type||'')+'</span>'+(p.permalink?'<a href="'+esc(p.permalink)+'" target="_blank" rel="noopener">ver ↗</a>':'')+'</div></div>'});
+
+  h+='<div class="an-sec">Fórmula ganadora</div><div class="an-reco"><h4>Lo que te funciona</h4><ul>';
+  if(rows[0])h+='<li>Publica más <b>'+esc(rows[0].t)+'</b>'+(lift>0?' — rinde un <b>'+lift+'% más</b> que tu media':'')+'.</li>';
+  if(bestDay)h+='<li>Mejor día para publicar: <b>'+bestDay+'</b>.</li>';
+  h+='<li>Longitud ideal de caption: <b>~'+topLen+'</b> caracteres.</li>';
+  h+='<li>Nº de slides que rinde: <b>'+topSlides+'</b>.</li>';
+  var hk=top.map(function(p){return String(p.caption).split('\n').filter(Boolean)[0]}).filter(Boolean).slice(0,2);
+  if(hk.length)h+='<li>Ganchos ganadores: '+hk.map(function(x){return '“'+esc(x.slice(0,60))+'”'}).join(' · ')+'.</li>';
+  h+='</ul></div>';
+  el.innerHTML=h;
+}
+
+async function generateAI(){
+  if(!aiReady()){toast('Conecta el publicador (⚙) o abre la app dentro de Claude');return}
+  var raw=$('ai_in').value.trim();
+  if(!raw){toast('Pega la ficha o unas notas primero');return}
+  // Si sólo hay un enlace, lo convertimos en texto útil (la IA no puede abrirlo)
+  var onlyUrl=/^https?:\/\/[^\s]+$/i.test(raw);
+  var material=raw, note='';
+  if(onlyUrl){var t=urlToText(raw); if(t){material=t;note=' (desde el enlace)'} }
+  else if(/https?:\/\//i.test(raw)){var t2=urlToText(raw); if(t2)material=raw+'\n'+t2;}
+
+  aiBusy('ai_go','Pensando…');
+  var t0=Date.now(), timer=setInterval(function(){$('ai_status').textContent='La IA está escribiendo tu carrusel… '+Math.round((Date.now()-t0)/1000)+'s';},1000);
+  $('ai_status').textContent='La IA está escribiendo tu carrusel…';
+  var ctl=new AbortController(); var killer=setTimeout(function(){ctl.abort()},95000);
+  // 1) Clasifica qué tipo de carrusel pides -> coge el modelo exacto de tu feed
+  var type=classifyType(material||raw);
+  var ex=brandExamples(type,3);
+  var ctx='';
+  if(ex.length){
+    ctx='\n\nMODELO REAL DE INSTAGRAM DE DURAN CARASSO (posts publicados de tipo "'+(TYPE_ES[type]||type)+'", tus más exitosos). IMÍTALOS con precisión: misma estructura de caption, longitud de frases, tono, uso de emojis y estilo de hashtags. No los copies literal, replica su ADN:\n'+ex.map(function(p,i){return '['+(i+1)+'] ('+(p.likes||0)+'❤ '+(p.slides||1)+' slides)\n'+String(p.caption).slice(0,650)}).join('\n---\n');
+  } else if(AICtx.examples.length){
+    ctx='\n\nEJEMPLOS APROBADOS POR EL EQUIPO (imita este tono y longitud):\n'+AICtx.examples.slice(0,4).map(function(e){return '- '+e}).join('\n');
+  }
+  var prompt=BRAND_RULES+ctx+'\n\nMATERIAL DE ENTRADA:\n'+material.slice(0,6000)+'\n\n'+OUTPUT_SPEC;
+  if(ex.length)$('ai_model').textContent='Modelo: '+(TYPE_ES[type]||type)+' · '+ex.length+' posts reales de referencia';
+  var aopts={signal:ctl.signal};
+  try{
+    var imgs=[], nContent=0;
+    if(photos.length){nContent=Math.min(photos.length,5);imgs=photos.slice(0,nContent).map(function(p){return p.src});}
+    // 2) Referencia VISUAL: 1 imagen real de tu feed (mismo tipo) como modelo de composición/luz
+    var refs=[];
+    var c=pubCfg();
+    if(c.url&&c.secret&&BRAND.posts&&BRAND.posts.length){
+      try{var br=await fetch(pubBase()+'/brand?type='+encodeURIComponent(type)+'&img=1',{headers:{'x-app-secret':c.secret},signal:ctl.signal});var bj=await br.json();refs=(bj.refs||[]).slice(0,1);}catch(e){}
+    }
+    if(nContent){prompt+='\n\nTe adjunto '+nContent+' fotos reales del inmueble, numeradas 0'+(nContent>1?'…'+(nContent-1):'')+' en ese orden (son las ÚNICAS seleccionables en "photo"). Aplica la CURADURÍA: elige la mejor foto y encuadre por slide y adapta el copy a lo que se ve.';}
+    if(refs.length){imgs=imgs.concat(refs);prompt+='\n\nADEMÁS, las '+refs.length+' ÚLTIMAS imágenes son carruseles REALES de Duran Carasso (NO son del inmueble, NO las selecciones en "photo"): úsalas SOLO como referencia de estilo visual —composición, encuadre, luz, temperatura de color, aire— para que el resultado se parezca a lo que ya publica la marca.';}
+    if(imgs.length)aopts.imageUrls=imgs;
+    LASTAI=null;
+    var r=await aiJson(prompt,aopts);
+    applyAI(r);
+    $('ai_status').textContent=LASTAI?('Coste de este post: '+fmtCost(LASTAI.cost)+(LASTAI.model?' · '+LASTAI.model.replace('claude-','').replace(/-/g,' '):'')):'';
+    toast('Carrusel generado con IA ✦'+note);
+    if(onlyUrl)setTimeout(function(){toast('Consejo: pega también el texto de la ficha para más detalle')},2000);
+  }catch(e){
+    $('ai_status').textContent = (e && e.code==='cancelled') ? 'La IA tardó demasiado — reintenta o pega la ficha en texto' : ('IA: '+((e&&e.message)||aiErr(e&&e.code))).slice(0,160);
+  }
+  clearInterval(timer);clearTimeout(killer);
+  aiIdle('ai_go','✦ Generar carrusel con IA');
+}
+
+async function optimizeHashtags(){
+  if(!aiReady())return; aiBusy('btn_htia','Optimizando…');
+  var p='Eres estratega de hashtags inmobiliarios de lujo. Devuelve SOLO un JSON array de 15 hashtags (strings con #), mezcla óptima de alcance amplio, medio y nicho, en el idioma del mercado, para esta propiedad. Incluye #DuranCarasso.\n\nPropiedad: '+[v('f_name'),v('f_loc'),v('f_type'),v('f_m2'),'mercado '+$('f_mkt').value].filter(Boolean).join(' · ');
+  try{var arr=await aiJson(p);if(Array.isArray(arr)&&arr.length){curTags=arr.map(function(t){t=String(t).trim();return t[0]==='#'?t:'#'+t}).slice(0,30);off=[];renderTags();save();toast('Hashtags optimizados ✦')}}
+  catch(e){toast(aiErr(e.code))}
+  aiIdle('btn_htia','✦ Optimizar hashtags con IA');
+}
+
+// 3 ganchos alternativos usando tu modelo real — eliges el que más pega
+var HOOKS=[];
+async function generateVariants(){
+  if(!aiReady()){toast('Conecta el publicador (⚙) o abre dentro de Claude');return}
+  aiBusy('btn_variants','Buscando ganchos…');
+  var type=classifyType($('caption').value+' '+v('f_type')+' '+v('f_name'));
+  var ex=brandExamples(type,3);
+  var base=[v('f_name'),v('f_loc'),v('f_type'),v('f_m2')].filter(Boolean).join(' · ')||$('caption').value.slice(0,300)||$('ai_in').value.slice(0,300);
+  var p=BRAND_RULES+(ex.length?'\n\nGANCHOS REALES QUE FUNCIONAN (tu feed, imita su registro):\n'+ex.map(function(e){return '• '+String(e.caption).split('\n').filter(Boolean)[0]}).join('\n'):'')+'\n\nGenera 3 GANCHOS distintos entre sí para el slide 1 de un carrusel de Instagram: máximo scroll-stop, elegantes, sin clickbait. Cada uno con un ángulo diferente (p. ej. emoción/estilo de vida, exclusividad/privacidad, dato irresistible). Devuelve SOLO JSON {"variants":[{"title":"titular ≤9 palabras","firstLine":"primera línea de la caption","angle":"1-2 palabras del ángulo"}]}.\n\nPropiedad: '+base;
+  try{LASTAI=null;var r=await aiJson(p);
+    var vs=(r&&Array.isArray(r.variants))?r.variants:(Array.isArray(r)?r:[]);
+    HOOKS=vs.slice(0,3);
+    if(!HOOKS.length){toast('No salieron variantes, reintenta')}else{renderVariants()}
+  }catch(e){toast(aiErr(e&&e.code)||'Error')}
+  aiIdle('btn_variants','✦ Dame 3 ganchos alternativos');
+}
+function renderVariants(){
+  var el=$('hook_variants');if(!el)return;
+  var h='';
+  HOOKS.forEach(function(x,i){h+='<div class="hv-card" data-i="'+i+'"><div class="t">'+esc(x.title||'')+'</div>'+(x.firstLine?'<div class="f">'+esc(x.firstLine)+'</div>':'')+(x.angle?'<div class="a">'+esc(x.angle)+'</div>':'')+'</div>'});
+  if(LASTAI)h+='<div class="mini" style="margin-top:7px;color:var(--gold)">Coste: '+fmtCost(LASTAI.cost)+'</div>';
+  el.innerHTML=h;
+  var cards=el.querySelectorAll('.hv-card');
+  for(var i=0;i<cards.length;i++)cards[i].addEventListener('click',function(){applyVariant(HOOKS[this.getAttribute('data-i')|0]);var c=el.querySelectorAll('.hv-card');for(var j=0;j<c.length;j++)c[j].style.borderColor='';this.style.borderColor='var(--gold)'});
+}
+function applyVariant(x){
+  if(!x)return;
+  if(x.title){slides[0].title=String(x.title);renderSlides();scheduleRender()}
+  if(x.firstLine){var c=$('caption').value.split('\n');c[0]=String(x.firstLine);$('caption').value=c.join('\n');if(typeof sync==='function')sync()}
+  save();toast('Gancho aplicado ✦');
+}
+async function viralHook(){
+  if(!aiReady())return; aiBusy('btn_hookia','Afinando…');
+  var p=BRAND_RULES+'\n\nMejora el GANCHO para máximo scroll-stop en Instagram sin perder elegancia ni caer en clickbait. Devuelve SOLO un JSON {"title":"titular slide 1 de ≤9 palabras","firstLine":"primera línea de la caption"}.\n\nTitular actual: '+(slides[0].title||'—')+'\nPropiedad: '+[v('f_name'),v('f_loc'),v('f_type'),v('f_m2')].filter(Boolean).join(' · ');
+  try{var r=await aiJson(p);
+    if(r&&r.title){slides[0].title=String(r.title);renderSlides();scheduleRender()}
+    if(r&&r.firstLine){var c=$('caption').value.split('\n');c[0]=String(r.firstLine);$('caption').value=c.join('\n');sync()}
+    toast('Gancho mejorado ✦');save();
+  }catch(e){toast(aiErr(e.code))}
+  aiIdle('btn_hookia','✦ Mejorar gancho (viral) con IA');
+}
+
+/* ── Memoria (aprendizaje) — db si hay, si no localStorage ── */
+function curPost(){return {name:v('f_name'),market:$('f_mkt').value,caption:$('caption').value,hashtags:tagList(),slides:slides.map(function(s){return {kicker:s.kicker,title:s.title,body:s.body,layout:s.layout}})}}
+function memLocalAdd(doc){try{var a=JSON.parse(localStorage.getItem('dc_mem')||'[]');a.unshift(doc);localStorage.setItem('dc_mem',JSON.stringify(a.slice(0,40)))}catch(e){}}
+function memBadge(n){var el=$('ai_mem');if(el)el.textContent=n?('memoria · '+n+' aprobados'):''}
+function saveApproved(rating){
+  var doc=curPost();doc.rating=rating;doc.ts=Date.now();
+  if(DB){DB.collection('posts').add(doc).then(function(){toast(rating==='up'?'Guardado — la IA aprende 👍':'Descartado 👎');loadMemory()}).catch(function(){memLocalAdd(doc);loadMemory();toast('Guardado 👍')});}
+  else{memLocalAdd(doc);loadMemory();toast(rating==='up'?'Guardado — la IA aprende 👍':'Descartado 👎')}
+}
+function memLocalLoad(){try{var a=JSON.parse(localStorage.getItem('dc_mem')||'[]').filter(function(p){return p.rating==='up'});AICtx.examples=a.slice(0,8).map(function(p){return (p.name?p.name+': ':'')+String(p.caption||'').split('\n')[0]});AICtx.count=a.length;memBadge(a.length)}catch(e){}}
+function loadMemory(){
+  if(DB){try{DB.collection('posts').where('rating','==','up').orderBy('ts','desc').limit(8).get().then(function(q){
+    var ex=[];q.docs.forEach(function(d){var p=d.data();if(p&&p.caption)ex.push((p.name?p.name+': ':'')+String(p.caption).split('\n')[0])});
+    AICtx.examples=ex;AICtx.count=q.size;memBadge(q.size);
+  }).catch(function(){memLocalLoad()})}catch(e){memLocalLoad()}}
+  else memLocalLoad();
+}
+
+function refreshAIui(){
+  var on=aiReady();
+  var card=$('ai_card'); if(card)card.style.display=''; // siempre visible
+  var banner=$('conn_banner'); if(banner)banner.style.display=on?'none':'';
+  if(!on&&$('conn_msg'))$('conn_msg').textContent='La IA necesita el publicador conectado. Pulsa “Conectar publicador” (URL del Worker + APP_SECRET).';
+  var n=document.querySelectorAll('.ai-only'); for(var i=0;i<n.length;i++)n[i].style.display=on?((n[i].id==='learn_row')?'grid':'block'):'none';
+  if($('ai_go')){$('ai_go').disabled=!on; if(on&&$('ai_status').textContent==='Conectando IA…')$('ai_status').textContent='';}
+  if($('ai_scrape'))$('ai_scrape').disabled=!on;
+}
+function setConn(msg,kind){var b=$('conn_banner'),m=$('conn_msg');if(!b||!m)return;m.textContent=msg;var col={err:['#FCF4F2','#EDC9C1'],warn:['#FCFAF3','#E7D9A8'],ok:['#F1F8F3','#BEE3C9'],info:['#F7F8FA','#ECEBE6']}[kind]||['#F7F8FA','#ECEBE6'];b.style.display='';b.style.background=col[0];b.style.borderColor=col[1];}
+async function testConnection(silent){
+  var c=pubCfg();
+  if(!c.url){setConn('Falta conectar. Pulsa “Conectar publicador”.','err');return}
+  if(!silent)setConn('Comprobando conexión…','info');
+  try{var h=await fetch(pubBase()+'/health');if(!h.ok)throw 0;await h.json();}
+  catch(e){setConn('No llego al Worker. Revisa la URL (debe ser https y acabar en .workers.dev).','err');return}
+  try{
+    var d=await fetch(pubBase()+'/diag',{headers:{'x-app-secret':c.secret}});
+    if(d.status===401){setConn('APP_SECRET incorrecto. Vuelve a “Conectar publicador” y pon el secret correcto de Cloudflare.','err');return}
+    if(d.status===404){var b0=$('conn_banner');if(b0)b0.style.display='none';refreshAIui();if(!silent)toast('Conectado ✓');return}
+    var dj=await d.json();
+    if(!dj.ai){setConn('Conectado ✓ pero falta la clave de IA en Cloudflare: añade ANTHROPIC_KEY (Worker → Settings → Variables and Secrets) y Deploy.','warn');return}
+    var b=$('conn_banner');if(b)b.style.display='none';
+    refreshAIui();
+    if(!silent)toast('Conectado ✓ IA lista'+(dj.ig?' · Instagram listo':''));
+  }catch(e){setConn('No pude comprobar la conexión, reintenta.','err')}
+}
+function connectPublisher(){
+  var c=pubCfg();
+  var u=prompt('URL del Worker (https://…workers.dev):',c.url||'https://dc-publicador.adriapintat.workers.dev'); if(u===null)return;
+  var s=prompt('APP_SECRET (el que pusiste en Cloudflare):',c.secret||''); if(s===null)return;
+  setPubCfg({url:u.trim().replace(/\/$/,''),secret:s.trim()});
+  refreshAIui();
+  if(typeof loadJobs==='function')loadJobs();
+  testConnection();
+}
+(function initCaps(){
+  if(window.claude&&claude.use){
+    $('ai_status').textContent='Conectando IA…';
+    claude.use('sample').then(function(s){if(s)SAMPLE=s;refreshAIui()}).catch(function(){refreshAIui()});
+    claude.use('db').then(function(db){if(db){DB=db;loadMemory();if(typeof plansLoad==='function')plansLoad()}}).catch(function(){});
+  }
+  refreshAIui();loadMemory();
+})();
+function addPhotoDataUrls(urls){
+  urls.forEach(function(src){var im=new Image();im.onload=function(){photos.push({src:src,img:im});renderThumbs();autoAssign();renderSlides();scheduleRender();save()};im.src=src});
+}
+async function scrapeLink(){
+  var raw=$('ai_in').value.trim();
+  if(!/^https?:\/\//i.test(raw)){toast('Pega la URL de la propiedad en el recuadro');return}
+  var c=pubCfg();
+  if(!c.url||!c.secret){toast('Para traer del enlace necesitas la versión alojada + ⚙ Conectar (Calendario)');return}
+  aiBusy('ai_scrape','Trayendo del enlace…');$('ai_status').textContent='Leyendo la página…';
+  try{
+    var r=await fetch(pubBase()+'/scrape?url='+encodeURIComponent(raw),{headers:{'x-app-secret':c.secret}});
+    var d=await r.json();
+    if(d.error){toast('No pude leer el enlace');$('ai_status').textContent='';}
+    else{
+      if(d.images&&d.images.length)addPhotoDataUrls(d.images.slice(0,8));
+      if(d.name){$('f_name').value=d.name;$('chip').textContent=d.name;save()}
+      if(d.text)$('ai_in').value=d.text;
+      toast('Traído: '+((d.images||[]).length)+' fotos ✦ generando…');
+      aiIdle('ai_scrape','⇩ Traer fotos + info del enlace');
+      await generateAI();
+      return;
+    }
+  }catch(e){toast('Sin conexión con el lector (usa la versión alojada)');$('ai_status').textContent='';}
+  aiIdle('ai_scrape','⇩ Traer fotos + info del enlace');
+}
+$('ai_go').addEventListener('click',generateAI);
+$('ai_scrape').addEventListener('click',scrapeLink);
+$('ai_learn').addEventListener('click',learnFromIG);
+$('conn_go').addEventListener('click',connectPublisher);
+$('conn_test').addEventListener('click',function(){testConnection()});
+brandBadge();
+if(!SAMPLE&&pubCfg().url){setTimeout(function(){testConnection(true)},400)}
+$('btn_htia').addEventListener('click',optimizeHashtags);
+$('btn_hookia').addEventListener('click',viralHook);
+$('btn_variants').addEventListener('click',generateVariants);
+$('btn_up').addEventListener('click',function(){saveApproved('up')});
+$('btn_down').addEventListener('click',function(){saveApproved('down')});
+
+/* ══ PUBLICAR + CALENDARIO ══ */
+function pubCfg(){try{return JSON.parse(localStorage.getItem('dc_pub_cfg')||'{}')}catch(e){return {}}}
+function setPubCfg(c){try{localStorage.setItem('dc_pub_cfg',JSON.stringify(c))}catch(e){}}
+function pubBase(){var c=pubCfg();return (c.url||'').replace(/\/$/,'')}
+function blobB64(b){return new Promise(function(res){var r=new FileReader();r.onload=function(){res(String(r.result).split(',')[1])};r.readAsDataURL(b)})}
+function jpegBlob(cv){return new Promise(function(res){cv.toBlob(function(b){res(b)},'image/jpeg',0.9)})}
+async function exportForPublish(){var cvs=$('pv').querySelectorAll('canvas'),out=[];for(var i=0;i<cvs.length;i++){var b=await jpegBlob(cvs[i]);out.push({b64:await blobB64(b),ct:'image/jpeg'})}return out}
+$('pub_cfg_btn').addEventListener('click',connectPublisher);
+async function doPublish(when){
+  var c=pubCfg(); if(!c.url||!c.secret){toast('Pulsa ⚙ Conectar primero');return}
+  var cvs=$('pv').querySelectorAll('canvas');
+  if(!photos.length||cvs.length<2){toast('En Crear: sube 2-10 fotos y genera el carrusel');return}
+  toast(when?'Agendando…':'Publicando…');
+  try{
+    var images=await exportForPublish();
+    var r=await fetch(pubBase()+'/publish',{method:'POST',headers:{'Content-Type':'application/json','x-app-secret':c.secret},body:JSON.stringify({images:images,caption:($('full').value||$('caption').value),when:when||0})});
+    var j=await r.json();
+    if(j.ok)toast('Publicado en Instagram ✓');
+    else if(j.scheduled)toast('Agendado ✓ — se publicará solo');
+    else toast('Error: '+(j.error||(j.result&&j.result.step)||'fallo'));
+    loadJobs();
+  }catch(e){toast('Sin conexión con el publicador (usa la versión alojada)')}
+}
+$('pub_now').addEventListener('click',function(){doPublish(0)});
+
+/* ── datos del calendario ── */
+var JOBSCACHE=[], PLANS=[], calY=null, calM=null, calSel=null, calTime='10:00';
+function genId(){return 'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function loadJobs(){
+  plansLoad();
+  var c=pubCfg();
+  if(!c.url||!c.secret){JOBSCACHE=[];renderCalendar();renderCalDay();return}
+  fetch(pubBase()+'/jobs',{headers:{'x-app-secret':c.secret}}).then(function(r){return r.json()}).then(function(d){
+    JOBSCACHE=d.jobs||[];renderCalendar();renderCalDay();
+  }).catch(function(){JOBSCACHE=[];renderCalendar();renderCalDay()});
+}
+/* ── planes (borradores por día) — persisten en db o en el navegador ── */
+function plansLocal(){try{PLANS=JSON.parse(localStorage.getItem('dc_plans')||'[]')}catch(e){PLANS=[]}}
+function plansSaveLocal(){try{localStorage.setItem('dc_plans',JSON.stringify(PLANS))}catch(e){}}
+function plansLoad(){
+  if(DB){DB.collection('drafts').orderBy('ts','desc').limit(120).get().then(function(q){PLANS=q.docs.map(function(d){var o=d.data()||{};o._id=d.id;return o});renderCalendar();renderCalDay()}).catch(function(){plansLocal();renderCalendar();renderCalDay()});}
+  else {plansLocal();renderCalendar();renderCalDay()}
+}
+function planAdd(p){
+  if(DB){DB.collection('drafts').add(p).then(function(){plansLoad()}).catch(function(){PLANS.unshift(p);plansSaveLocal();renderCalendar();renderCalDay()});}
+  else {PLANS.unshift(p);plansSaveLocal();renderCalendar();renderCalDay()}
+}
+function planRemove(id){
+  if(DB){DB.doc('drafts/'+id).delete().then(function(){plansLoad()}).catch(function(){});}
+  else {PLANS=PLANS.filter(function(p){return (p._id||p.id)!==id});plansSaveLocal();renderCalendar();renderCalDay()}
+}
+function planThumb(){var cv=$('pv').querySelector('canvas');if(!cv)return '';try{var t=document.createElement('canvas');t.width=120;t.height=150;t.getContext('2d').drawImage(cv,0,0,120,150);return t.toDataURL('image/jpeg',0.55)}catch(e){return ''}}
+function addPlanToDay(){
+  if(!calSel){toast('Elige un día');return}
+  if(photos.length<2){toast('Primero sube fotos en «Crear»');showTab('create');return}
+  var t=calTime||'10:00';
+  var p=curPost(); p.date=calSel; p.time=t; p.ts=new Date(calSel+'T'+t).getTime(); p.thumb=planThumb(); p.id=genId();
+  // Optimista: aparece al instante, no esperamos a la base de datos
+  PLANS.unshift(p); renderCalendar(); renderCalDay();
+  // Persistir en segundo plano
+  if(DB){DB.collection('drafts').add(p).then(function(){plansLoad()}).catch(function(){plansSaveLocal()});}
+  else plansSaveLocal();
+  var c=pubCfg();
+  if(c.url&&c.secret){doPublish(p.ts);} // sube imágenes y agenda: se publica solo ese día
+  else toast('Carrusel preparado para el '+new Date(calSel+'T12:00').toLocaleDateString('es',{day:'numeric',month:'long'})+' ✓');
+}
+function loadPlan(id){
+  var p=PLANS.filter(function(x){return (x._id||x.id)===id})[0]; if(!p)return;
+  if(p.market)$('f_mkt').value=p.market;
+  if(p.name){$('f_name').value=p.name;$('chip').textContent=p.name}
+  if(p.slides&&p.slides.length)for(var i=0;i<5;i++){var a=p.slides[i]||{};slides[i].kicker=a.kicker||'';slides[i].title=a.title||'';slides[i].body=a.body||'';slides[i].layout=a.layout||LAYOUTS[i]}
+  if(p.caption)$('caption').value=p.caption;
+  if(p.hashtags&&p.hashtags.length){curTags=p.hashtags;off=[]}
+  renderSlides();renderTags();scheduleRender();save();
+  showTab('create');toast('Plan cargado en «Crear» — añade las fotos y revisa');
+}
+function pad2(n){return String(n).padStart(2,'0')}
+function ymd(d){return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate())}
+function jobDay(j){var t=j.when||j.createdAt;return t?ymd(new Date(t)):''}
+function renderCalendar(){
+  if(!$('cal_grid'))return;
+  var now=new Date(); if(calY==null){calY=now.getFullYear();calM=now.getMonth()}
+  var first=new Date(calY,calM,1), start=(first.getDay()+6)%7, days=new Date(calY,calM+1,0).getDate(), prev=new Date(calY,calM,0).getDate();
+  $('cal_title').textContent=first.toLocaleDateString('es',{month:'long',year:'numeric'});
+  $('cal_dows').innerHTML=['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'].map(function(x){return '<div class="cal-dow">'+x+'</div>'}).join('');
+  var cells='',ts=ymd(now);
+  for(var i=0;i<start;i++)cells+='<div class="cal-cell out"><span class="dn">'+(prev-start+1+i)+'</span></div>';
+  for(var d=1;d<=days;d++){
+    var ds=calY+'-'+pad2(calM+1)+'-'+pad2(d);
+    var dj=JOBSCACHE.filter(function(j){return jobDay(j)===ds});
+    var dp=PLANS.filter(function(p){return p.date===ds});
+    var chips=dj.slice(0,2).map(function(j){return '<span class="cal-chip '+j.status+'">'+(j.when?new Date(j.when).toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit'})+' ':'')+esc((j.name||(j.caption||'').split('\n')[0]).slice(0,8))+'</span>'}).join('');
+    chips+=dp.slice(0,2).map(function(p){return '<span class="cal-chip plan">'+(p.time?p.time+' ':'')+esc((p.name||'').slice(0,8))+'</span>'}).join('');
+    cells+='<div class="cal-cell'+(ds===ts?' today':'')+(ds===calSel?' sel':'')+'" data-day="'+ds+'"><span class="dn">'+d+'</span>'+chips+'</div>';
+  }
+  $('cal_grid').innerHTML=cells;
+}
+function renderCalDay(){
+  if(!$('cal_day'))return;
+  if(!calSel){$('cal_day').innerHTML='<div class="mini">Elige un día del calendario para preparar un carrusel.</div>';return}
+  var dj=JOBSCACHE.filter(function(j){return jobDay(j)===calSel}), dp=PLANS.filter(function(p){return p.date===calSel}), d=new Date(calSel+'T12:00');
+  var ready=photos.length>=2, curName=v('f_name')||'Carrusel actual', curThumb=ready?planThumb():'';
+  var html='<div class="divider"></div><label style="font-size:14px;color:var(--ink);text-transform:none;letter-spacing:0;font-weight:600;font-family:\'Playfair Display\',serif">'+d.toLocaleDateString('es',{weekday:'long',day:'numeric',month:'long'})+'</label>';
+  // Qué se va a añadir
+  if(ready){
+    html+='<div style="display:flex;gap:11px;align-items:center;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:11px;margin:12px 0">'+
+      (curThumb?'<img src="'+curThumb+'" style="width:40px;height:50px;object-fit:cover;border-radius:6px;border:1px solid var(--line)">':'')+
+      '<div style="flex:1;min-width:0"><div class="mini">Carrusel actual</div><div style="font-size:13px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(curName)+'</div></div>'+
+      '<input type="time" id="cal_time" value="'+(calTime||'10:00')+'" style="width:auto">'+
+      '</div><button class="btn btn-p btn-full" id="cal_add">＋ Programar en este día</button>';
+  } else {
+    html+='<div class="hint" style="margin:12px 0">Aún no hay carrusel preparado. Ve a <b>Crear</b>, sube las fotos y genera el post; luego vuelve aquí y prográmalo.</div><button class="btn btn-s btn-full" id="cal_goto">Ir a «Crear»</button>';
+  }
+  // Lo ya preparado / agendado ese día
+  if(dp.length||dj.length)html+='<div style="margin-top:16px"><label>En este día</label></div>';
+  if(dp.length)html+=dp.map(function(p){return '<div style="display:flex;gap:11px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line2)">'+(p.thumb?'<img src="'+p.thumb+'" style="width:34px;height:43px;object-fit:cover;border-radius:5px;border:1px solid var(--line)">':'')+'<div style="flex:1;min-width:0"><div style="font-size:12.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(p.name||'Carrusel')+'</div><div class="mini">'+(p.time||'')+' · preparado</div></div><button class="btn btn-s btn-mini" data-load="'+(p._id||p.id)+'" style="padding:5px 10px">Cargar</button> <button class="btn btn-s btn-mini" data-del="'+(p._id||p.id)+'" style="padding:5px 9px">✕</button></div>'}).join('');
+  if(dj.length)html+=dj.map(function(j){var st={scheduled:'🗓 Agendado',published:'✅ Publicado',error:'⚠️ Error',publishing:'⏳ Publicando',cancelled:'✖ Cancelado'}[j.status]||j.status;return '<div style="display:flex;gap:9px;align-items:center;font-size:12px;padding:8px 0;border-bottom:1px solid var(--line2)"><span style="width:46px;color:var(--sub)">'+(j.when?new Date(j.when).toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit'}):'')+'</span><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc((j.caption||'').split('\n')[0].slice(0,34))+'</span><span style="color:var(--sub)">'+st+'</span>'+(j.status==='scheduled'?' <button class="btn btn-s btn-mini" data-cancel="'+j.id+'" style="padding:3px 7px">✕</button>':'')+'</div>'}).join('');
+  $('cal_day').innerHTML=html;
+  if($('cal_add'))$('cal_add').onclick=addPlanToDay;
+  if($('cal_goto'))$('cal_goto').onclick=function(){showTab('create')};
+  if($('cal_time'))$('cal_time').onchange=function(){calTime=this.value};
+}
+$('cal_grid').addEventListener('click',function(e){var c=e.target.closest('[data-day]');if(!c||c.classList.contains('out'))return;calSel=c.getAttribute('data-day');renderCalendar();renderCalDay()});
+$('cal_day').addEventListener('click',function(e){
+  var load=e.target.getAttribute('data-load'); if(load){loadPlan(load);return}
+  var del=e.target.getAttribute('data-del'); if(del){planRemove(del);toast('Borrador eliminado');return}
+  var id=e.target.getAttribute('data-cancel'); if(!id)return;
+  var c=pubCfg(); if(!c.url)return;
+  fetch(pubBase()+'/jobs/cancel',{method:'POST',headers:{'Content-Type':'application/json','x-app-secret':c.secret},body:JSON.stringify({id:id})}).then(function(){toast('Agendado cancelado');loadJobs()}).catch(function(){});
+});
+$('cal_prev').addEventListener('click',function(){calM--;if(calM<0){calM=11;calY--}renderCalendar()});
+$('cal_next').addEventListener('click',function(){calM++;if(calM>11){calM=0;calY++}renderCalendar()});
+$('cal_today').addEventListener('click',function(){var n=new Date();calY=n.getFullYear();calM=n.getMonth();calSel=ymd(n);renderCalendar();renderCalDay()});
+
+/* ── PESTAÑAS ── */
+function showTab(w){
+  $('view_create').hidden=(w!=='create');
+  $('view_cal').hidden=(w!=='cal');
+  $('view_an').hidden=(w!=='an');
+  $('tab_create').classList.toggle('on',w==='create');
+  $('tab_cal').classList.toggle('on',w==='cal');
+  $('tab_an').classList.toggle('on',w==='an');
+  if(w==='cal'){if(!calSel)calSel=ymd(new Date());renderCalendar();renderCalDay();loadJobs()}
+  if(w==='an')renderAnalytics();
+  window.scrollTo(0,0);
+}
+$('tab_create').addEventListener('click',function(){showTab('create')});
+$('tab_cal').addEventListener('click',function(){showTab('cal')});
+$('tab_an').addEventListener('click',function(){showTab('an')});
+$('an_refresh').addEventListener('click',function(){if(typeof learnFromIG==='function'&&pubCfg().url){learnFromIG().then(function(){renderAnalytics()})}else renderAnalytics()});
+$('polish_btn').addEventListener('click',polishCopy);
+
+loadJobs();
+
+/* ══ PERSISTENCIA ══ */
+var FIELDS=['f_name','f_loc','f_mkt','f_type','f_m2','f_hab','f_ban','f_ext','f_amen','f_dist','f_ig','f_web','f_theme','f_scrim','f_logo','caption','hash'];
+function save(){try{var d={s:slides,off:off,ct:curTags,f:{}};FIELDS.forEach(function(k){if($(k))d.f[k]=$(k).value});localStorage.setItem('dc_ig_draft2',JSON.stringify(d))}catch(e){}}
+function load(){try{var d=JSON.parse(localStorage.getItem('dc_ig_draft2')||'null');if(!d)return false;FIELDS.forEach(function(k){if($(k)&&d.f&&d.f[k]!=null)$(k).value=d.f[k]});if(d.s&&d.s.length===5)slides=d.s;if(d.off)off=d.off;if(d.ct)curTags=d.ct;return true}catch(e){return false}}
+FIELDS.forEach(function(k){var el=$(k);if(el)el.addEventListener('input',save)});
+
+/* ══ PRESET (Les Tres Torres) — solo sin borrador ══ */
+var PRESET={
+ f:{f_name:'Piso en Les Tres Torres',f_loc:'Les Tres Torres, Barcelona',f_mkt:'barcelona',f_type:'Piso de lujo a estrenar',f_m2:'320 m²',f_hab:'4',f_ban:'5',f_ext:'terraza 40 m²',f_amen:'Cocina italiana equipada, parquet natural, clima frío/calor, mobiliario incluido',f_dist:'Sarrià-Sant Gervasi · totalmente exterior · 2 plazas garaje + trastero',f_ig:'@durancarasso',f_web:'durancarasso.es',f_theme:'dark',f_scrim:'72',f_logo:'on',
+   caption:'Hay pisos que se ocupan. Y otros en los que, simplemente, se empieza a vivir. 🌇\n\nA estrenar en Les Tres Torres: 320 m² totalmente exteriores, con una terraza de 40 m² que abraza el salón y una luz que no se apaga en todo el día. Cuatro habitaciones, tres de ellas en suite, y una master con baño y vestidor.\n\nParquet natural, cocina italiana, mobiliario de diseño incluido y el barrio más sereno de Barcelona a tus pies. Llave en mano.\n\n✉️ Escríbenos para una visita privada.\n\n🔗 durancarasso.es'},
+ s:[
+  {kicker:'Les Tres Torres, Barcelona',title:'Luz, terraza y 320 m² a estrenar',body:'',photo:0,focus:50,layout:'hook'},
+  {kicker:'El proyecto',title:'Un piso a estrenar',body:'320 m² construidos · totalmente exterior\nTerraza de 40 m²\n4 habitaciones · 5 baños\n3 suites + master con baño y vestidor',photo:1,focus:50,layout:'info'},
+  {kicker:'El interior',title:'Diseño sin concesiones',body:'Parquet natural y acabados exclusivos\nMuebles de diseño italiano incluidos\nArmarios empotrados a medida\nClima frío/calor en todas las estancias',photo:2,focus:50,layout:'info'},
+  {kicker:'El lifestyle',title:'Vivir en Les Tres Torres',body:'Cocina-office italiana equipada\nSalón-comedor exterior con terraza\n2 plazas de garaje y trastero\nEl barrio más sereno de Barcelona',photo:3,focus:50,layout:'info'},
+  {kicker:'Consulta privada',title:'Hablemos en privado',body:'Piso de 320 m² con terraza · Les Tres Torres\nLlave en mano, listo para entrar a vivir\ndurancarasso.es · @durancarasso',photo:0,focus:50,layout:'cta'}
+ ]
+};
+function applyPreset(){Object.keys(PRESET.f).forEach(function(k){if($(k))$(k).value=PRESET.f[k]});slides=JSON.parse(JSON.stringify(PRESET.s))}
+
+if(!load())applyPreset();
+$('chip').textContent=v('f_name')||'Nueva propiedad';
+renderThumbs();renderSlides();renderTags();renderAll();
+</script>
