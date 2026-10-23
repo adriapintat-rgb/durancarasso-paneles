@@ -103,9 +103,9 @@ a.dc-titulo:hover{text-decoration:underline;text-underline-offset:3px}
   .dc-topbar .dc-titulo{letter-spacing:.05em}
 }
 
-/* Botones comunes DC: 44 px (36 px los pequeños), radio 12, peso 600; el principal en azul de marca. */
+/* Botones comunes DC: 44 px como mínimo (también los pequeños, que solo tienen menos relleno), radio 12, peso 600; el principal en azul de marca. */
 .btn{min-height:44px;padding:0 18px;border-radius:12px;font-weight:600;font-size:.95rem}
-.btn.sm,.btn-sm{min-height:36px;padding:0 14px;font-size:.88rem}
+.btn.sm,.btn-sm{min-height:44px;padding:0 14px;font-size:.88rem}
 
 /* «Modo oscuro / Modo claro»: enlace discreto en la barra, a la izquierda de las acciones. */
 .dc-topbar .dc-tema{padding:6px 2px;border:0;background:none;color:var(--ink-3,var(--mute));font:400 .8rem/1.2 var(--sans);
@@ -116,7 +116,7 @@ a.dc-titulo:hover{text-decoration:underline;text-underline-offset:3px}
 /* Botones y campos DC: radios 12 y 10, 44 y 48 px, peso 600, sin animaciones */
 .btn{min-height:44px;padding:0 18px;border-radius:12px;font-weight:600;font-size:.95rem;transition:none}
 .btn:active{transform:none}
-.btn.sm{min-height:36px;padding:0 14px;font-size:.88rem}
+.btn.sm,.btn-sm{min-height:44px;padding:0 14px;font-size:.88rem}
 .btn:hover{background:var(--brand-soft);border-color:var(--brand-line)}
 .btn.primary,.btn.gold{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
 .btn.primary:hover,.btn.gold:hover{background:var(--brand-2);border-color:var(--brand-2);filter:none}

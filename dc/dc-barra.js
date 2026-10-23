@@ -51,13 +51,16 @@
   };
 })();
 
-/* Dentro del Hub (la app va en un marco): el logo vuelve al Hub en vez de abrirlo dentro de la app,
- * que no se deja enmarcar. Se lo pide al Hub, que cierra el marco. */
-if (window.top !== window) {
+/* Dentro del Hub DC de Vercel (la app va en su marco): el logo vuelve al Hub en vez de abrirlo dentro
+ * de la app, que no se deja enmarcar. Se lo pide al Hub, que cierra el marco. Solo si quien la enmarca
+ * es ese Hub; en cualquier otro sitio (Hub AP, claude.ai) el enlace funciona normal con target="_top". */
+var HUB_DC = 'https://dc-hub-lilac.vercel.app';
+var padre = (location.ancestorOrigins && location.ancestorOrigins[0]) || document.referrer || '';
+if (window.top !== window && padre.indexOf(HUB_DC) === 0) {
   document.addEventListener('click', (e) => {
     const a = e.target.closest && e.target.closest('a[href^="https://dc-hub-lilac.vercel.app"]');
     if (!a) return;
     e.preventDefault();
-    window.parent.postMessage({ dc: 'volver-al-hub' }, 'https://dc-hub-lilac.vercel.app');
+    window.parent.postMessage({ dc: 'volver-al-hub' }, HUB_DC);
   });
 }
