@@ -1,0 +1,464 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><base target="_top">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__MARCA__ · Panel Google</title>
+<script>(function () { try { var t = localStorage.getItem('dc-theme'); if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t); } catch (e) {} })();</script>
+<style>
+:root{--navy:#0D3550;--gold:#B8922A;--bg:#FAF9F6;--card:#fff;--line:#ECE9E2;--txt:#1d2430;--mut:#7a7f89;--ok:#2e7d4f;--okl:#E9F4EC;--bad:#b4442f;--badl:#FBEDE9}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--txt);font:15px/1.5 -apple-system,"Segoe UI",Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+button,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+.wrap{max-width:760px;margin:0 auto;padding:28px 16px 80px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:22px}
+.top small{display:block;letter-spacing:2.5px;font-size:10px;text-transform:uppercase;color:var(--gold);font-weight:700}
+.top h1{margin:4px 0 0;font-size:22px;font-weight:700;color:var(--navy);letter-spacing:-.2px}
+.ask{border:1px solid var(--line);background:#fff;border-radius:20px;padding:7px 14px;font-size:13px;font-weight:600;color:var(--navy);white-space:nowrap}
+.ask:hover{border-color:var(--navy)}
+.aviso{background:var(--badl);color:var(--bad);border-radius:10px;padding:10px 14px;font-size:13px;margin:0 0 16px}
+.sedes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 0 26px}
+.sd{background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 12px;text-align:left}
+.sd:hover{border-color:#d6d1c6}
+.sd b{display:block;font-size:15px;color:var(--navy)}
+.sd span{font-size:12px;color:var(--mut)}
+.sd.on{background:var(--navy);border-color:var(--navy)}
+.sd.on b{color:#fff}
+.sd.on span{color:#c9d6e2}
+.sd .ok{color:var(--ok)}
+.sd.on .ok{color:#9fd8b3}
+.stats{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--mut);margin:0 0 6px}
+.stats b{color:var(--txt);font-weight:600}
+.stats a{color:var(--navy);text-decoration:none;font-weight:600}
+h2{font-size:17px;color:var(--navy);margin:18px 0 12px}
+ol.objs{list-style:none;margin:0;padding:0}
+.obj{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;margin:0 0 12px}
+.oh{display:flex;gap:12px;align-items:flex-start}
+.n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+.ob{flex:1;min-width:0}
+.ob h3{margin:2px 0 0;font-size:15.5px;line-height:1.35}
+.why{margin:3px 0 0;font-size:13.5px;color:var(--mut)}
+.tag{flex:none;font-size:11px;font-weight:700;border-radius:10px;padding:2px 8px;background:var(--badl);color:var(--bad)}
+.sol{margin:14px 0 0 38px}
+.lab{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--mut);margin:0 0 6px}
+textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font-size:14px;line-height:1.5;background:var(--bg);resize:vertical;min-height:90px}
+textarea:focus{outline:none;border-color:var(--navy);background:#fff}
+.val{background:var(--bg);border-radius:10px;padding:10px 12px;font-size:14px;font-weight:600;word-break:break-all}
+.mut{font-size:12.5px;color:var(--mut);margin:6px 0 0}
+.mut a{color:var(--navy)}
+.act{display:flex;align-items:center;gap:6px 14px;flex-wrap:wrap;margin:12px 0 0 38px}
+.bt{border:0;border-radius:10px;padding:10px 16px;font-size:14px;font-weight:700;background:var(--navy);color:#fff;text-decoration:none;display:inline-block}
+.bt:hover{background:#16476b}
+.bt.lt{background:#fff;color:var(--navy);border:1px solid var(--line);font-weight:600;padding:9px 14px}
+.bt.lt:hover{border-color:var(--navy)}
+.bt:disabled{opacity:.55;cursor:wait}
+.lk{border:0;background:none;padding:4px 0;font-size:13px;font-weight:600;color:var(--mut)}
+.lk:hover{color:var(--navy)}
+.lk.ok:hover{color:var(--ok)}
+.up{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.up select{border:1px solid var(--line);border-radius:10px;padding:9px 10px;background:#fff;font-size:14px}
+.up input{display:none}
+details.man{margin:10px 0 0 38px;font-size:13px;color:var(--mut)}
+details.man summary{cursor:pointer;font-weight:600}
+details.man ol{margin:6px 0 0;padding-left:18px}
+.vacio{background:var(--okl);color:var(--ok);border-radius:14px;padding:18px;font-weight:600}
+details.hechas{margin-top:18px;font-size:13.5px;color:var(--mut)}
+details.hechas summary{cursor:pointer;font-weight:600}
+details.hechas ul{list-style:none;margin:8px 0 0;padding:0}
+details.hechas li{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-top:1px solid var(--line)}
+details.hechas li span{text-decoration:line-through;text-decoration-color:#c9c3b6}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#1d2430;color:#fff;padding:9px 16px;border-radius:20px;font-size:13px;display:none;z-index:50;max-width:calc(100vw - 32px)}
+.chat{position:fixed;right:16px;bottom:16px;width:380px;max-width:calc(100vw - 32px);height:500px;max-height:calc(100vh - 32px);background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 10px 34px rgba(0,0,0,.18);display:none;flex-direction:column;overflow:hidden;z-index:30}
+.chat .hd{padding:12px 14px;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:14px;color:var(--navy);border-bottom:1px solid var(--line)}
+.chat .hd button{background:none;border:0;font-size:20px;color:var(--mut)}
+.chat .ms{flex:1;overflow:auto;padding:12px}
+.msg{padding:9px 12px;border-radius:12px;margin:6px 0;font-size:14px;white-space:pre-wrap}
+.msg.yo{background:#EEF2F6;margin-left:40px}
+.msg.ia{background:var(--bg);margin-right:24px}
+.sug{display:block;width:100%;text-align:left;border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 10px;margin:6px 0;font-size:13px}
+.chat form{display:flex;gap:6px;padding:10px;border-top:1px solid var(--line)}
+.chat input{flex:1;border:1px solid var(--line);border-radius:10px;padding:9px 10px;font-size:14px}
+@media (max-width:640px){
+ .wrap{padding-top:20px}
+ .sedes{grid-template-columns:repeat(2,1fr)}
+ .sol,.act,details.man{margin-left:0}
+}
+</style>
+<link rel="stylesheet" href="https://adriapintat-rgb.github.io/durancarasso-paneles/dc/dc-ui.css">
+<script src="https://adriapintat-rgb.github.io/durancarasso-paneles/dc/dc-barra.js" defer></script>
+<style>
+/* ── Look DC: el kit dc-ui.css pone tokens, barra y modo oscuro; aquí, lo propio de este panel ── */
+:root{--navy:var(--brand,#003d4b);--gold:var(--brand,#003d4b);--txt:var(--ink,#1a1a1a);--mut:var(--muted,#666);--ok:var(--brand,#003d4b);--okl:var(--brand-soft,#eef4f5);--bad:#a33a2b;--badl:#f6e4e1}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bad:#e58b7d;--badl:#2e1b18}}
+:root[data-theme="dark"]{--bad:#e58b7d;--badl:#2e1b18}
+.top{align-items:center;margin-bottom:22px}
+.top h1{margin:0;font-size:1.75rem;line-height:1.2;font-weight:500;letter-spacing:0;color:var(--ink)}
+.ask{min-height:44px;padding:0 16px;border:1px solid var(--line-2);border-radius:12px;background:var(--surface);color:var(--brand);font-size:.95rem;font-weight:600}
+.ask:hover{background:var(--brand-soft);border-color:var(--brand-line)}
+.aviso{border-radius:12px;padding:12px 14px;font-size:.9rem}
+.sedes{gap:10px;margin-bottom:24px}
+.sd{min-height:64px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.sd:hover{border-color:var(--brand-line)}
+.sd b{font-size:1rem;font-weight:600;color:var(--ink)}
+.sd span{font-size:.82rem;color:var(--muted)}
+.sd.on{background:var(--brand-soft);border-color:var(--brand-line)}
+.sd.on b,.sd.on span,.sd.on .ok{color:var(--brand)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0;font-size:.875rem;color:var(--muted)}
+.stats span{padding:12px 16px;background:var(--brand-soft);border:1px solid var(--brand-line);border-radius:14px}
+.stats b{display:block;font:500 1.9rem/1.15 var(--serif);color:var(--brand)}
+.stats a{grid-column:1/-1;justify-self:end;padding:4px 0;color:var(--brand);text-decoration:underline;text-underline-offset:3px}
+h2{margin:22px 0 12px;font-size:1.35rem;line-height:1.25;color:var(--ink)}
+.obj{background:var(--surface);border-color:var(--line);border-radius:14px;padding:20px}
+.n{width:28px;height:28px;background:var(--brand-tint);color:var(--brand);font-size:.85rem;font-weight:600}
+.ob h3{margin:1px 0 0;font-size:1.15rem;line-height:1.3;color:var(--ink)}
+.why{margin-top:4px;font-size:.92rem}
+.tag{border-radius:999px;padding:3px 10px;font-size:.75rem;font-weight:600}
+.sol{margin:14px 0 0 40px}
+.lab{font-size:.72rem;font-weight:600;letter-spacing:.08em;margin-bottom:8px}
+textarea{min-height:96px;max-height:480px;field-sizing:content;border:1px solid var(--line-2);border-radius:10px;padding:10px 12px;font-size:1rem;background:var(--surface);color:var(--ink)}
+textarea:focus{border-color:var(--brand);background:var(--surface);box-shadow:0 0 0 3px var(--brand-tint)}
+.val{display:flex;align-items:center;min-height:48px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);font-size:1rem}
+.mut{font-size:.85rem;margin-top:8px}
+.act{gap:4px 16px;margin:12px 0 0 40px}
+.bt{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border:1px solid var(--brand);border-radius:12px;background:var(--brand);color:var(--brand-ink);font-size:.95rem;font-weight:600;line-height:1.2;cursor:pointer}
+.bt:hover{background:var(--brand-2);border-color:var(--brand-2)}
+.bt.lt{padding:0 16px;background:var(--surface);color:var(--brand);border-color:var(--line-2);font-weight:600}
+.bt.lt:hover{background:var(--brand-soft);border-color:var(--brand-line)}
+.lk{min-height:44px;padding:0 2px;font-size:.9rem;color:var(--muted)}
+.lk:hover,.lk.ok:hover{color:var(--brand)}
+.up select{min-height:48px;padding:0 12px;border:1px solid var(--line-2);border-radius:10px;background:var(--surface);color:var(--ink);font-size:1rem}
+details.man{margin:10px 0 0 40px;font-size:.9rem}
+.vacio{border:1px solid var(--brand-line);border-radius:14px;padding:18px 20px}
+details.hechas{margin-top:20px;font-size:.92rem}
+details.hechas li{align-items:center;padding:2px 0}
+details.hechas li span{text-decoration-color:var(--line-2)}
+.toast{background:var(--ink);color:var(--bg);border-radius:12px;padding:10px 16px;font-size:.9rem}
+.chat{background:var(--surface);border-radius:14px;box-shadow:var(--shadow)}
+.chat .hd{padding:6px 6px 6px 16px;font:500 1.1rem/1.3 var(--serif);color:var(--ink)}
+.chat .hd button{width:44px;height:44px;border-radius:10px;font-family:var(--sans);color:var(--muted)}
+.chat .hd button:hover{background:var(--brand-soft);color:var(--brand)}
+.msg{border-radius:12px;font-size:.95rem}
+.msg.yo{background:var(--brand-soft)}
+.msg.ia{background:var(--surface-2)}
+.sug{min-height:44px;padding:10px 12px;background:var(--surface);border-radius:10px;font-size:.9rem;color:var(--ink)}
+.sug:hover{background:var(--brand-soft);border-color:var(--brand-line)}
+.chat form{gap:8px}
+.chat input{min-width:0;min-height:48px;padding:0 12px;border:1px solid var(--line-2);border-radius:10px;background:var(--surface);color:var(--ink);font:inherit;font-size:1rem}
+.chat input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-tint)}
+@media (max-width:640px){
+ .top h1{font-size:1.5rem}
+ .sol,.act,details.man{margin-left:0}
+}
+</style>
+</head><body>
+<header class="dc-topbar">
+ <a class="dc-brand" id="dcHub" href="https://dc-hub-lilac.vercel.app/" target="_top" aria-label="Volver al Hub de Durán Carasso"><img class="dc-logo-largo" src="https://adriapintat-rgb.github.io/durancarasso-paneles/dc/logo-largo.jpg" alt="__MARCA__"><img class="dc-logo-corto" src="https://adriapintat-rgb.github.io/durancarasso-paneles/dc/logo-redondo.png" alt=""></a>
+ <span class="dc-sep" aria-hidden="true"></span>
+ <span class="dc-titulo">SEO/GEO</span>
+ <span class="dc-hueco"></span>
+ <div class="dc-acciones">
+  <button type="button" class="dc-tema" id="dcTema">Modo oscuro</button>
+  <span class="dc-version" title="Versión del panel">v17</span>
+ </div>
+</header>
+<script>
+/* Barra DC: «Modo oscuro» / «Modo claro», recordado en este navegador */
+(function () {
+  var r = document.documentElement, b = document.getElementById('dcTema');
+  function oscuro() { var t = r.getAttribute('data-theme'); return t ? t === 'dark' : !!(window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches); }
+  function rotulo() { b.textContent = oscuro() ? 'Modo claro' : 'Modo oscuro'; }
+  b.addEventListener('click', function () { var t = oscuro() ? 'light' : 'dark'; r.setAttribute('data-theme', t); try { localStorage.setItem('dc-theme', t); } catch (e) {} rotulo(); });
+  try { matchMedia('(prefers-color-scheme: dark)').addEventListener('change', rotulo); } catch (e) {}
+  rotulo();
+  /* Apps Script sirve el panel dentro de marcos de Google, no del Hub: el logo navega (target _top) en vez de quedarse en dc-barra.js */
+  document.getElementById('dcHub').addEventListener('click', function (e) { e.stopPropagation(); });
+})();
+</script>
+<main class="wrap">
+ <div class="top">
+  <h1 id="ti"></h1>
+  <button class="ask" onclick="chat(true)">Pregunta a la IA</button>
+ </div>
+ <div id="aviso"></div>
+ <nav class="sedes" id="sedes"></nav>
+ <section id="sede"></section>
+</main>
+<div class="chat" id="chat"><div class="hd">Pregunta a la IA<button onclick="chat(false)" aria-label="Cerrar">×</button></div>
+ <div class="ms" id="ms"></div>
+ <form onsubmit="preguntar(event)"><input id="q" placeholder="Escribe tu pregunta…" autocomplete="off"><button class="bt">Enviar</button></form></div>
+<div class="toast" id="toast"></div>
+<script>
+var D = __DATOS__;
+var NL = String.fromCharCode(10);
+var SEDES = D.sedesInfo || [];
+var NOMBRE = {}, PAGINA = {}; SEDES.forEach(function (s) { NOMBRE[s.code] = s.nombre; PAGINA[s.code] = s.pagina || ''; });
+var BIZ = 'https://business.google.com/';
+var MAX = 4;                 /* objetivos visibles por sede */
+var GU = D.guias || {};      /* estado de los objetivos que salen de la revisión automática (sin propuesta) */
+var SOL = {};                /* soluciones preparadas por la IA en esta sesión */
+var actual = SEDES.length ? SEDES[0].code : '', OBJ = [], HECHOS = [];
+
+function el(id) { return document.getElementById(id); }
+function esc(t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+function toast(t) { var x = el('toast'); x.textContent = t; x.style.display = 'block'; clearTimeout(x._t); x._t = setTimeout(function () { x.style.display = 'none'; }, 3000); }
+function sedesDe(it) { return String(it.sede || '').split(',').filter(String); }
+function hecho(it) { return it.estado === 'HECHO'; }
+function api(fn, args, ok, btn) {
+  var txt = btn ? btn.textContent : '';
+  if (btn) { btn.disabled = true; btn.textContent = 'Un momento…'; }
+  var r = google.script.run.withSuccessHandler(function (x) { if (btn) { btn.disabled = false; btn.textContent = txt; } ok(x); })
+    .withFailureHandler(function (e) { if (btn) { btn.disabled = false; btn.textContent = txt; } toast('No se pudo: ' + (e && e.message ? e.message : e)); });
+  r[fn].apply(r, args);
+}
+function copiar(t) {
+  var ok = function () { toast('Copiado'); };
+  if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(ok, function () { viejo(t); }); } else viejo(t);
+  function viejo(t) { var a = document.createElement('textarea'); a.value = t; document.body.appendChild(a); a.select(); try { document.execCommand('copy'); ok(); } catch (e) { toast('Selecciona y pulsa Ctrl+C'); } a.remove(); }
+}
+function parteDetalle(d) {
+  var o = { porque: '', pasos: [] }, modo = '';
+  String(d || '').split(NL).forEach(function (l) {
+    l = l.trim(); if (!l) return;
+    if (l.indexOf('Por qué:') === 0) { o.porque = l.slice(8).trim(); modo = ''; }
+    else if (l.indexOf('Cómo:') === 0) modo = 'p';
+    else if (l.indexOf('Cuándo:') === 0) modo = '';
+    else if (l.indexOf('Dónde:') === 0) o.pasos.push(l.slice(6).trim());
+    else if (modo === 'p') o.pasos.push(l.replace(/^[0-9]+[.)] */, ''));
+  });
+  return o;
+}
+
+/* ── Qué toca en cada sede: lo que detecta la revisión + las propuestas de la IA, sin duplicados, máx. 4 ── */
+function prio(it) { return it.prioridad === 'ALTA' ? 0 : it.prioridad === 'BAJA' ? 3 : 2; }
+function tipoDe(t) {
+  var s = String(t || '').toLowerCase();
+  if (/reseñ|opini/.test(s)) return 'resenas';
+  if (/foto|imagen/.test(s)) return 'fotos';
+  if (/enlaz/.test(s)) return 'web';
+  if (/llms|schema|meta ?desc|robots|hreflang|francés|velocidad|pagespeed|programador|la web|página web/.test(s)) return 'webdev';
+  if (/nombre/.test(s)) return 'nombre';
+  if (/teléfono/.test(s)) return 'telefono';
+  if (/horario/.test(s)) return 'horario';
+  return 'tarea';
+}
+function meta(x) {
+  var arriba = (x.competencia || []).filter(function (c) { return c.resenas > x.resenas; }).sort(function (a, b) { return a.resenas - b.resenas; })[0];
+  return arriba ? { n: arriba.resenas + 1, falta: arriba.resenas + 1 - x.resenas, quien: arriba.nombre } : null;
+}
+function catalan(code) { return /catal/i.test((D.sedes[code] || {}).idioma || '') || code === 'CRD' || code === 'AND'; }
+function enlaces(t, code) { return String(t || '').split('[ENLACE]').join((D.sedes[code] || {}).resena || ''); }
+
+function objetivos(code) {
+  var x = D.sedes[code] || {}, f = x.falta || [], o = [], usadas = {};
+  var mias = D.items.filter(function (i) { return sedesDe(i).indexOf(code) !== -1; });
+  var tareas = mias.filter(function (i) { return i.tipo === 'TAREA'; });
+  function tiene(c) { return f.indexOf(c) !== -1; }
+  function guia(k, p, titulo, why, texto) {
+    var it = k === 'webdev' ? null : tareas.filter(function (i) { return !usadas[i.id] && tipoDe(i.titulo) === k; })[0];   /* lo de la web puede ser cosas distintas: no se junta */
+    if (it) usadas[it.id] = 1;
+    if (it && it.estado === 'DESCARTADO') return;
+    var key = code + '_' + k;
+    if (!it && GU[key] === 'DESCARTADO') return;
+    o.push({ key: it ? it.id : key, k: k, p: it ? Math.min(p, prio(it)) : p, it: it || null, titulo: titulo,
+      why: why, texto: it && it.texto ? enlaces(it.texto, code) : texto || '', done: it ? hecho(it) : GU[key] === 'HECHO', pasos: it ? parteDetalle(it.detalle).pasos : [] });
+  }
+  if (tiene('Nombre sin palabras clave (riesgo de suspensión)'))
+    guia('nombre', 0, 'Dejar el nombre de la ficha solo como «' + D.marca + '»', 'Ahora pone «' + (x.nombreFicha || '') + '». Las palabras clave en el nombre pueden hacer que Google suspenda la ficha.');
+  if (tiene('Teléfono')) guia('telefono', 0, 'Poner el teléfono en la ficha', 'Google no muestra teléfono de esta oficina.');
+  if (tiene('Web enlazada') || tiene('Enlazar la ficha a la página de la sede'))
+    guia('web', 1, 'Enlazar la ficha a la página de ' + NOMBRE[code], 'Ahora lleva a ' + (x.web || 'ninguna web') + '. Si lleva a la página de la oficina, Google la entiende mejor.');
+  var m = meta(x);
+  if (m || tiene('Mínimo 30 reseñas') || tiene('Nota ≥ 4,5'))
+    guia('resenas', 1, m ? 'Conseguir ' + m.falta + ' reseñas más' : 'Conseguir más reseñas',
+      'Tenéis ' + x.resenas + ' (' + x.rating + '★).' + (m ? ' Con ' + m.n + ' pasáis a ' + m.quien + ' en Google Maps.' : ' Objetivo: 30 o más.'),
+      enlaces(catalan(code) ? 'Hola, gràcies per confiar en ' + D.marca + '. Si tens un minut, ens ajudaria molt la teva opinió a Google: [ENLACE]'
+        : 'Hola, gracias por confiar en ' + D.marca + '. Si tienes un minuto, nos ayudaría mucho tu opinión en Google: [ENLACE]', code));
+  if (tiene('Horario')) guia('horario', 1, 'Añadir el horario en la ficha', 'Google no muestra cuándo está abierta la oficina.');
+  if (tiene('Más fotos (fachada, oficina, equipo)'))
+    guia('fotos', 2, 'Subir ' + Math.max(1, 10 - (x.fotos || 0)) + ' fotos', 'Tiene ' + (x.fotos || 0) + '. Las fichas con 10 o más reciben más visitas.');
+  var web = ['Schema en la web', 'Meta description', 'Mismo teléfono en ficha y web'].filter(tiene);
+  if (web.length) guia('webdev', 3, 'Mejorar la página de ' + NOMBRE[code] + ' en la web', 'Falta: ' + web.join(', ').toLowerCase() + '.');
+  tareas.forEach(function (it) {
+    if (usadas[it.id] || it.estado === 'DESCARTADO') return;
+    var d = parteDetalle(it.detalle);
+    o.push({ key: it.id, k: tipoDe(it.titulo), p: prio(it), it: it, titulo: it.titulo, why: d.porque, texto: enlaces(it.texto, code), done: hecho(it), pasos: d.pasos });
+  });
+  mias.forEach(function (it) {
+    if (it.tipo === 'TAREA' || it.estado === 'DESCARTADO') return;
+    var post = it.tipo === 'POST';
+    o.push({ key: it.id, k: post ? 'post' : 'desc', p: 2, it: it, titulo: post ? 'Publicar la novedad de la semana' : 'Actualizar la descripción de la ficha',
+      why: post ? 'Las fichas que publican cada semana salen más en Google Maps.' : 'La descripción actual tiene más de un mes.', texto: it.texto || '', done: hecho(it), pasos: [] });
+  });
+  o.forEach(function (x, i) { x.i = i; });
+  o.sort(function (a, b) { return a.p - b.p || a.i - b.i; });
+  return { pend: o.filter(function (x) { return !x.done; }).slice(0, MAX), hechos: o.filter(function (x) { return x.done; }) };
+}
+
+/* ── Pintar ── */
+function pintaSedes() {
+  el('sedes').innerHTML = SEDES.map(function (s) {
+    var x = D.sedes[s.code] || {}, n = x.error ? -1 : objetivos(s.code).pend.length;
+    var sub = n < 0 ? 'sin datos' : n ? n + ' por hacer' : '<span class="ok">✓ Al día</span>';
+    return '<button class="sd' + (s.code === actual ? ' on' : '') + '" onclick="verSede(&quot;' + s.code + '&quot;)"><b>' + esc(s.nombre) + '</b><span>' + sub + '</span></button>';
+  }).join('');
+}
+function solucion(o, i) {
+  var code = actual, x = D.sedes[code] || {}, t = o.texto || SOL[o.key] || '';
+  if (o.k === 'post' || o.k === 'desc') return '<div class="lab">' + (o.k === 'post' ? 'Publicación lista' : 'Descripción lista') + ' · puedes editarla</div><textarea id="tx' + i + '" rows="6">' + esc(t) + '</textarea>';
+  if (o.k === 'resenas') return '<div class="lab">Mensaje para tus clientes · puedes editarlo</div><textarea id="tx' + i + '" rows="3">' + esc(t) + '</textarea>' +
+    '<p class="mut">Envíalo a clientes contentos de las últimas operaciones, mejor justo después de firmar o entregar llaves.</p>';
+  if (o.k === 'fotos') return D.apiGbp ? '<div class="up"><select id="cat' + i + '"><option value="EXTERIOR">Fachada</option><option value="INTERIOR">Oficina por dentro</option><option value="TEAMS">Equipo</option><option value="ADDITIONAL">Zona / otras</option></select>' +
+    '<label class="bt">Elegir fotos y subir<input type="file" accept="image/jpeg,image/png" multiple onchange="subir(' + i + ',this)"></label></div>' +
+    '<p class="mut" id="up' + i + '">Se suben directamente a la ficha de ' + esc(NOMBRE[code]) + '. Puedes elegir varias a la vez.</p>'
+    : '<p class="mut">Fachada, oficina por dentro, equipo y la zona.</p>';
+  if (o.k === 'web') return '<div class="lab">Enlace nuevo</div><div class="val">' + esc(PAGINA[code]) + '</div>';
+  if (o.k === 'telefono') return '<div class="lab">Teléfono oficial</div><div class="val">' + esc(x.telOficial || '') + '</div>';
+  if (o.k === 'nombre') return '<div class="lab">Nombre nuevo</div><div class="val">' + esc(D.marca) + '</div>';
+  if (o.k === 'horario') return '<p class="mut">Se pone a mano en Google: 2 minutos.</p>';
+  if (t) return '<div class="lab">' + (o.k === 'webdev' ? 'Solución para el programador' : 'Solución lista') + '</div><textarea id="tx' + i + '" rows="6">' + esc(t) + '</textarea>';
+  return '<button class="bt lt" onclick="preparar(' + i + ',this)">Preparar la solución</button><p class="mut">La IA escribe el texto o el código listo para usar.</p>';
+}
+function botones(o, i) {
+  var b = '', t = o.texto || SOL[o.key] || '';
+  function p(txt, fn) { b += '<button class="bt" onclick="' + fn + '(' + i + ',this)">' + txt + '</button>'; }
+  function s(txt, fn, cls) { b += '<button class="lk' + (cls ? ' ' + cls : '') + '" onclick="' + fn + '(' + i + ',this)">' + txt + '</button>'; }
+  if (o.k === 'post' || o.k === 'desc') { if (D.apiGbp) { p('Publicar en Google', 'publicar'); s('Copiar', 'copiarTx'); } else p('Copiar', 'copiarTx'); }
+  else if (o.k === 'resenas') { p('Enviar por WhatsApp', 'whatsapp'); s('Copiar', 'copiarTx'); }
+  else if (o.k === 'web') { if (D.apiGbp) p('Poner este enlace en Google', 'ponerWeb'); else p('Copiar', 'copiarVal'); }
+  else if (o.k === 'telefono') { if (D.apiGbp) p('Poner este teléfono en Google', 'ponerTel'); else p('Copiar', 'copiarVal'); }
+  else if (o.k === 'nombre') { if (D.apiGbp) p('Cambiar el nombre en Google', 'ponerNombre'); }
+  else if (o.k === 'horario' || (o.k === 'fotos' && !D.apiGbp)) b += '<a class="bt" href="' + BIZ + '" target="_blank">Abrir mi ficha</a>';
+  else if (t && o.k === 'webdev') { p('Enviar al programador', 'programador'); s('Copiar', 'copiarTx'); }
+  else if (t) p('Copiar', 'copiarTx');
+  if (o.it && o.k !== 'nombre' && o.k !== 'web' && o.k !== 'telefono' && o.k !== 'fotos' && o.k !== 'horario') s('Otra versión', 'otra');
+  s('Ya está hecho', 'hecha', 'ok');
+  s(o.k === 'nombre' ? 'Mantener el nombre actual' : 'Descartar', 'descartar');
+  return b;
+}
+function card(o, i) {
+  return '<li class="obj"><div class="oh"><span class="n">' + (i + 1) + '</span><div class="ob"><h3>' + esc(o.titulo) + '</h3>' +
+    (o.why ? '<p class="why">' + esc(o.why) + '</p>' : '') + '</div>' + (o.p === 0 ? '<span class="tag">Urgente</span>' : '') + '</div>' +
+    '<div class="sol">' + solucion(o, i) + '</div><div class="act">' + botones(o, i) + '</div>' +
+    (o.pasos.length ? '<details class="man"><summary>Cómo hacerlo a mano</summary><ol>' + o.pasos.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ol></details>' : '') + '</li>';
+}
+function pintaSede() {
+  var code = actual, x = D.sedes[code] || {};
+  if (x.error) { el('sede').innerHTML = '<p class="aviso">No se pudo analizar ' + esc(NOMBRE[code]) + ' esta semana: ' + esc(x.error) + '</p>'; return; }
+  var r = objetivos(code); OBJ = r.pend; HECHOS = r.hechos;
+  el('sede').innerHTML = '<div class="stats"><span><b>' + x.rating + '★</b> nota</span><span><b>' + x.resenas + '</b> reseñas</span><span><b>' + x.fotos + '</b> fotos</span>' +
+    (x.maps ? '<a href="' + esc(x.maps) + '" target="_blank">Ver en Google Maps ›</a>' : '') + '</div>' +
+    '<h2>' + (OBJ.length ? 'Esta semana en ' + esc(NOMBRE[code]) : esc(NOMBRE[code])) + '</h2>' +
+    (OBJ.length ? '<ol class="objs">' + OBJ.map(card).join('') + '</ol>' : '<div class="vacio">✓ Todo al día en ' + esc(NOMBRE[code]) + '. El lunes llega la revisión nueva.</div>') +
+    (HECHOS.length ? '<details class="hechas"><summary>Hecho esta semana · ' + HECHOS.length + '</summary><ul>' + HECHOS.map(function (o, j) {
+      return '<li><span>' + esc(o.titulo) + '</span><button class="lk" onclick="deshacer(' + j + ',this)">Deshacer</button></li>'; }).join('') + '</ul></details>' : '');
+}
+function pinta() { pintaSedes(); pintaSede(); }
+
+/* ── Acciones ── */
+function verSede(c) { actual = c; pinta(); window.scrollTo(0, 0); }
+function buscar(id) { return D.items.filter(function (i) { return i.id === id; })[0]; }
+function actualiza(n) { var it = buscar(n.id); if (it) { it.estado = n.estado; it.titulo = n.titulo; it.detalle = n.detalle; it.texto = n.texto; } pinta(); }
+function texto(i) { var t = el('tx' + i); return t ? t.value : (OBJ[i].texto || SOL[OBJ[i].key] || ''); }
+function estado(o, est, btn, msg) {
+  if (o.it) api('accionPanel', [D.clave, o.it.id, est === 'HECHO' ? 'hecho' : est === 'DESCARTADO' ? 'no' : 'pendiente'], function (n) { actualiza(n); toast(msg); }, btn);
+  else api('marcarGuia', [D.clave, D.fecha, o.key, est], function (g) { GU = g || {}; pinta(); toast(msg); }, btn);
+}
+function hecha(i, b) { estado(OBJ[i], 'HECHO', b, 'Hecho ✓'); }
+function descartar(i, b) {
+  var o = OBJ[i];
+  if (o.k === 'nombre' && !o.it) return api('ignorarObjetivo', [D.clave, 'nombre', true], function () { estado(o, 'DESCARTADO', null, 'Se mantiene el nombre actual'); }, b);
+  estado(o, 'DESCARTADO', b, 'Descartado: no se volverá a proponer');
+}
+function deshacer(j, b) { estado(HECHOS[j], 'PENDIENTE', b, 'Vuelve a estar pendiente'); }
+function copiarTx(i) { copiar(texto(i)); }
+function copiarVal(i) { var o = OBJ[i]; copiar(o.k === 'web' ? PAGINA[actual] : (D.sedes[actual] || {}).telOficial || ''); }
+function otra(i, b) { api('accionPanel', [D.clave, OBJ[i].it.id, 'otra'], function (n) { actualiza(n); toast('Nueva versión'); }, b); }
+function publicar(i, b) {
+  var o = OBJ[i], t = texto(i).trim();
+  if (!t) return toast('El texto está vacío');
+  if (!confirm('¿Publicar este texto en la ficha de Google de ' + NOMBRE[actual] + '? Lo verá todo el mundo.')) return;
+  api('accionPanel', [D.clave, o.it.id, 'aplicar', t], function (n) { actualiza(n); toast('Publicado en Google ✓'); }, b);
+}
+function whatsapp(i) { window.open('https://wa.me/?text=' + encodeURIComponent(texto(i)), '_blank'); }
+function programador(i) {
+  var o = OBJ[i];
+  window.open('mailto:?subject=' + encodeURIComponent(D.marca + ' · ' + o.titulo) + '&body=' + encodeURIComponent(o.titulo + NL + NL + texto(i)), '_blank');
+}
+function ficha(i, b, que, valor, pregunta) {
+  if (!confirm(pregunta)) return;
+  api('aplicarFicha', [D.clave, actual, que, valor], function (msg) { estado(OBJ[i], 'HECHO', null, msg || 'Cambiado en Google ✓'); }, b);
+}
+function ponerWeb(i, b) { ficha(i, b, 'web', PAGINA[actual], '¿Cambiar el enlace de la ficha de ' + NOMBRE[actual] + ' en Google a ' + PAGINA[actual] + '?'); }
+function ponerTel(i, b) { var t = (D.sedes[actual] || {}).telOficial; ficha(i, b, 'telefono', t, '¿Poner el teléfono ' + t + ' en la ficha de ' + NOMBRE[actual] + '?'); }
+function ponerNombre(i, b) {
+  if (!confirm('¿Cambiar el nombre de la ficha de ' + NOMBRE[actual] + ' a «' + D.marca + '»? Google puede tardar unos días en validarlo.')) return;
+  api('aplicarNombre', [D.clave, actual], function (msg) { estado(OBJ[i], 'HECHO', null, msg); }, b);
+}
+function preparar(i, b) {
+  var o = OBJ[i];
+  if (o.it) return api('accionPanel', [D.clave, o.it.id, 'solucion'], function (n) { actualiza(n); toast('Solución lista'); }, b);
+  api('prepararSolucion', [D.clave, actual, o.titulo, o.why], function (t) { SOL[o.key] = t; pinta(); toast('Solución lista'); }, b);
+}
+/* Fotos: se reducen en el navegador (máx. 2000 px, JPEG) y se suben a la ficha una a una */
+function foto(file, cb) {
+  var r = new FileReader();
+  r.onload = function () {
+    var im = new Image();
+    im.onload = function () {
+      var k = Math.min(1, 2000 / Math.max(im.width, im.height)), c = document.createElement('canvas');
+      c.width = Math.round(im.width * k); c.height = Math.round(im.height * k);
+      if (Math.min(c.width, c.height) < 250) return cb(null, 'es demasiado pequeña (mínimo 250 px)');
+      c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
+      var u = c.toDataURL('image/jpeg', 0.86); cb(u.slice(u.indexOf(',') + 1));
+    };
+    im.onerror = function () { cb(null, 'no se puede leer'); };
+    im.src = r.result;
+  };
+  r.readAsDataURL(file);
+}
+function subir(i, inp) {
+  var files = [].slice.call(inp.files || []), cat = el('cat' + i).value, info = el('up' + i), ok = 0, mal = [], lbl = inp.parentNode;
+  if (!files.length) return;
+  lbl.style.opacity = '.55'; lbl.style.pointerEvents = 'none';
+  function fin() {
+    lbl.style.opacity = ''; lbl.style.pointerEvents = ''; inp.value = '';
+    info.textContent = ok + ' de ' + files.length + ' subidas a Google' + (mal.length ? ' · ' + mal.join(' · ') : '') + '.';
+    if (ok) toast(ok + (ok === 1 ? ' foto subida' : ' fotos subidas') + ' a Google ✓');
+  }
+  (function una(n) {
+    if (n >= files.length) return fin();
+    info.textContent = 'Subiendo ' + (n + 1) + ' de ' + files.length + '…';
+    foto(files[n], function (b64, err) {
+      if (!b64) { mal.push(files[n].name + ' ' + err); return una(n + 1); }
+      google.script.run.withSuccessHandler(function () { ok++; una(n + 1); })
+        .withFailureHandler(function (e) { mal.push(files[n].name + ': ' + (e && e.message ? e.message : e)); una(n + 1); })
+        .subirFoto(D.clave, actual, b64, 'image/jpeg', cat);
+    });
+  })(0);
+}
+function chat(v) {
+  el('chat').style.display = v ? 'flex' : 'none';
+  if (v && !el('ms').innerHTML) {
+    el('ms').innerHTML = '<div class="msg ia">Pregúntame lo que quieras sobre las fichas. Uso los datos de esta semana.</div>' +
+      ['¿Qué es lo más urgente esta semana?', 'Escríbeme un WhatsApp para pedir reseñas', '¿Cómo vamos frente a la competencia?'].map(function (s) {
+        return '<button class="sug" onclick="el(&quot;q&quot;).value=this.textContent;preguntar()">' + s + '</button>'; }).join('');
+  }
+  if (v) el('q').focus();
+}
+function preguntar(e) {
+  if (e) e.preventDefault();
+  var q = el('q').value.trim(); if (!q) return;
+  var ms = el('ms'); el('q').value = '';
+  ms.insertAdjacentHTML('beforeend', '<div class="msg yo">' + esc(q) + '</div><div class="msg ia">Pensando…</div>'); ms.scrollTop = ms.scrollHeight;
+  var p = ms.lastElementChild;   /* cada respuesta va a su burbuja, aunque se hagan dos preguntas seguidas */
+  google.script.run.withSuccessHandler(function (r) { p.textContent = r; ms.scrollTop = ms.scrollHeight; })
+    .withFailureHandler(function (er) { p.textContent = 'No he podido responder: ' + (er && er.message ? er.message : er); })
+    .preguntarIA(D.clave, q, actual);
+}
+
+el('ti').textContent = 'Semana del ' + (D.fecha || '');
+if (D.errorIA) el('aviso').innerHTML = '<div class="aviso">La IA no respondió esta semana (' + esc(D.errorIA) + '). Lo que ves sale de la revisión automática.</div>';
+var pri = SEDES.map(function (s) { return s.code; }).filter(function (c) { return !(D.sedes[c] || {}).error; })
+  .sort(function (a, b) { return objetivos(b).pend.length - objetivos(a).pend.length; })[0];
+if (pri) actual = pri;
+pinta();
+</script></body></html>
