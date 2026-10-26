@@ -56,6 +56,10 @@
  * es ese Hub; en cualquier otro sitio (Hub AP, claude.ai) el enlace funciona normal con target="_top". */
 var HUB_DC = 'https://dc-hub-lilac.vercel.app';
 var padre = (location.ancestorOrigins && location.ancestorOrigins[0]) || document.referrer || '';
+// Dentro del Hub DC (directamente o, como Apps Script, en un marco dentro de otro) su barra ya lleva el logo
+// para volver y el título: la de la app se esconde en pantallas anchas (dc-ui.css, .en-hub-dc).
+var ancestros = location.ancestorOrigins ? Array.prototype.slice.call(location.ancestorOrigins) : [document.referrer || ''];
+if (window.top !== window && ancestros.some(function (o) { return String(o).indexOf(HUB_DC) === 0; })) document.documentElement.classList.add('en-hub-dc');
 if (window.top !== window && padre.indexOf(HUB_DC) === 0) {
   document.addEventListener('click', (e) => {
     const a = e.target.closest && e.target.closest('a[href^="https://dc-hub-lilac.vercel.app"]');

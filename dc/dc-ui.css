@@ -145,3 +145,6 @@ textarea.in{min-height:96px}
 .view.on{animation:none}
 .chip,.lc,.tile,.fila,.anun,.side a,.btn{transition:none}
 
+/* Dentro del Hub DC de Vercel: su barra ya hace de barra de la app (logo para volver y título), así que la de la app
+   no se repite. En pantallas estrechas se queda, por si lleva el botón del menú. La clase la pone dc-barra.js. */
+@media (min-width:861px){html.en-hub-dc header.dc-topbar{display:none}}
