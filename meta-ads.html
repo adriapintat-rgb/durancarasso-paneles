@@ -643,7 +643,7 @@ function go(p){qa('.tab').forEach(function(x){x.classList.toggle('on',x.dataset.
 qa('.tab').forEach(function(t){t.onclick=function(){go(t.dataset.p)}});
 
 /* ── Carga ── */
-function load(){return api('/state').then(function(s){STATE=s;render();loadLeads(true);loadComp(true)}).catch(function(e){toast(e.message,1)})}
+function load(){return api('/state').then(function(s){STATE=s;render();loadLeads(true);loadComp(true)}).catch(function(e){if(DEMO)return toast(e.message,1);DEMO=true;showOnb(false);toast('El motor no responde: te enseño la demo',1);return load()})}
 function loadLeads(quiet){return api('/leads').then(function(d){LEADS=d;renderLeads();renderWeek();renderSedes()}).catch(function(e){if(!quiet)toast(e.message,1)})}
 function loadComp(quiet){return api('/competition').then(function(d){COMP=d;renderComp();renderSedeDetail()}).catch(function(e){if(!quiet)toast(e.message,1)})}
 function sedes(){return (STATE&&STATE.settings.sedes)||[]}
