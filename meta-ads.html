@@ -1130,7 +1130,7 @@ function demoApi(path,body){
 (function init(){
   var c=cfg();
   if(/[?&]demo\b/.test(location.search))DEMO=true;
-  if(!DEMO&&!c.url){showOnb(true);return}
+  if(!c.url)DEMO=true; // sin motor conectado: demo directa (el motor ads-agent aún no está desplegado)
   if(c.url)$('cUrl').value=c.url;
   showOnb(false);
   var t=ls('dc_ads_tab');if(t&&document.querySelector('.tab[data-p="'+t+'"]'))go(t);
