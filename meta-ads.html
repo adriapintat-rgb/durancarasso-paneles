@@ -710,14 +710,17 @@ var CFG_KEY='dc_ads_cfg';
 function cfg(){try{return JSON.parse(ls(CFG_KEY)||'{}')}catch(e){return {}}}
 function setCfg(c){ls(CFG_KEY,JSON.stringify(c))}
 var DEMO=false,STATE=null,LEADS=null,COMP=null;
+// En Vercel el panel y el agente van juntos: el agente está en /api del mismo dominio y se entra con el pase del Hub DC
+var SAME=null;
+function base(){var c=cfg();return c.url?c.url.replace(/\/+$/,''):SAME}
 var F={plan:'all',lead:'all',sede:''};
 
 function api(path,body){
   if(DEMO)return demoApi(path,body);
-  var c=cfg();
-  if(!c.url)return Promise.reject(new Error('Sin conectar'));
-  return fetch(c.url.replace(/\/+$/,'')+path,{method:body?'POST':'GET',headers:{'x-app-secret':c.secret||'','Content-Type':'application/json'},body:body?JSON.stringify(body):undefined})
-    .then(function(r){return r.json().catch(function(){return {error:'Respuesta no válida ('+r.status+')'}}).then(function(d){if(!r.ok||d.error){var m=d.error==='unauthorized'?'Contraseña incorrecta':(d.error||'Error '+r.status);if(d.meta&&d.meta.title)m=d.meta.title+': '+m;throw new Error(m)}return d})});
+  var c=cfg(),b=base();
+  if(!b)return Promise.reject(new Error('Sin conectar'));
+  return fetch(b+path,{method:body?'POST':'GET',credentials:!c.url&&SAME?'include':'omit',headers:{'x-app-secret':c.secret||'','Content-Type':'application/json'},body:body?JSON.stringify(body):undefined})
+    .then(function(r){return r.json().catch(function(){return {error:'Respuesta no válida ('+r.status+')'}}).then(function(d){if(!r.ok||d.error){if(r.status===401&&SAME&&!c.url){showOnb(true)}var m=d.error==='unauthorized'?(SAME&&!c.url?'Entra desde el Hub DC o escribe la contraseña':'Contraseña incorrecta'):(d.error||'Error '+r.status);if(d.meta&&d.meta.title)m=d.meta.title+': '+m;throw new Error(m)}return d})});
 }
 function diagHtml(d){
   var rows=[[d.worker,'Agente desplegado y accesible'],[d.kv,'Memoria (KV) conectada'],
@@ -726,10 +729,10 @@ function diagHtml(d){
     [d.page_id,'Página de Facebook (leads y crear campañas)'+(d.page_id?'':' — elígela en Ajustes → Conector de Meta')],[d.ai,'IA conectada ('+esc(d.model||'')+')'],[d.email,'Email (Resend) — opcional']];
   return rows.map(function(r){return '<div><span class="'+(r[0]?'ok':'ko')+'">'+(r[0]?'✓':'✗')+'</span> '+r[1]+'</div>'}).join('');
 }
-function showOnb(on){$('onb').hidden=!on;$('tabs').style.display=on?'none':'';qa('.page').forEach(function(p){p.style.display=on?'none':''})}
+function showOnb(on){$('onb').hidden=!on;if(on&&SAME){$('cUrl').parentNode.hidden=true;$('cDemo').hidden=false;$('cDiag').innerHTML='<div class="muted">Ábrelo desde el <a href="https://dc-hub-lilac.vercel.app/" target="_top">Hub DC</a> para entrar sin contraseña.</div>'}$('tabs').style.display=on?'none':'';qa('.page').forEach(function(p){p.style.display=on?'none':''})}
 $('cGo').onclick=function(){
-  var url=$('cUrl').value.trim(),sec=$('cSec').value.trim(),b=this;
-  if(!/^https?:\/\//.test(url)){toast('Pega la URL completa (https://...)',1);return}
+  var url=SAME?'':$('cUrl').value.trim(),sec=$('cSec').value.trim(),b=this;
+  if(!SAME&&!/^https?:\/\//.test(url)){toast('Pega la URL completa (https://...)',1);return}
   DEMO=false;setCfg({url:url,secret:sec});busy(b,true,'Comprobando…');
   api('/diag').then(function(d){$('cDiag').innerHTML=diagHtml(d);if(d.meta_token&&!d.meta_error){showOnb(false);load().then(function(){if(!d.account_id){go('aj');findConn();toast('Elige tu cuenta publicitaria y tu página')}})}})
   .catch(function(e){$('cDiag').innerHTML='<div class="ko">✗ '+esc(e.message)+'</div><div class="muted">Revisa la URL, que el Worker esté desplegado y la contraseña.</div>'})
@@ -745,7 +748,15 @@ function go(p){qa('.tab').forEach(function(x){x.classList.toggle('on',x.dataset.
 qa('.tab').forEach(function(t){t.onclick=function(){go(t.dataset.p)}});
 
 /* ── Carga ── */
-function load(){return api('/state').then(function(s){STATE=s;render();loadLeads(true);loadComp(true)}).catch(function(e){toast(e.message,1)})}
+var PULSED=0;
+function load(){return api('/state').then(function(s){STATE=s;render();loadLeads(true);loadComp(true);autoPulse()}).catch(function(e){toast(e.message,1)})}
+// Si la vigilancia lleva más de 1 h sin pasar (p. ej. en el plan gratuito de Vercel solo hay un cron al día), la lanza al abrir el panel
+function autoPulse(){
+  var A=STATE&&STATE.alerts,c=STATE&&STATE.settings;
+  if(DEMO||PULSED||!c||c.mode==='off'||!c.accountId&&!(STATE.report))return;
+  if(A&&A.ts&&Date.now()-A.ts<3600000)return;
+  PULSED=1;api('/pulse',{}).then(function(r){if(r&&!r.skipped)return api('/state').then(function(s){STATE=s;render()})}).catch(function(){});
+}
 function loadLeads(quiet){return api('/leads').then(function(d){LEADS=d;renderLeads();renderWeek();renderSedes()}).catch(function(e){if(!quiet)toast(e.message,1)})}
 function loadComp(quiet){return api('/competition').then(function(d){COMP=d;renderComp();renderSedeDetail()}).catch(function(e){if(!quiet)toast(e.message,1)})}
 function sedes(){return (STATE&&STATE.settings.sedes)||[]}
@@ -1388,12 +1399,17 @@ function demoApi(path,body){
 /* ── Arranque ── */
 (function init(){
   var c=cfg();
-  if(/[?&]demo\b/.test(location.search))DEMO=true;
-  if(!c.url)DEMO=true; // sin agente conectado: demo directa, con la banda para conectarlo
-  if(c.url)$('cUrl').value=c.url;
-  showOnb(false);
-  var t=ls('dc_ads_tab');if(t&&document.querySelector('.tab[data-p="'+t+'"]'))go(t);
-  load();
+  function start(){
+    if(/[?&]demo\b/.test(location.search))DEMO=true;
+    if(!c.url&&!SAME)DEMO=true; // sin agente conectado: demo directa, con la banda para conectarlo
+    if(c.url)$('cUrl').value=c.url;
+    showOnb(false);
+    var t=ls('dc_ads_tab');if(t&&document.querySelector('.tab[data-p="'+t+'"]'))go(t);
+    load();
+  }
+  if(c.url||!/^https:/.test(location.protocol)){start();return}
+  // ¿Hay un agente en este mismo dominio (Vercel)? Si sí, se usa sin pedir URL
+  fetch('/api/health',{credentials:'include'}).then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.agent==='meta-ads')SAME='/api'}).catch(function(){}).then(start);
 })();
 })();
 </script>
