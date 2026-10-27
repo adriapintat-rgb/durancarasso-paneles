@@ -313,6 +313,55 @@ input[type=checkbox],input[type=range]{accent-color:var(--brand)}
 .toast.err{background:var(--red)}
 #wRes .est:has(.ok){background:color-mix(in srgb,var(--green) 12%,var(--surface))!important}
 #wRes .est:has(.ko){background:color-mix(in srgb,var(--red) 12%,var(--surface))!important}
+.btn,.sd{transition:none}
+
+/* v2 · Vigilancia, movimientos e inversión */
+.watch{display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:.85rem;color:var(--muted);margin-top:10px}
+.watch .live{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:6px}
+.watch .live.off{background:var(--line-2)}
+.alerts{display:grid;gap:8px;margin-top:16px}
+.alert{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:12px;padding:10px 12px;background:var(--surface);font-size:.92rem}
+.alert.red{border-left-color:var(--red)}
+.alert .t{flex:1}
+.alert small{color:var(--muted);white-space:nowrap}
+.kpi svg.spark{display:block;width:100%;height:26px;margin-top:8px}
+.kpi svg.spark polyline{fill:none;stroke:var(--brand);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.moves{display:grid;gap:8px}
+.mv{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start;border:1px solid var(--line);border-radius:12px;padding:11px 13px;background:var(--surface);font-size:.93rem}
+.mv .ar{font-weight:700;min-width:52px;text-align:center;border-radius:8px;padding:2px 6px;font-size:.8rem;font-variant-numeric:tabular-nums}
+.mv .ar.good{color:var(--green);background:color-mix(in srgb,var(--green) 11%,var(--surface))}
+.mv .ar.bad{color:var(--red);background:color-mix(in srgb,var(--red) 11%,var(--surface))}
+@media(max-width:520px){.mv{grid-template-columns:auto 1fr}.mv .tag{grid-column:2}}
+.invest{border:1px solid var(--brand-line);background:var(--brand-soft);border-radius:var(--r);padding:14px 16px;font-size:.95rem;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.invest p{flex:1;min-width:220px}
+.invest b{color:var(--brand)}
+.pace .barbig{height:12px;background:var(--line);border-radius:6px;position:relative;margin:14px 0 6px}
+.pace .barbig i{display:block;height:100%;background:var(--brand);border-radius:6px}
+.pace .barbig i.over{background:var(--red)}
+.pace .barbig em{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink)}
+.hbar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;width:90px;display:inline-block;vertical-align:middle;margin-left:8px}
+.hbar i{display:block;height:100%;background:var(--brand-line)}
+.hbar.rec i{background:var(--brand)}
+.tbl td .up,.tbl td .down{font-weight:600}
+.simrow{display:grid;grid-template-columns:1fr auto;gap:6px 14px;align-items:center;font-size:.9rem}
+/* Creatividades */
+.crs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.cr{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);overflow:hidden;display:flex;flex-direction:column}
+.cr .th{aspect-ratio:1.7/1;background:var(--surface-2) center/cover no-repeat;position:relative;display:flex;align-items:center;justify-content:center;color:var(--muted);font:500 1.4rem var(--serif)}
+.cr .th .tag{position:absolute;left:8px;top:8px;background:var(--surface)}
+.cr .th.none{aspect-ratio:auto;height:64px;font-size:1.1rem}
+.cr .bd{padding:10px 12px 12px;display:grid;gap:8px;font-size:.88rem}
+.cr .nm{font-weight:600;color:var(--ink);word-break:break-word;line-height:1.3}
+.cr .st{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;text-align:center;border-top:1px solid var(--line);padding-top:8px}
+.cr .st b{display:block;font:500 1.1rem/1.2 var(--serif);color:var(--brand)}
+.cr .st small{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+/* Conector y demo */
+.perm{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:4px 14px;font-size:.88rem;margin-top:10px}
+.demo-bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:#fbf0da;color:#8a5a00;border-radius:12px;padding:10px 14px;font-size:.9rem;margin-bottom:18px}
+.demo-bar .btn{min-height:36px}
+:root[data-theme="dark"] .demo-bar{background:#33270f;color:#f0c674}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .demo-bar{background:#33270f;color:#f0c674}}
+.chart .grid line{stroke:var(--line);stroke-width:1;vector-effect:non-scaling-stroke}
 </style>
 </head>
 <body>
@@ -326,32 +375,34 @@ input[type=checkbox],input[type=range]{accent-color:var(--brand)}
     <div class="dc-acciones">
       <span id="modePill" class="pill" hidden></span>
       <button type="button" class="dc-tema" id="themeBtn">Modo oscuro</button>
-      <span class="dc-version" title="Versión del panel Paid Media">v1.0</span>
+      <span class="dc-version" title="Versión del panel Paid Media">v2.0</span>
     </div>
   </header>
   <nav class="tabs" id="tabs">
-    <button class="tab on" data-p="res">🎯 Resumen</button>
-    <button class="tab" data-p="plan">🛠️ Plan<span class="bdg" id="bPlan" hidden></span></button>
-    <button class="tab" data-p="ads">✍️ Anuncios</button>
-    <button class="tab" data-p="leads">📲 Leads<span class="bdg" id="bLeads" hidden></span></button>
-    <button class="tab" data-p="comp">🔍 Competencia</button>
-    <button class="tab" data-p="sede">📍 Sedes</button>
-    <button class="tab" data-p="chat">🤖 Asistente</button>
-    <button class="tab" data-p="aj">⚙️ Ajustes</button>
+    <button class="tab on" data-p="res">Resumen<span class="bdg" id="bAl" hidden></span></button>
+    <button class="tab" data-p="plan">Plan<span class="bdg" id="bPlan" hidden></span></button>
+    <button class="tab" data-p="inv">Inversión</button>
+    <button class="tab" data-p="ads">Anuncios</button>
+    <button class="tab" data-p="leads">Leads<span class="bdg" id="bLeads" hidden></span></button>
+    <button class="tab" data-p="comp">Competencia</button>
+    <button class="tab" data-p="sede">Sedes</button>
+    <button class="tab" data-p="chat">Asistente</button>
+    <button class="tab" data-p="aj">Ajustes</button>
   </nav>
 </div>
 
 <main>
+  <div class="demo-bar" id="demoBar" hidden><span>Modo demo: datos de ejemplo, no toca tu cuenta.</span><span class="sp"></span><button class="btn btn-s btn-sm" id="demoConnect">Conectar mi agente</button></div>
   <!-- Conexión / onboarding -->
   <section id="onb" class="onb" hidden>
-    <h1>El panel de control de tu publicidad en Instagram y Facebook</h1>
-    <p class="muted">Como el Agente Google, pero para anuncios: cada mañana revisa tus campañas por sede, te dice qué hacer (y lo hace por ti con un clic), te prepara los anuncios, te trae los leads para escribirles por WhatsApp y vigila a la competencia.</p>
+    <h1>Tu media buyer de Meta Ads, trabajando cada hora</h1>
+    <p class="muted">Vigila Instagram y Facebook cada hora, analiza cada mañana qué ha subido o bajado y por qué, decide dónde rinde más el próximo euro y lo ejecuta por ti dentro de tus límites. Te trae los leads al momento y aprende de lo que funciona.</p>
     <ul>
-      <li>🎯 Objetivos por sede con ✓/✗ y meta concreta</li>
-      <li>🛠️ Plan de acción con pasos: ⚡ Hacerlo ya · ✅ Hecho · 🔄 Otra · ❌ No me sirve</li>
-      <li>✍️ Anuncios listos: 📋 Copiar · ✏️ Ajustar con IA · 🚀 Lanzar</li>
-      <li>📲 Leads con WhatsApp en un toque y calidad 👍/👎</li>
-      <li>🔍 Competencia de cada zona · 🤖 Asistente con tus datos</li>
+      <li>✓ Vigilancia cada hora: cuenta, anuncios rechazados, gasto disparado y leads nuevos al momento</li>
+      <li>✓ Qué ha cambiado y por qué: subasta, clics o conversión</li>
+      <li>✓ Dónde invertir: reparto óptimo entre sedes, ritmo del mes y ubicaciones</li>
+      <li>✓ Plan con pasos y «Hacerlo ya»; todo se puede deshacer</li>
+      <li>✓ Anuncios listos, ranking de creatividades, leads por WhatsApp y competencia</li>
     </ul>
     <div class="card grid">
       <div><label>URL del agente</label><input id="cUrl" placeholder="https://dc-ads-agent.tu-usuario.workers.dev"></div>
@@ -378,22 +429,30 @@ input[type=checkbox],input[type=range]{accent-color:var(--brand)}
           <div class="headline" id="headline"></div>
           <div class="summary" id="summary"></div>
           <div class="meta"><span id="lastRun"></span><button class="btn btn-s btn-sm" data-run>Analizar ahora</button><label class="check" style="margin:0;font-size:12px;color:var(--sub)"><input type="checkbox" id="runMail"> enviar resumen por email</label></div>
+          <div class="watch" id="watch"></div>
         </div>
       </div>
+      <div class="alerts" id="alerts"></div>
       <div class="week" id="week"></div>
 
-      <h2>🎯 Objetivos por sede <span class="aux">últimos 7 días · toca una sede para ver el detalle</span></h2>
-      <div class="sedes" id="sedes"></div>
-
-      <h2>Cuenta completa</h2>
+      <h2>Cuenta · últimos 7 días</h2>
       <div class="kpis" id="kpis"></div>
+
+      <h2>Qué ha cambiado y por qué <span class="aux">esta semana frente a la anterior</span></h2>
+      <div class="moves" id="moves"></div>
+
+      <h2>Dónde invertir</h2>
+      <div class="invest" id="investBox"></div>
+
+      <h2>Objetivos por sede <span class="aux">toca una sede para ver el detalle</span></h2>
+      <div class="sedes" id="sedes"></div>
 
       <h2>Diagnóstico</h2>
       <ul class="diag" id="diag"></ul>
       <p class="focus" id="focus"></p>
 
       <h2>Tendencia 30 días</h2>
-      <div class="chart"><div class="legend"><span><i style="background:rgba(13,53,80,.22)"></i>Inversión diaria</span><span><i style="background:var(--gold)"></i><span id="lgRes">Resultados</span></span></div><div id="chart"></div></div>
+      <div class="chart"><div class="legend"><span><i style="background:var(--brand-line)"></i>Inversión diaria</span><span><i style="background:var(--brand)"></i><span id="lgRes">Resultados</span></span></div><div id="chart"></div></div>
     </div>
   </section>
 
@@ -408,8 +467,37 @@ input[type=checkbox],input[type=range]{accent-color:var(--brand)}
     <ul class="learn" id="learn"></ul>
   </section>
 
+  <!-- 💶 INVERSIÓN -->
+  <section class="page" id="p-inv">
+    <div id="invEmpty" class="empty" hidden>Pulsa "Analizar ahora" en Resumen para ver el reparto y el ritmo del mes.</div>
+    <div id="invBody">
+      <h2>Ritmo del mes</h2>
+      <div class="card pace" id="pace"></div>
+
+      <h2>Reparto recomendado entre sedes <span class="aux">mismo dinero, más resultados</span></h2>
+      <p class="muted" style="margin-bottom:10px">Cada sede rinde menos cuanto más dinero le metes (rendimientos decrecientes). El agente calcula con tus datos, y con la calidad de los leads que marca el equipo, dónde sale más barato el siguiente resultado y reparte el presupuesto para que cueste lo mismo en todas.</p>
+      <div class="tblw"><table class="tbl" id="alloc"></table></div>
+      <div class="row" style="margin-top:12px"><button class="btn btn-p" id="rebalance">Acercarme al reparto (un paso)</button><span class="muted" id="rebNote"></span></div>
+
+      <h2>Simulador <span class="aux">¿qué pasa si invierto más o menos?</span></h2>
+      <div class="card sim">
+        <div class="range"><span class="bignum" id="simV">— €/día</span><input type="range" id="simR" min="5" max="300" step="5"></div>
+        <label class="check" style="margin-top:8px"><input type="checkbox" id="simIdle"> Incluir las sedes sin campaña</label>
+        <div class="est" id="simOut"></div>
+      </div>
+
+      <h2>Dónde se ven tus anuncios <span class="aux">últimos 7 días</span></h2>
+      <div class="tblw"><table class="tbl" id="places"></table></div>
+    </div>
+  </section>
+
   <!-- ✍️ ANUNCIOS -->
   <section class="page" id="p-ads">
+    <h2>Creatividades en marcha <span class="aux">ordenadas por rendimiento · 7 días</span></h2>
+    <div class="chips" id="crF" style="margin-bottom:12px"></div>
+    <div class="crs" id="crs"></div>
+
+    <h2>Anuncios listos para lanzar</h2>
     <p class="muted" style="margin-bottom:12px">Un anuncio por sede, escrito con lo que ya te funciona y diferenciado de la competencia. <b>🚀 Lanzar</b> lo publica junto a tu mejor anuncio de esa sede (misma foto y público), así compiten y Meta se queda con el ganador.</p>
     <div class="ads" id="adsReady"></div>
 
@@ -517,6 +605,13 @@ input[type=checkbox],input[type=range]{accent-color:var(--brand)}
 
   <!-- ⚙️ AJUSTES -->
   <section class="page" id="p-aj">
+    <h2>Conector de Meta</h2>
+    <div class="card" id="conn">
+      <p class="muted">Elige la cuenta publicitaria, la página de Facebook (formularios y leads) y la cuenta de Instagram con las que trabaja el agente.</p>
+      <div class="row" style="margin-top:10px"><button class="btn btn-s" id="connFind">Buscar mis cuentas</button></div>
+      <div id="connBody"></div>
+    </div>
+
     <h2>Modo de trabajo</h2>
     <div class="seg" id="sMode">
       <button data-v="off"><b>Apagado</b><span>No hace nada</span></button>
@@ -546,6 +641,7 @@ input[type=checkbox],input[type=range]{accent-color:var(--brand)}
       <div><label>Frecuencia máxima</label><input id="sFreq" type="number" min="1.5" max="10" step="0.5"></div>
       <div><label>CTR mínimo (%)</label><input id="sCtr" type="number" min="0.1" max="5" step="0.1"></div>
       <div><label>Pausar si gasta N× objetivo sin resultados</label><input id="sKill" type="number" min="1.5" max="6" step="0.5"></div>
+      <div><label>Presupuesto del mes (€, 0 = sin presupuesto)</label><input id="sMonth" type="number" min="0" step="50"></div>
     </div>
 
     <h2>WhatsApp a leads</h2>
@@ -557,7 +653,10 @@ input[type=checkbox],input[type=range]{accent-color:var(--brand)}
     <h2>Emails</h2>
     <div class="grid g2">
       <div><label>Destinatarios (separados por coma)</label><input id="sMails" placeholder="tu@email.com, director@email.com"></div>
-      <label class="check" style="align-self:end"><input type="checkbox" id="sDaily"> Aviso diario solo si hay algo urgente (el resumen semanal llega siempre los lunes con el botón al panel)</label>
+      <div class="grid" style="align-content:end;gap:8px">
+        <label class="check"><input type="checkbox" id="sLeadMail"> Email al momento con cada lead nuevo (nombre y sede; el teléfono solo se ve en el panel)</label>
+        <label class="check"><input type="checkbox" id="sDaily"> Aviso solo si hay algo urgente (el resumen semanal llega siempre los lunes)</label>
+      </div>
     </div>
 
     <h2>Tu negocio</h2>
@@ -599,8 +698,10 @@ function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorag
 
 var LABEL={leads:'leads',traffic:'visitas',messages:'conversaciones',sales:'ventas',reach:'mil personas'};
 var LABEL1={leads:'lead',traffic:'visita',messages:'conversación',sales:'venta',reach:'mil personas'};
-var KIND={PAUSE:'Lo hace el agente',ACTIVATE:'Lo hace el agente',SCALE_UP:'Lo hace el agente',SCALE_DOWN:'Lo hace el agente',BUDGET:'Lo hace el agente',NEW_AD:'Lo hace el agente',LAUNCH:'Crear en el panel',MANUAL:'Tarea para ti',ALERT:'Aviso',CREATE:'Campaña nueva'};
-var EXEC=['PAUSE','ACTIVATE','SCALE_UP','SCALE_DOWN','BUDGET','NEW_AD'];
+var KIND={PAUSE:'Lo hace el agente',ACTIVATE:'Lo hace el agente',SCALE_UP:'Lo hace el agente',SCALE_DOWN:'Lo hace el agente',BUDGET:'Lo hace el agente',NEW_AD:'Lo hace el agente',REBALANCE:'Lo hace el agente',LAUNCH:'Crear en el panel',MANUAL:'Tarea para ti',MANUAL_RULE:'Tarea para ti',ALERT:'Aviso',CREATE:'Campaña nueva'};
+var EXEC=['PAUSE','ACTIVATE','SCALE_UP','SCALE_DOWN','BUDGET','NEW_AD','REBALANCE'];
+var CAUSE={cpm:'Subasta',ctr:'Clics',cvr:'Conversión',spend:'Inversión','':'Resultados'};
+var PLACE={facebook:'Facebook',instagram:'Instagram',audience_network:'Audience Network',messenger:'Messenger',threads:'Threads'};
 var STATUS={pending:'Pendiente',done:'Hecho',failed:'No se pudo',rejected:'No me sirve',undone:'Deshecho',expired:'Caducado',replaced:'Cambiada',info:'Aviso'};
 var Q={bueno:'👍 Bueno',malo:'👎 Malo',visita:'🏠 Visita',cliente:'🤝 Cliente'};
 
@@ -622,7 +723,7 @@ function diagHtml(d){
   var rows=[[d.worker,'Agente desplegado y accesible'],[d.kv,'Memoria (KV) conectada'],
     [d.meta_token&&!d.meta_error,'Token de Meta válido'+(d.meta_user?' ('+esc(d.meta_user)+')':'')+(d.meta_error?' — '+esc(d.meta_error):'')],
     [d.account_id&&!d.account_error,'Cuenta publicitaria'+(d.account?' '+esc(d.account):'')+(d.account_error?' — '+esc(d.account_error):'')+(d.account_ok===false?' — no está activa (revisa facturación)':'')],
-    [d.page_id,'Página de Facebook (leads y crear campañas)'],[d.ai,'IA conectada ('+esc(d.model||'')+')'],[d.email,'Email (Resend) — opcional']];
+    [d.page_id,'Página de Facebook (leads y crear campañas)'+(d.page_id?'':' — elígela en Ajustes → Conector de Meta')],[d.ai,'IA conectada ('+esc(d.model||'')+')'],[d.email,'Email (Resend) — opcional']];
   return rows.map(function(r){return '<div><span class="'+(r[0]?'ok':'ko')+'">'+(r[0]?'✓':'✗')+'</span> '+r[1]+'</div>'}).join('');
 }
 function showOnb(on){$('onb').hidden=!on;$('tabs').style.display=on?'none':'';qa('.page').forEach(function(p){p.style.display=on?'none':''})}
@@ -630,20 +731,21 @@ $('cGo').onclick=function(){
   var url=$('cUrl').value.trim(),sec=$('cSec').value.trim(),b=this;
   if(!/^https?:\/\//.test(url)){toast('Pega la URL completa (https://...)',1);return}
   DEMO=false;setCfg({url:url,secret:sec});busy(b,true,'Comprobando…');
-  api('/diag').then(function(d){$('cDiag').innerHTML=diagHtml(d);if(d.meta_token&&d.account_id){showOnb(false);load()}})
+  api('/diag').then(function(d){$('cDiag').innerHTML=diagHtml(d);if(d.meta_token&&!d.meta_error){showOnb(false);load().then(function(){if(!d.account_id){go('aj');findConn();toast('Elige tu cuenta publicitaria y tu página')}})}})
   .catch(function(e){$('cDiag').innerHTML='<div class="ko">✗ '+esc(e.message)+'</div><div class="muted">Revisa la URL, que el Worker esté desplegado y la contraseña.</div>'})
   .then(function(){busy(b,false)});
 };
 $('cDemo').onclick=function(){DEMO=true;showOnb(false);load()};
+$('demoConnect').onclick=function(){DEMO=false;STATE=null;$('demoBar').hidden=true;showOnb(true)};
 $('sOut').onclick=function(){if(!confirm('¿Desconectar este navegador del agente?'))return;setCfg({});DEMO=false;STATE=null;showOnb(true)};
 $('sTest').onclick=function(){var b=this;busy(b,true);api('/diag').then(function(d){$('sDiag').innerHTML=diagHtml(d)}).catch(function(e){$('sDiag').innerHTML='<div class="ko">✗ '+esc(e.message)+'</div>'}).then(function(){busy(b,false)})};
 
 /* ── Tabs ── */
-function go(p){qa('.tab').forEach(function(x){x.classList.toggle('on',x.dataset.p===p)});qa('.page').forEach(function(x){x.classList.toggle('on',x.id==='p-'+p)});ls('dc_ads_tab',p);if(p==='ads')loadForms();if(p==='leads'&&!LEADS)loadLeads();if(p==='comp'&&!COMP)loadComp();window.scrollTo(0,0)}
+function go(p){qa('.tab').forEach(function(x){x.classList.toggle('on',x.dataset.p===p)});qa('.page').forEach(function(x){x.classList.toggle('on',x.id==='p-'+p)});ls('dc_ads_tab',p);if(p==='ads')loadForms();if(p==='inv')renderInv();if(p==='leads'&&!LEADS)loadLeads();if(p==='comp'&&!COMP)loadComp();window.scrollTo(0,0)}
 qa('.tab').forEach(function(t){t.onclick=function(){go(t.dataset.p)}});
 
 /* ── Carga ── */
-function load(){return api('/state').then(function(s){STATE=s;render();loadLeads(true);loadComp(true)}).catch(function(e){if(DEMO)return toast(e.message,1);DEMO=true;showOnb(false);toast('El motor no responde: te enseño la demo',1);return load()})}
+function load(){return api('/state').then(function(s){STATE=s;render();loadLeads(true);loadComp(true)}).catch(function(e){toast(e.message,1)})}
 function loadLeads(quiet){return api('/leads').then(function(d){LEADS=d;renderLeads();renderWeek();renderSedes()}).catch(function(e){if(!quiet)toast(e.message,1)})}
 function loadComp(quiet){return api('/competition').then(function(d){COMP=d;renderComp();renderSedeDetail()}).catch(function(e){if(!quiet)toast(e.message,1)})}
 function sedes(){return (STATE&&STATE.settings.sedes)||[]}
@@ -654,8 +756,9 @@ function render(){
   var m=s.settings.mode,pill=$('modePill');pill.hidden=false;
   pill.className='pill'+(DEMO?' demo':m==='autopiloto'?' auto':m==='off'?' off':'');
   pill.textContent=(DEMO?'Demo · ':'')+(m==='autopiloto'?'● Autopiloto':m==='off'?'Apagado':'● Copiloto');
+  $('demoBar').hidden=!DEMO;
   if(!F.sede&&sedes()[0])F.sede=sedes()[0].id;
-  renderRes();renderPlan();renderAds();renderSedeDetail();renderAj();wEstimate();renderSugg();
+  renderRes();renderPlan();renderInv();renderAds();renderCreatives();renderSedeDetail();renderAj();wEstimate();renderSugg();renderWatch();
 }
 
 /* ── 🎯 RESUMEN ── */
@@ -676,17 +779,41 @@ function renderRes(){
   $('lastRun').textContent='Actualizado '+ago(r.ts)+(r.aiError?' · decidido con reglas (IA no disponible)':'');
   renderWeek();renderSedes();
   var cpaCls=k.cur.cpa!=null&&T?(k.cur.cpa<=T?'up':k.cur.cpa<=T*1.3?'':'down'):'';
+  var D=(r.daily||[]).slice(-14),dSp=D.map(function(x){return x.spend||0}),dRes=D.map(function(x){return x.res||0}),dCpa=D.map(function(x){return x.res?x.spend/x.res:null}),dCtr=D.map(function(x){return x.ctr});
   $('kpis').innerHTML=[
-    ['Invertido',eur(k.cur.spendAll,0),delta(k.cur.spendAll,k.prev.spendAll),'Lo gastado esta semana.'],
-    [L,num(k.cur.res,0),delta(k.cur.res,k.prev.res),'Resultados conseguidos.'],
-    ['Coste por '+L1,'<span class="'+cpaCls+'">'+eur(k.cur.cpa)+'</span>',delta(k.cur.cpa,k.prev.cpa,true),'Objetivo: '+eur(T)+(r.autoT&&r.autoT[r.mainObj]?' (automático)':'')],
-    ['CTR',num(k.cur.ctr,2)+'%',delta(k.cur.ctr,k.prev.ctr),'De cada 100 que lo ven, cuántos hacen clic. Sano: >0,8%.'],
-    ['Frecuencia',num(k.cur.freq,1),'','Veces que lo ve cada persona. Más de 3,5 cansa.']
-  ].map(function(x){return '<div class="kpi"><div class="v">'+x[1]+'</div><div class="l">'+esc(x[0])+'</div><div class="d">'+x[2]+'</div><div class="h">'+x[3]+'</div></div>'}).join('');
+    ['Invertido',eur(k.cur.spendAll,0),delta(k.cur.spendAll,k.prev.spendAll),'Lo gastado esta semana.',dSp],
+    [L,num(k.cur.res,0),delta(k.cur.res,k.prev.res),'Resultados conseguidos.',dRes],
+    ['Coste por '+L1,'<span class="'+cpaCls+'">'+eur(k.cur.cpa)+'</span>',delta(k.cur.cpa,k.prev.cpa,true),'Objetivo: '+eur(T)+(r.autoT&&r.autoT[r.mainObj]?' (automático)':''),dCpa],
+    ['CTR',num(k.cur.ctr,2)+'%',delta(k.cur.ctr,k.prev.ctr),'De cada 100 que lo ven, cuántos hacen clic. Sano: >0,8%.',dCtr],
+    ['Frecuencia',num(k.cur.freq,1),'','Veces que lo ve cada persona. Más de 3,5 cansa.',null]
+  ].map(function(x){return '<div class="kpi"><div class="v">'+x[1]+'</div><div class="l">'+esc(x[0])+'</div><div class="d">'+x[2]+'</div><div class="h">'+x[3]+'</div>'+spark(x[4])+'</div>'}).join('');
+  var M=r.moves||[];
+  $('moves').innerHTML=M.length?M.map(function(m){var lbl=m.metric==='freq'?'Fatiga':CAUSE[m.cause]||'';return '<div class="mv"><span class="ar '+(m.good?'good':'bad')+'">'+(m.pct>0?'▲':'▼')+Math.abs(m.pct)+'%</span><span>'+esc(m.text)+'</span>'+(lbl?'<span class="tag">'+esc(lbl)+'</span>':'')+'</div>'}).join(''):'<div class="muted">Semana estable: nada ha cambiado lo suficiente como para preocuparse.</div>';
+  var inv=(r.ai&&r.ai.invest)||(r.allocation&&r.allocation.text)||'';
+  $('investBox').innerHTML='<p>'+(inv?esc(inv):'Aún no hay datos suficientes para recomendar un reparto.')+'</p><button class="btn btn-s btn-sm" data-go="inv">Ver reparto y simulador</button>';
+  renderAlerts();
   $('lgRes').textContent=L.charAt(0).toUpperCase()+L.slice(1);
   $('chart').innerHTML=chart(r.daily||[],'d',L);
   $('diag').innerHTML=((r.ai&&r.ai.diagnosis)||[]).map(function(d){return '<li>'+esc(d)+'</li>'}).join('')||'<li class="muted">Sin incidencias.</li>';
   $('focus').innerHTML=r.ai&&r.ai.focus?'<b>Foco próxima semana:</b> '+esc(r.ai.focus):'';
+}
+function spark(a){
+  if(!a)return '';var v=a.filter(function(x){return x!=null&&isFinite(x)});if(v.length<3)return '';
+  var mx=Math.max.apply(null,v),mn=Math.min.apply(null,v),rg=mx-mn||1,n=a.length-1;
+  var pts=a.map(function(x,i){return x==null||!isFinite(x)?null:(i/n*100).toFixed(1)+','+(24-(x-mn)/rg*22).toFixed(1)}).filter(Boolean).join(' ');
+  return '<svg class="spark" viewBox="0 0 100 26" preserveAspectRatio="none" aria-hidden="true"><polyline points="'+pts+'"/></svg>';
+}
+function renderWatch(){
+  var A=STATE&&STATE.alerts,t=A&&A.today,el=$('watch');if(!el)return;
+  if(!A||!A.ts){el.innerHTML='<span><span class="live off"></span>Vigilancia: aún no ha hecho ninguna comprobación (se hace cada hora).</span><button class="btn-link" data-pulse>Comprobar ahora</button>';return}
+  var L=t?LABEL[t.obj]||'resultados':'';
+  el.innerHTML='<span><span class="live"></span>Vigilancia '+ago(A.ts)+'</span>'+(t?'<span>Hoy: <b>'+eur(t.spend,0)+'</b>'+(t.budget?' de '+eur(t.budget,0)+'/día':'')+' · <b>'+num(t.res,0)+'</b> '+esc(L)+'</span>':'')+'<button class="btn-link" data-pulse>Comprobar ahora</button>';
+}
+function renderAlerts(){
+  var A=(STATE&&STATE.alerts&&STATE.alerts.items||[]).filter(function(a){return !a.seen}),E=STATE&&STATE.lastError;
+  var h=A.slice(0,6).map(function(a){return '<div class="alert '+(a.level==='red'?'red':'')+'"><span class="t">'+esc(a.text)+'</span><small>'+ago(a.ts)+'</small><button class="btn-link" data-alseen="'+esc(a.id)+'">Visto</button></div>'}).join('');
+  if(E&&E.ts&&Date.now()-E.ts<2*86400000)h+='<div class="alert red"><span class="t">La última '+esc(E.job||'ejecución')+' automática falló: '+esc(E.error)+'</span><small>'+ago(E.ts)+'</small></div>';
+  $('alerts').innerHTML=h;$('bAl').hidden=!A.length;$('bAl').textContent=A.length;
 }
 function renderWeek(){
   var r=rep();if(!r)return;
@@ -716,11 +843,14 @@ function chart(d,key,L){
   var bars=d.map(function(x,i){var h=(H-P*2)*sp(x)/ms;return '<rect x="'+(P+i*bw+1)+'" y="'+(H-P-h)+'" width="'+Math.max(1,bw-2)+'" height="'+h+'" rx="2" fill="rgba(13,53,80,.22)"><title>'+esc(x[key])+': '+eur(sp(x))+' · '+num(x.res)+' '+esc(L)+'</title></rect>'}).join('');
   var pts=d.map(function(x,i){return (P+i*bw+bw/2)+','+(H-P-(H-P*2)*(x.res||0)/mr)}).join(' ');
   var lab=function(s){var p=String(s).split('-');return p[2]+'/'+p[1]};
-  return '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" role="img" aria-label="Inversión y resultados">'+bars+'<polyline points="'+pts+'" fill="none" stroke="#B8922A" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>'+
+  var grid='<g class="grid">'+[0.25,0.5,0.75].map(function(f){var y=(P+(H-P*2)*f).toFixed(1);return '<line x1="0" x2="'+W+'" y1="'+y+'" y2="'+y+'"/>'}).join('')+'</g>';
+  return '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" role="img" aria-label="Inversión y resultados">'+grid+bars+'<polyline points="'+pts+'" fill="none" stroke="#B8922A" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>'+
     '<div class="muted" style="display:flex;justify-content:space-between;font-size:11px;padding:2px 4px 0"><span>'+lab(d[0][key])+'</span><span>máx. '+eur(ms,0)+' · '+num(mr)+' '+esc(L)+'</span><span>'+lab(d[d.length-1][key])+'</span></div>';
 }
 document.addEventListener('click',function(e){
-  var t=e.target.closest('[data-go],[data-sede],[data-run],[data-ap],[data-tk],[data-un],[data-q],[data-cp],[data-adj],[data-rw],[data-lc],[data-wz],[data-lq],[data-lwa],[data-ask]');if(!t)return;
+  var t=e.target.closest('[data-go],[data-sede],[data-run],[data-ap],[data-tk],[data-un],[data-q],[data-cp],[data-adj],[data-rw],[data-lc],[data-wz],[data-lq],[data-lwa],[data-ask],[data-pulse],[data-alseen]');if(!t)return;
+  if(t.dataset.pulse!==undefined){pulseNow(t);return}
+  if(t.dataset.alseen){api('/alert',{id:t.dataset.alseen}).then(load).catch(function(e){toast(e.message,1)});return}
   if(t.dataset.go){go(t.dataset.go);return}
   if(t.dataset.sede&&t.classList.contains('sd')){F.sede=t.dataset.sede;renderSedeDetail();go('sede');return}
   if(t.dataset.run!==undefined){run(t);return}
@@ -741,6 +871,11 @@ function act(path,body,btn){
   busy(btn,true);
   api(path,body).then(function(r){var a=r.action;toast(a.status==='done'?'Hecho: '+(a.result||''):a.status==='failed'?'No se pudo: '+a.error:a.status==='undone'?'Deshecho':'Listo',a.status==='failed');return load()})
   .catch(function(e){toast(e.message,1);busy(btn,false)});
+}
+function pulseNow(btn){
+  busy(btn,true,'Comprobando…');
+  api('/pulse',{}).then(function(r){toast(r.skipped?'Sin conectar: '+r.skipped:(r.fresh&&r.fresh.length?r.fresh.length+' aviso'+(r.fresh.length>1?'s':'')+' nuevo'+(r.fresh.length>1?'s':''):'Todo en orden')+(r.newLeads?' · '+r.newLeads+' lead'+(r.newLeads>1?'s':'')+' nuevo'+(r.newLeads>1?'s':''):''));return load()})
+  .catch(function(e){toast(e.message,1)}).then(function(){busy(btn,false)});
 }
 function run(btn){
   var t0=Date.now(),iv;busy(btn,true,'Analizando… 0 s');
@@ -769,6 +904,7 @@ function taskCard(a){
     '<span class="tag">'+esc(st==='pending'?(a.when||'esta semana'):(a.auto&&st==='done'?'Hecho automáticamente':STATUS[st]||st))+'</span></div>'+
     '<div class="ti">'+esc(a.title||a.target_name)+'</div><div>'+esc(a.why)+'</div>'+(a.impact?'<div class="i">→ '+esc(a.impact)+'</div>':'')+
     (a.pct&&(a.type==='SCALE_UP'||a.type==='SCALE_DOWN')?'<div class="i">Cambio: '+(a.type==='SCALE_DOWN'?'−':'+')+a.pct+'% del presupuesto diario de "'+esc(a.target_name)+'"</div>':'')+
+    (a.steps_api&&a.steps_api.length?'<div class="i">Cambios: '+a.steps_api.map(function(x){return esc(x.name)+' '+(x.pct>0?'+':'')+x.pct+'%'}).join(' · ')+'</div>':'')+
     (a.variant?'<div class="var">'+esc(a.variant.primary_text)+'\n<b>'+esc(a.variant.headline)+'</b> · '+esc(a.variant.description)+'</div>':'')+steps+
     (a.result&&st!=='pending'?'<div class="i">'+esc(a.result)+'</div>':'')+(a.error?'<div class="i" style="color:var(--red)">'+esc(a.error)+'</div>':'')+
     (btns?'<div class="row">'+btns+'</div>':'')+'</div>';
@@ -790,6 +926,105 @@ function task(b){
   busy(b,true,mark==='other'?'Pensando…':'');
   api('/task',{id:id,mark:mark,note:note}).then(function(r){toast(mark==='done'?'¡Hecho!':mark==='reject'?'Entendido: no te lo volverá a proponer':'Nueva propuesta: '+r.action.title);return load()})
   .catch(function(e){toast(e.message,1);busy(b,false)});
+}
+
+/* ── 💶 INVERSIÓN ── */
+var SIM=null;
+function renderInv(){
+  var r=rep();$('invEmpty').hidden=!!r;$('invBody').hidden=!r;if(!r)return;
+  var pc=r.pacing,cur=r.account&&r.account.currency,L=LABEL[r.mainObj];
+  if(pc){
+    var ref=pc.budget||pc.projected||1,pct=Math.min(100,pc.spent/ref*100),mark=Math.min(100,pc.day/pc.dim*100);
+    var st={libre:'Sin presupuesto del mes: ponlo en Ajustes y el agente vigila que no te pases.',ok:'Vas al ritmo del presupuesto.',pasa:'A este ritmo te pasarás del presupuesto.',corto:'Vas corto: te sobrará presupuesto.'}[pc.status];
+    $('pace').innerHTML='<div class="kpis">'+[[eur(pc.spent,0),'Gastado este mes'],[eur(pc.projected,0),'Previsión a fin de mes'],[pc.budget?eur(pc.budget,0):'—','Presupuesto'],[pc.recDaily!=null?eur(pc.recDaily,0):eur(pc.avgDaily,0),pc.recDaily!=null?'Al día para cuadrar':'Media diaria'],[num(pc.res,0)+' → '+num(pc.projectedRes,0),L+' del mes (previsión)']].map(function(x){return '<div class="kpi"><div class="v">'+x[0]+'</div><div class="l">'+esc(x[1])+'</div></div>'}).join('')+'</div>'+
+      '<div class="barbig"><i class="'+(pc.status==='pasa'?'over':'')+'" style="width:'+pct.toFixed(1)+'%"></i><em style="left:'+mark.toFixed(1)+'%" title="Hoy: día '+pc.day+' de '+pc.dim+'"></em></div>'+
+      '<div class="muted">Día '+pc.day+' de '+pc.dim+' · '+esc(st)+'</div>';
+  }
+  var al=r.allocation;
+  if(!al){$('alloc').innerHTML='<tr><td class="muted" style="padding:16px">Hace falta al menos una semana con resultados para calcular el reparto.</td></tr>';$('rebalance').hidden=true}
+  else{
+    var mx=Math.max.apply(null,al.rows.map(function(x){return Math.max(x.curDaily,x.recDaily,x.testDaily||0)}))||1;
+    $('alloc').innerHTML='<tr><th>Sede</th><th>Ahora €/día</th><th>Recomendado</th><th>'+esc(L)+'/sem ahora</th><th>Con el reparto</th><th>Siguiente '+esc(LABEL1[r.mainObj])+'</th><th>Calidad</th></tr>'+
+      al.rows.map(function(x){var d=x.recDaily-x.curDaily;
+        return '<tr><td><b>'+esc(x.name)+'</b>'+(!x.curDaily?' <span class="tag">sin campaña</span>':'')+'</td><td>'+eur(x.curDaily,0)+'<span class="hbar"><i style="width:'+(x.curDaily/mx*100)+'%"></i></span></td>'+
+          '<td>'+(x.curDaily?'<span class="'+(d>0.5?'up':d<-0.5?'down':'')+'">'+eur(x.recDaily,0)+'</span><span class="hbar rec"><i style="width:'+(x.recDaily/mx*100)+'%"></i></span>':'<span class="muted">prueba con '+eur(x.testDaily,0)+'</span>')+'</td>'+
+          '<td>'+num(x.resNow,1)+'</td><td>'+(x.curDaily?num(x.resRec,1):'<span class="muted">≈ '+num(x.resTest,1)+'</span>')+'</td><td>'+eur(x.nextCost)+'</td><td>'+(x.q===1?'<span class="muted">—</span>':(x.q>1?'<span class="up">mejor</span>':'<span class="down">peor</span>'))+'</td></tr>'}).join('')+
+      '<tr class="c"><td>Total</td><td>'+eur(al.totalDaily,0)+'</td><td>'+eur(al.totalDaily,0)+'</td><td>'+num(al.resNow,1)+'</td><td>'+num(al.resRec,1)+'</td><td colspan="2">'+(al.gainPct>0?'<span class="up">+'+al.gainPct+'% en leads de calidad</span>':'<span class="muted">ya está casi óptimo</span>')+'</td></tr>';
+    $('rebalance').hidden=!(al.gainPct>=3&&al.rows.filter(function(x){return x.curDaily>0}).length>1);
+    $('rebNote').textContent=al.text+' Cada paso mueve como máximo un '+((STATE&&STATE.settings.stepPct)||20)+'% por conjunto y respeta la fase de aprendizaje.';
+  }
+  if(!SIM&&al){SIM={total:Math.max(5,Math.round(al.totalDaily||30))};$('simR').max=Math.max(150,Math.round((al.totalDaily||30)*3/5)*5);$('simR').value=SIM.total}
+  simulate();
+  var P=r.placements||[],tot=P.reduce(function(a,x){return a+x.spend},0)||1,T=r.targets[r.mainObj];
+  $('places').innerHTML=P.length?'<tr><th>Ubicación</th><th>Inversión</th><th>% del gasto</th><th>'+esc(L)+'</th><th>Coste</th><th>CTR</th></tr>'+P.map(function(x){var bad=T&&x.spend>=2*T&&(!x.res||x.cpa>2.5*T);return '<tr><td><b>'+esc(PLACE[x.p]||x.p)+'</b>'+(bad?' <span class="tag red">no rinde</span>':'')+'</td><td>'+eur(x.spend,0)+'</td><td>'+Math.round(x.spend/tot*100)+'%<span class="hbar"><i style="width:'+(x.spend/tot*100)+'%"></i></span></td><td>'+num(x.res,0)+'</td><td>'+eur(x.cpa)+'</td><td>'+num(x.ctr,2)+'%</td></tr>'}).join(''):'<tr><td class="muted" style="padding:16px">Sin datos de ubicaciones todavía.</td></tr>';
+}
+function split(rows,total,floor,e){
+  e=e||((rep()&&rep().allocation)||{}).e||0.7;var out={},pool=rows.slice(),left=total;
+  for(var it=0;it<rows.length&&pool.length;it++){
+    var w=pool.map(function(r){return Math.pow(r.k*r.q,1/(1-e))}),W=w.reduce(function(a,x){return a+x},0)||1;
+    var low=pool.filter(function(r,i){return left*w[i]/W<floor});
+    if(!low.length||floor*pool.length>left){pool.forEach(function(r,i){out[r.id]=left*w[i]/W});return out}
+    low.forEach(function(r){out[r.id]=floor;left-=floor});pool=pool.filter(function(r){return low.indexOf(r)<0});
+  }
+  return out;
+}
+function simulate(){
+  var r=rep(),al=r&&r.allocation;if(!al){$('simOut').innerHTML='<span class="muted">Sin datos para simular todavía.</span>';$('simV').textContent='— €/día';return}
+  var total=+$('simR').value,e=al.e||0.7,rows=al.rows.filter(function(x){return x.curDaily>0||$('simIdle').checked});
+  $('simV').textContent=total+' €/día';
+  var sp=split(rows,total,5),res=0,L=LABEL[r.mainObj];
+  var lines=rows.map(function(x){var d=sp[x.id]||0,rr=d>0?x.k*Math.pow(d*7,e):0;res+=rr;return '<span>'+esc(x.name)+'</span><span><b>'+eur(d,0)+'</b>/día · '+num(rr,1)+' '+esc(L)+'/sem</span>'}).join('');
+  var cpa=res?total*7/res:null,diff=res-al.resNow;
+  $('simOut').innerHTML='<div style="margin-bottom:8px">Con <b>'+eur(total,0)+'/día</b> ('+eur(total*30.4,0)+'/mes) bien repartidos: <b>≈ '+num(res,1)+' '+esc(L)+' por semana</b> a '+eur(cpa)+' cada uno'+(al.resNow?' <span class="'+(diff>=0?'up':'down')+'">('+(diff>=0?'+':'')+num(diff,1)+' frente a hoy)</span>':'')+'.</div><div class="simrow">'+lines+'</div><div class="muted" style="margin-top:8px">Estimación con tus datos y rendimientos decrecientes: cuanto más subes, más caro sale cada resultado extra.</div>';
+}
+$('simR').oninput=simulate;$('simIdle').onchange=simulate;
+$('rebalance').onclick=function(){
+  var b=this;if(!confirm('El agente moverá presupuesto entre sedes (máximo '+((STATE&&STATE.settings.stepPct)||20)+'% por conjunto). Se puede deshacer en Plan → Hecho. ¿Seguir?'))return;
+  busy(b,true,'Aplicando…');
+  api('/rebalance',{}).then(function(r){toast(r.action.result||'Hecho');return load()}).catch(function(e){toast(e.message,1)}).then(function(){busy(b,false)});
+};
+
+/* ── Creatividades ── */
+F.cr='all';
+function crScore(a,T){var m=a.m7||{};if(!m.spend)return -1;var s=0;if(m.res)s+=T?T/(m.cpa||T)*2:1;s+=(m.ctr||0)/1.2;if(m.freq>3.5)s-=0.5;if(a.quality&&a.quality.n)s+=a.quality.good/a.quality.n;return s}
+function renderCreatives(){
+  var r=rep();if(!r||!r.ads){$('crs').innerHTML='<div class="empty">Pulsa "Analizar ahora" en Resumen.</div>';return}
+  renderFilter($('crF'),F.cr,function(v){F.cr=v;renderCreatives()});
+  var S=(STATE&&STATE.settings)||{},A=r.ads.filter(function(a){return (a.status==='ACTIVE'||(a.m7&&a.m7.spend>0))&&(F.cr==='all'||a.sede===F.cr)});
+  A.sort(function(a,b){return crScore(b,r.targets[b.obj])-crScore(a,r.targets[a.obj])});
+  $('crs').innerHTML=A.length?A.slice(0,24).map(function(a,i){
+    var m=a.m7||{},p=a.mp||{},T=r.targets[a.obj],tag=a.status==='DISAPPROVED'?'<span class="tag red">Rechazado</span>':i===0&&m.res?'<span class="tag green">Ganador</span>':m.freq>(S.freqCap||3.5)?'<span class="tag red">Cansado</span>':m.spend&&!m.res&&T&&m.spend>=T?'<span class="tag red">Sin resultados</span>':a.flag==='good'?'<span class="tag green">Rinde</span>':'';
+    var d=m.cpa&&p.cpa?Math.round((m.cpa/p.cpa-1)*100):null,q=a.quality;
+    return '<div class="cr"><div class="th'+(a.thumb?'':' none')+'"'+(a.thumb?' style="background-image:url(\''+esc(a.thumb)+'\')"':'')+'>'+(a.thumb?'':esc(sedeName(a.sede).slice(0,2)))+tag+'</div><div class="bd"><div class="nm">'+esc(a.name)+'</div><div class="row"><span class="tag">'+esc(sedeName(a.sede))+'</span>'+(d!=null&&Math.abs(d)>=5?'<span class="'+(d<0?'up':'down')+'" style="font-size:.8rem">coste '+(d>0?'+':'')+d+'%</span>':'')+(q&&q.n?'<span class="muted" style="font-size:.8rem">'+q.good+'/'+q.n+' leads buenos</span>':'')+'</div>'+
+      '<div class="st"><div><b>'+eur(m.cpa)+'</b><small>por '+esc(LABEL1[a.obj])+'</small></div><div><b>'+num(m.ctr,2)+'%</b><small>CTR</small></div><div><b>'+num(m.freq,1)+'</b><small>frec.</small></div></div>'+
+      '<div class="muted" style="font-size:.8rem">'+eur(m.spend,0)+' · '+num(m.res,0)+' '+esc(LABEL[a.obj])+'</div></div></div>'}).join(''):'<div class="empty">No hay anuncios activos en esta sede.</div>';
+}
+
+/* ── Conector de Meta ── */
+var CONN=null;
+function findConn(){
+  var b=$('connFind');busy(b,true,'Buscando…');
+  api('/connect').then(function(d){CONN=d;renderConn()}).catch(function(e){$('connBody').innerHTML='<p class="ko" style="margin-top:10px">✗ '+esc(e.message)+'</p>'}).then(function(){busy(b,false)});
+}
+$('connFind').onclick=findConn;
+function renderConn(){
+  var d=CONN;if(!d)return;var c=d.current||{};
+  var opt=function(list,sel,lab){return list.map(function(x){return '<option value="'+esc(x.id)+'"'+(x.id===sel||('act_'+String(sel).replace('act_',''))===x.id?' selected':'')+'>'+esc(lab(x))+'</option>'}).join('')};
+  var ig=[];d.pages.forEach(function(p){if(p.ig)ig.push({id:p.ig.id,name:'@'+(p.ig.username||p.ig.id)+' ('+p.name+')'})});
+  $('connBody').innerHTML='<p style="margin-top:12px">Token de <b>'+esc(d.user||'Meta')+'</b>'+(d.userError?' <span class="ko">— '+esc(d.userError)+'</span>':'')+'</p>'+
+    '<div class="grid g3" style="margin-top:10px"><div><label>Cuenta publicitaria</label><select id="connAcc"><option value="">Elige…</option>'+opt(d.accounts,c.accountId,function(a){return a.name+' · '+a.id.replace('act_','')+(a.status!==1?' (no activa)':'')+(a.business?' · '+a.business:'')})+'</select></div>'+
+    '<div><label>Página de Facebook</label><select id="connPage"><option value="">Ninguna</option>'+opt(d.pages,c.pageId,function(p){return p.name})+'</select></div>'+
+    '<div><label>Instagram</label><select id="connIg"><option value="">Automático (el de la página)</option>'+opt(ig,c.igId,function(x){return x.name})+'</select></div></div>'+
+    (d.permsKnown?'<div class="perm">'+d.permissions.map(function(p){return '<div><span class="'+(p.ok?'ok':'ko')+'">'+(p.ok?'✓':'✗')+'</span> '+esc(p.p)+'</div>'}).join('')+'</div>'+(d.permissions.some(function(p){return !p.ok})?'<p class="muted" style="margin-top:6px">Faltan permisos: vuelve a generar el token del usuario del sistema marcándolos (Meta Business → Usuarios del sistema → Generar token).</p>':''):'')+
+    (d.errors&&d.errors.length?'<p class="ko" style="margin-top:8px">'+d.errors.map(esc).join(' · ')+'</p>':'')+
+    '<div class="row" style="margin-top:12px"><button class="btn btn-p" id="connSave">Guardar conexión</button></div>';
+  $('connPage').onchange=function(){var p=d.pages.filter(function(x){return x.id===$('connPage').value})[0];if(p&&p.ig)$('connIg').value=p.ig.id};
+  $('connSave').onclick=function(){
+    var b=this,body={accountId:$('connAcc').value,pageId:$('connPage').value,igId:$('connIg').value};
+    if(!body.accountId){toast('Elige la cuenta publicitaria',1);return}
+    busy(b,true,'Guardando…');
+    api('/connect',body).then(function(r){toast('Conectado'+(r.account?' a '+r.account.name:'')+'. Pulsa "Analizar ahora".');W.formsLoaded=0;return load()}).then(function(){go('res')}).catch(function(e){toast(e.message,1)}).then(function(){busy(b,false)});
+  };
 }
 
 /* ── ✍️ ANUNCIOS ── */
@@ -1011,6 +1246,7 @@ function renderAj(){
   SEDES=JSON.parse(JSON.stringify(s.sedes||[]));renderSedesEdit();
   $('tLeads').value=s.targets.leads||0;$('tTraffic').value=s.targets.traffic||0;$('tMsg').value=s.targets.messages||0;
   if(r&&r.targets){var a=[];Object.keys(r.autoT||{}).forEach(function(k){a.push(LABEL1[k]+': '+eur(r.targets[k]))});$('tAuto').textContent='0 = automático: el agente usa la media de tu propia cuenta'+(a.length?' (ahora: '+a.join(', ')+').':'.')}
+  $('sMonth').value=s.monthlyBudget||0;$('sLeadMail').checked=s.leadEmail!==false;
   $('sCap').value=s.maxDailySpend||0;$('sStep').value=s.stepPct;$('sCalm').value=s.calmDays;$('sFreq').value=s.freqCap;$('sCtr').value=s.minCtr;$('sKill').value=s.killMultiple;
   $('sMails').value=s.emails||'';$('sDaily').checked=!!s.dailyEmail;$('sBiz').value=s.business||'';$('sVoice').value=s.voice||'';$('sWeb').value=s.website||'';$('sPriv').value=s.privacyUrl||'';$('sHousing').checked=!!s.housing;
   $('sMe').value=me();$('sWa').value=s.waTemplate||'';
@@ -1021,7 +1257,7 @@ $('sSave').onclick=function(){
   if(MODE==='autopiloto'&&STATE.settings.mode!=='autopiloto'&&!confirm('En autopiloto el agente pausará anuncios y moverá presupuestos él solo (con los límites de abajo). ¿Activar?'))return;
   ls('dc_ads_me',$('sMe').value.trim());
   var body={mode:MODE,targets:{leads:+$('tLeads').value||0,traffic:+$('tTraffic').value||0,messages:+$('tMsg').value||0,sales:STATE.settings.targets.sales||0,reach:STATE.settings.targets.reach||0},
-    maxDailySpend:+$('sCap').value||0,stepPct:+$('sStep').value||20,calmDays:+$('sCalm').value||3,freqCap:+$('sFreq').value||3.5,minCtr:+$('sCtr').value||0.8,killMultiple:+$('sKill').value||2.5,
+    maxDailySpend:+$('sCap').value||0,monthlyBudget:+$('sMonth').value||0,leadEmail:$('sLeadMail').checked,stepPct:+$('sStep').value||20,calmDays:+$('sCalm').value||3,freqCap:+$('sFreq').value||3.5,minCtr:+$('sCtr').value||0.8,killMultiple:+$('sKill').value||2.5,
     emails:$('sMails').value.trim(),dailyEmail:$('sDaily').checked,business:$('sBiz').value.trim(),voice:$('sVoice').value.trim(),website:$('sWeb').value.trim(),privacyUrl:$('sPriv').value.trim(),housing:$('sHousing').checked,
     sedes:SEDES.filter(function(s){return s.name}),waTemplate:$('sWa').value.trim()};
   busy(b,true);api('/settings',body).then(function(r){STATE.settings=r.settings;render();toast('Ajustes guardados. Pulsa "Analizar ahora" para aplicarlos.')}).catch(function(e){toast(e.message,1)}).then(function(){busy(b,false)});
@@ -1048,24 +1284,42 @@ function demoState(){
     {id:'L4',ts:now-2*D,name:'Marc Ficticio',phone:'+34600000004',email:'',sede:'cerdanya',ad:'Chalet_montaña',answers:[{q:'cuándo quieres comprar',a:'este año'}],q:'visita',contactedAt:now-2*D+30*60000},
     {id:'L5',ts:now-3*D,name:'Test Lead',phone:'+34600000005',email:'',sede:'sitges',ad:'Calma_interior_v1',answers:[],q:'malo',contactedAt:now-3*D+20*60000}
   ];
+  // Reparto de ejemplo con el mismo modelo que el agente (rendimientos decrecientes, e = 0,7)
+  var E=0.7,al=[['sitges','Sitges',30,26.1,1.4],['barcelona','Barcelona',14,32.1,1],['cerdanya','Cerdanya',10,30.9,1],['andorra','Andorra',0,37.8,1]].map(function(x){var anc=x[2]?x[2]*7:105;return {id:x[0],name:x[1],curDaily:x[2],q:x[4],k:(anc/x[3])/Math.pow(anc,E),active:x[2]>0}});
+  var live=al.filter(function(x){return x.curDaily>0}),tot=live.reduce(function(a,x){return a+x.curDaily},0),sp=split(live,tot,5,E);
+  var resAt=function(x,d){return d>0?x.k*Math.pow(d*7,E):0};
+  al.forEach(function(x){x.recDaily=x.curDaily>0?Math.round(sp[x.id]*100)/100:0;x.resNow=resAt(x,x.curDaily);x.resRec=resAt(x,x.recDaily);x.nextCost=Math.pow(Math.max(x.curDaily,15)*7,1-E)/(E*x.k);x.testDaily=x.curDaily?0:15;x.resTest=x.curDaily?0:resAt(x,15)});
+  var aNow=al.reduce(function(a,x){return a+x.resNow},0),aRec=al.reduce(function(a,x){return a+x.resRec},0),qNow=al.reduce(function(a,x){return a+x.resNow*x.q},0),qRec=al.reduce(function(a,x){return a+x.resRec*x.q},0);
+  var today=new Date(),dim=new Date(today.getFullYear(),today.getMonth()+1,0).getDate(),dd=today.getDate(),spentM=Math.round(dd*52+18),projM=Math.round(spentM+(dim-dd)*54);
   return {
     brand:'Durán Carasso',
-    settings:{mode:'copiloto',targets:{leads:0,traffic:0,messages:0,sales:0,reach:0},maxDailySpend:120,stepPct:20,killMultiple:2.5,freqCap:3.5,minCtr:0.8,calmDays:3,maxAutoPerDay:5,dailyEmail:true,emails:'direccion@example.com',business:'Inmobiliaria de lujo con sedes en Barcelona, Sitges, Cerdanya y Andorra.',voice:'Lujo sobrio, cercano y preciso.',website:'https://www.durancarasso.com',privacyUrl:'',housing:true,comercial:'',
+    alerts:{ts:now-12*60000,today:{spend:31,res:1,budget:54,obj:'leads',hour:12},items:[
+      {id:'al1',key:'ad:A9',level:'red',text:'Meta ha rechazado el anuncio "Calma_precio_v1".',ts:now-50*60000,day:''},
+      {id:'al2',key:'lead',level:'amber',text:'Lead nuevo en Sitges hace 25 min (Laura): aún sin contactar.',ts:now-25*60000,day:''}]},
+    settings:{mode:'copiloto',targets:{leads:0,traffic:0,messages:0,sales:0,reach:0},maxDailySpend:120,monthlyBudget:1600,leadEmail:true,stepPct:20,killMultiple:2.5,freqCap:3.5,minCtr:0.8,calmDays:3,maxAutoPerDay:5,dailyEmail:true,emails:'direccion@example.com',business:'Inmobiliaria de lujo con sedes en Barcelona, Sitges, Cerdanya y Andorra.',voice:'Lujo sobrio, cercano y preciso.',website:'https://www.durancarasso.com',privacyUrl:'',housing:true,comercial:'',
       waTemplate:'Hola {nombre}, soy {comercial} de Durán Carasso. Gracias por tu interés en {sede}. ¿Te va bien que te llame hoy y te cuento los detalles?',
       sedes:[{id:'barcelona',name:'Barcelona',kw:'barcelona,bcn',goal:0,market:'Barcelona'},{id:'sitges',name:'Sitges',kw:'sitges',goal:0,market:'Sitges'},{id:'cerdanya',name:'Cerdanya',kw:'cerdanya,puigcerda',goal:0,market:'Cerdanya'},{id:'andorra',name:'Andorra',kw:'andorra',goal:0,market:'Andorra'}]},
     report:{ts:now-3*H,trigger:'cron',account:{name:'Durán Carasso',currency:'EUR',status:1},mainObj:'leads',targets:{leads:31.5,traffic:0.42},autoT:{leads:true,traffic:true},
       kpi:{cur:{spend:519,spendAll:519,res:19,cpa:27.32,ctr:1.12,freq:2.1},prev:{spend:463,spendAll:463,res:16,cpa:28.94,ctr:1.18,freq:1.9}},
-      daily:daily,sedes:sedesR,
+      daily:daily,sedes:sedesR,today:{spend:31,res:1},
+      moves:[
+        {scope:'sitges',name:'Sitges',metric:'res',good:true,pct:27,cause:'ctr',text:'Sitges: suben los leads de 11 a 14, porque los anuncios enganchan más: el 1,14% hace clic tras el cambio de texto de Calma_fachada.'},
+        {scope:'barcelona',name:'Barcelona',metric:'cpa',good:false,pct:31,cause:'cpm',text:'Barcelona: el coste por lead sube de 22,50 € a 32,67 € (+45%) porque la subasta está más cara: 1.000 impresiones cuestan 14,80 € (antes 10,20 €). Suele ser más competencia o un público demasiado pequeño.'},
+        {scope:'sitges',name:'Sitges',metric:'freq',good:false,pct:28,cause:'ctr',text:'Sitges: cada persona ya ve Calma_vistas_v2 4,2 veces (antes 3,1). Pronto se cansará: prepara creatividades nuevas.'},
+        {scope:'cuenta',name:'Cuenta',metric:'cpa',good:true,pct:-6,cause:'cvr',text:'Cuenta: el coste por lead baja de 28,94 € a 27,32 € porque convierten más los que hacen clic (11,2% frente a 9,6%).'}],
+      pacing:{month:today.toISOString().slice(0,7),day:dd,dim:dim,spent:spentM,res:Math.round(spentM/27.3),avgDaily:54,projected:projM,projectedRes:Math.round(projM/27.3),budget:1600,status:projM>1680?'pasa':projM<1360?'corto':'ok',recDaily:Math.round((1600-spentM)/Math.max(1,dim-dd+1))},
+      allocation:{e:E,obj:'leads',totalDaily:tot,rows:al,resNow:aNow,resRec:aRec,gainPct:Math.round((qRec/qNow-1)*100),text:'El próximo euro rinde más en Sitges (siguiente lead ≈ 34 €) que en Barcelona (≈ 47 €). Sin campaña: Andorra (≈ 3 leads/semana con 15 €/día).'},
+      placements:[{p:'instagram',spend:331,res:14,cpa:23.64,ctr:1.31},{p:'facebook',spend:121,res:5,cpa:24.2,ctr:0.92},{p:'audience_network',spend:67,res:0,cpa:null,ctr:0.21}],
       campaigns:[{id:'C1',name:'Prospecting_Leads_Sitges',obj:'leads',sede:'sitges',status:'ACTIVE',daily:null,m7:m(361,14,1.14,2.3),flag:'good'},{id:'C2',name:'Leads_BCN_Eixample',obj:'leads',sede:'barcelona',status:'ACTIVE',daily:14,m7:m(98,3,0.9,1.7),flag:'watch'},{id:'C3',name:'Leads_Cerdanya',obj:'leads',sede:'cerdanya',status:'ACTIVE',daily:null,m7:m(60,2,1.2,1.5),flag:'good'}],
       adsets:[{id:'S1',name:'No_interests_Sitges_60km_SP',campaign_id:'C1',obj:'leads',sede:'sitges',status:'ACTIVE',daily:30,learning:'SUCCESS',m7:m(361,14,1.14,2.3),flag:'good'},{id:'S2',name:'BCN_Advantage',campaign_id:'C2',obj:'leads',sede:'barcelona',status:'ACTIVE',daily:null,m7:m(98,3,0.9,1.7),flag:'watch'},{id:'S3',name:'Puigcerdà_40km',campaign_id:'C3',obj:'leads',sede:'cerdanya',status:'ACTIVE',daily:10,m7:m(60,2,1.2,1.5),flag:'good'}],
-      ads:[{id:'A1',name:'Calma_fachada_v4',adset_id:'S1',obj:'leads',sede:'sitges',status:'ACTIVE',m7:m(151,12,1.5,1.8),flag:'good'},{id:'A2',name:'Calma_interior_v1',adset_id:'S1',obj:'leads',sede:'sitges',status:'ACTIVE',m7:m(120,0,0.44,1.9),flag:'bad'},{id:'A3',name:'Calma_vistas_v2',adset_id:'S1',obj:'leads',sede:'sitges',status:'ACTIVE',m7:m(90,2,1.0,4.2),flag:'bad'},{id:'B1',name:'BCN_Eixample_v1',adset_id:'S2',obj:'leads',sede:'barcelona',status:'ACTIVE',m7:m(60,2,1,1.7),flag:'good'},{id:'B2',name:'BCN_Eixample_v2',adset_id:'S2',obj:'leads',sede:'barcelona',status:'ACTIVE',m7:m(38,1,0.8,1.7),flag:'watch'},{id:'D1',name:'Chalet_montaña',adset_id:'S3',obj:'leads',sede:'cerdanya',status:'ACTIVE',m7:m(60,2,1.2,1.5),flag:'good'}],
+      ads:[{id:'A1',name:'Calma_fachada_v4',adset_id:'S1',obj:'leads',sede:'sitges',status:'ACTIVE',m7:m(151,12,1.5,1.8),mp:m(140,8,1.2,1.6),flag:'good',quality:{n:9,good:5,bad:2}},{id:'A2',name:'Calma_interior_v1',adset_id:'S1',obj:'leads',sede:'sitges',status:'ACTIVE',m7:m(120,0,0.44,1.9),flag:'bad'},{id:'A3',name:'Calma_vistas_v2',adset_id:'S1',obj:'leads',sede:'sitges',status:'ACTIVE',m7:m(90,2,1.0,4.2),mp:m(100,4,1.3,3.1),flag:'bad'},{id:'B1',name:'BCN_Eixample_v1',adset_id:'S2',obj:'leads',sede:'barcelona',status:'ACTIVE',m7:m(60,2,1,1.7),flag:'good'},{id:'B2',name:'BCN_Eixample_v2',adset_id:'S2',obj:'leads',sede:'barcelona',status:'ACTIVE',m7:m(38,1,0.8,1.7),flag:'watch'},{id:'D1',name:'Chalet_montaña',adset_id:'S3',obj:'leads',sede:'cerdanya',status:'ACTIVE',m7:m(60,2,1.2,1.5),flag:'good'}],
       adsReady:[
         {id:'r1',sede:'sitges',angle:'jardín privado',primary_text:'Tu jardín, a diez minutos del mar.\nPlantas bajas en Sitges con 80 m² de jardín privado. Entrega 2027.',headline:'Jardín privado en Sitges',description:'Desde 785.000 €',image_hint:'Foto exterior del jardín con luz de tarde.'},
         {id:'r2',sede:'barcelona',angle:'visita el mismo día',primary_text:'Eixample, techos de 3,5 m y luz de mañana.\nTe lo enseñamos hoy mismo, en privado.',headline:'Visita privada hoy',description:'Eixample · 3 dormitorios',image_hint:'Salón con techos altos y ventanales.'},
         {id:'r3',sede:'cerdanya',angle:'temporada de esquí',primary_text:'Estrena casa antes de que abran las pistas.\nChalets en la Cerdanya con entrega inmediata.',headline:'Entrega antes del esquí',description:'Chalets en la Cerdanya',image_hint:'Chalet con montaña nevada al fondo.'},
         {id:'r4',sede:'andorra',angle:'calidad de vida',primary_text:'Montaña, colegio internacional y 1 hora a Barcelona.\nViviendas en Andorra para vivir todo el año.',headline:'Vivir en Andorra',description:'Asesoramiento completo',image_hint:'Vista del valle desde una terraza.'}
       ],
-      ai:{headline:'Semana sólida: 19 leads a 27,32 € (−6%). Sitges tira del carro; Andorra sigue sin campaña.',health:72,summary:'Sitges concentra el 74% de los leads y está a 3 de su meta. Un anuncio de Sitges se come 120 € sin traer nada y Andorra no capta: ahí están las dos palancas de la semana.',diagnosis:['Calma_fachada_v4 trae 12 de los 14 leads de Sitges a 12,58 € cada uno: es tu ganador.','Calma_interior_v1 lleva 120 € sin un solo lead; su CTR (0,44%) indica que la imagen no engancha.','Calma_vistas_v2 está cansado: la misma gente lo ha visto 4,2 veces.','Andorra no tiene campaña mientras la competencia tiene 7 anuncios activos.'],focus:'Pasar el dinero del perdedor al ganador en Sitges y lanzar Andorra con 20 €/día.',cost:0.061,model:'claude-opus-5-5'},
+      ai:{invest:'Pasa 5 €/día de Cerdanya a Sitges: allí el siguiente lead sale a ≈ 34 € y además el 56% son buenos. Y lanza Andorra con 15 €/día: ≈ 3 leads/semana. Vas a acabar el mes cerca de tu presupuesto de 1.600 €.',headline:'Semana sólida: 19 leads a 27,32 € (−6%). Sitges tira del carro; Andorra sigue sin campaña.',health:72,summary:'Sitges concentra el 74% de los leads y está a 3 de su meta. Un anuncio de Sitges se come 120 € sin traer nada y Andorra no capta: ahí están las dos palancas de la semana.',diagnosis:['Calma_fachada_v4 trae 12 de los 14 leads de Sitges a 12,58 € cada uno: es tu ganador.','Calma_interior_v1 lleva 120 € sin un solo lead; su CTR (0,44%) indica que la imagen no engancha.','Calma_vistas_v2 está cansado: la misma gente lo ha visto 4,2 veces.','Andorra no tiene campaña mientras la competencia tiene 7 anuncios activos.'],focus:'Pasar el dinero del perdedor al ganador en Sitges y lanzar Andorra con 20 €/día.',cost:0.061,model:'claude-opus-5-5'},
       plan:['p1','p2','p3','p4','p5','p6']},
     actions:[
       {id:'p1',ts:now-3*H,type:'PAUSE',target_id:'A2',target_name:'Calma_interior_v1',title:'Pausar el anuncio "Calma_interior_v1"',sede:'sitges',when:'hoy',priority:1,steps:['Pulsa ⚡ Hacerlo ya','El dinero pasa solo a los anuncios que funcionan'],why:'Ha gastado 120 € en 7 días sin conseguir ni un lead (tu objetivo: 31,50 €).',impact:'≈ 120 €/semana que pasan a anuncios que sí convierten (+4 leads estimados).',status:'pending'},
@@ -1122,6 +1376,11 @@ function demoApi(path,body){
     {angle:'precio/m² oportunidad',primary_text:'Desde 785.000 € en Sitges.\nÚltimas plantas bajas con jardín privado. Pide el dossier con planos y precios.',headline:'Obra nueva desde 785.000 €',description:'Dossier con planos'},
     {angle:'escasez',primary_text:'Quedan 6 viviendas.\nObra nueva en Sitges con jardín o terraza con vistas. Reserva tu visita privada.',headline:'Últimas 6 viviendas en Sitges',description:'Visita privada'}]});
   if(path==='/forms')return wait(300,{forms:[{id:'000000000000001',name:'CalmaR_condicional_ES_CHECK'}]});
+  if(path==='/pulse'){S.alerts.ts=Date.now();return wait(900,{ok:true,fresh:[],newLeads:0,today:S.alerts.today})}
+  if(path==='/alert'){S.alerts.items.forEach(function(a){if(a.id===body.id||body.all)a.seen=true});return wait(150,{ok:true})}
+  if(path==='/rebalance'){var rb={id:'rb'+Date.now(),ts:Date.now(),type:'REBALANCE',target_name:'Reparto entre sedes',title:'Acercar el presupuesto al reparto óptimo',sede:'todas',why:S.report.allocation.text,status:'done',doneAt:Date.now(),undo:{kind:'multi'},steps_api:[{name:'No_interests_Sitges_60km_SP',pct:15},{name:'Puigcerdà_40km',pct:-20}],result:'Presupuestos: No_interests_Sitges_60km_SP: 30 € → 34,50 € · Puigcerdà_40km: 10 € → 8 €'};S.actions.unshift(rb);return wait(900,{ok:true,action:rb})}
+  if(path==='/connect'&&!body)return wait(700,{user:'Agente DC (usuario del sistema)',permissions:['ads_management','ads_read','business_management','pages_show_list','pages_read_engagement','pages_manage_ads','leads_retrieval'].map(function(p){return {p:p,ok:true}}),permsKnown:true,accounts:[{id:'act_000000000000',name:'Durán Carasso',status:1,currency:'EUR',business:'Durán Carasso'}],pages:[{id:'000000000000002',name:'Durán Carasso',ig:{id:'000000000000003',username:'durancarasso'}}],current:{accountId:'act_000000000000',pageId:'000000000000002',igId:'000000000000003'},errors:[]});
+  if(path==='/connect')return wait(500,{ok:true,account:{name:'Durán Carasso'},current:body});
   if(path==='/create'){S.actions.forEach(function(a){if(a.type==='LAUNCH'&&a.sede===body.sede&&a.status==='pending'){a.status='done';a.doneAt=Date.now();a.result='Campaña creada'}});return wait(1800,{ok:true,campaign_id:'demo',active:!!body.activate,url:'https://adsmanager.facebook.com/'})}
   return Promise.reject(new Error('No disponible en demo'));
 }
@@ -1130,7 +1389,7 @@ function demoApi(path,body){
 (function init(){
   var c=cfg();
   if(/[?&]demo\b/.test(location.search))DEMO=true;
-  if(!c.url)DEMO=true; // sin motor conectado: demo directa (el motor ads-agent aún no está desplegado)
+  if(!c.url)DEMO=true; // sin agente conectado: demo directa, con la banda para conectarlo
   if(c.url)$('cUrl').value=c.url;
   showOnb(false);
   var t=ls('dc_ads_tab');if(t&&document.querySelector('.tab[data-p="'+t+'"]'))go(t);
