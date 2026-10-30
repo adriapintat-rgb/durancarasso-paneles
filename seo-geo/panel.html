@@ -311,7 +311,7 @@ function pintaSedes() {
 function solucion(o, i) {
   var code = actual, x = D.sedes[code] || {}, t = o.texto || SOL[o.key] || '';
   if (o.k === 'noticia') return '<div class="lab">Post a partir de la noticia · puedes editarlo</div><textarea id="tx' + i + '" rows="7">' + esc(t) + '</textarea>' +
-    '<p class="mut">' + esc(o.fuente) + (o.original ? ' · «' + esc(o.original) + '»' : '') + (o.enlace ? ' · <a href="' + esc(o.enlace) + '" target="_blank">Leer la noticia ›</a>' : '') + '</p>';
+    '<p class="mut">' + esc(o.fuente) + (o.original ? ' · «' + esc(o.original) + '»' : '') + (o.enlace ? ' · <a href="' + esc(o.enlace) + '" target="_blank" onclick="avisoObj(' + i + ',&quot;Abierta la noticia original&quot;)">Leer la noticia ›</a>' : '') + '</p>';
   if (o.k === 'post' || o.k === 'desc') return '<div class="lab">' + (o.k === 'post' ? 'Publicación lista' : 'Descripción lista') + ' · puedes editarla</div><textarea id="tx' + i + '" rows="6">' + esc(t) + '</textarea>';
   if (o.k === 'resenas') return '<div class="lab">Mensaje para tus clientes · puedes editarlo</div><textarea id="tx' + i + '" rows="3">' + esc(t) + '</textarea>' +
     '<p class="mut">Envíalo a clientes contentos de las últimas operaciones, mejor justo después de firmar o entregar llaves.</p>';
@@ -335,7 +335,7 @@ function botones(o, i) {
   else if (o.k === 'web') { if (D.apiGbp) p('Poner este enlace en Google', 'ponerWeb'); else p('Copiar', 'copiarVal'); }
   else if (o.k === 'telefono') { if (D.apiGbp) p('Poner este teléfono en Google', 'ponerTel'); else p('Copiar', 'copiarVal'); }
   else if (o.k === 'nombre') { if (D.apiGbp) p('Cambiar el nombre en Google', 'ponerNombre'); }
-  else if (o.k === 'horario' || (o.k === 'fotos' && !D.apiGbp)) b += '<a class="bt" href="' + BIZ + '" target="_blank">Abrir mi ficha</a>';
+  else if (o.k === 'horario' || (o.k === 'fotos' && !D.apiGbp)) b += '<a class="bt" href="' + BIZ + '" target="_blank" onclick="avisoObj(' + i + ',&quot;Abierta la ficha en Google&quot;)">Abrir mi ficha</a>';
   else if (t && o.k === 'webdev') { p('Enviar al programador', 'programador'); s('Copiar', 'copiarTx'); }
   else if (t) p('Copiar', 'copiarTx');
   if (o.it && o.k !== 'nombre' && o.k !== 'web' && o.k !== 'telefono' && o.k !== 'fotos' && o.k !== 'horario') s('Otra versión', 'otra');
@@ -354,7 +354,7 @@ function pintaSede() {
   if (x.error) { el('sede').innerHTML = '<p class="aviso">No se pudo analizar ' + esc(NOMBRE[code]) + ' esta semana: ' + esc(x.error) + '</p>'; return; }
   var r = objetivos(code); OBJ = r.pend; HECHOS = r.hechos;
   el('sede').innerHTML = '<div class="stats"><span><b>' + x.rating + '★</b> nota</span><span><b>' + x.resenas + '</b> reseñas</span><span><b>' + x.fotos + '</b> fotos</span>' +
-    (x.maps ? '<a href="' + esc(x.maps) + '" target="_blank">Ver en Google Maps ›</a>' : '') + '</div>' +
+    (x.maps ? '<a href="' + esc(x.maps) + '" target="_blank" onclick="aviso(&quot;Abierto Google Maps&quot;)">Ver en Google Maps ›</a>' : '') + '</div>' +
     '<h2>' + (OBJ.length ? 'Esta semana en ' + esc(NOMBRE[code]) : esc(NOMBRE[code])) + '</h2>' +
     (OBJ.length ? '<ol class="objs">' + OBJ.map(card).join('') + '</ol>' : '<div class="vacio">✓ Todo al día en ' + esc(NOMBRE[code]) + '. El lunes llega la revisión nueva.</div>') +
     (HECHOS.length ? '<details class="hechas"><summary>Hecho esta semana · ' + HECHOS.length + '</summary><ul>' + HECHOS.map(function (o, j) {
@@ -378,8 +378,11 @@ function descartar(i, b) {
   estado(o, 'DESCARTADO', b, 'Descartado: no se volverá a proponer');
 }
 function deshacer(j, b) { estado(HECHOS[j], 'PENDIENTE', b, 'Vuelve a estar pendiente'); }
-function copiarTx(i) { copiar(texto(i)); }
-function copiarVal(i) { var o = OBJ[i]; copiar(o.k === 'web' ? PAGINA[actual] : (D.sedes[actual] || {}).telOficial || ''); }
+/* Aviso por email de los botones que no pasan por el servidor (el resto lo envía el servidor) */
+function aviso(que, sobre, cont) { try { google.script.run.withFailureHandler(function () {}).avisoPanel(D.clave, actual, que, sobre || '', cont || ''); } catch (e) {} }
+function avisoObj(i, que) { var o = OBJ[i]; aviso(que, o ? o.titulo : ''); }
+function copiarTx(i) { copiar(texto(i)); aviso('Texto copiado', OBJ[i].titulo, texto(i)); }
+function copiarVal(i) { var o = OBJ[i], v = o.k === 'web' ? PAGINA[actual] : (D.sedes[actual] || {}).telOficial || ''; copiar(v); aviso('Copiado', o.titulo, v); }
 function otra(i, b) { api('accionPanel', [D.clave, OBJ[i].it.id, 'otra'], function (n) { actualiza(n); toast('Nueva versión'); }, b); }
 function publicar(i, b) {
   var o = OBJ[i], t = texto(i).trim();
@@ -387,10 +390,11 @@ function publicar(i, b) {
   if (!confirm('¿Publicar este texto en la ficha de Google de ' + NOMBRE[actual] + '? Lo verá todo el mundo.')) return;
   api('accionPanel', [D.clave, o.it.id, 'aplicar', t], function (n) { actualiza(n); toast('Publicado en Google ✓'); }, b);
 }
-function whatsapp(i) { window.open('https://wa.me/?text=' + encodeURIComponent(texto(i)), '_blank'); }
+function whatsapp(i) { window.open('https://wa.me/?text=' + encodeURIComponent(texto(i)), '_blank'); aviso('Abierto WhatsApp para pedir reseñas', OBJ[i].titulo, texto(i)); }
 function programador(i) {
   var o = OBJ[i];
   window.open('mailto:?subject=' + encodeURIComponent(D.marca + ' · ' + o.titulo) + '&body=' + encodeURIComponent(o.titulo + NL + NL + texto(i)), '_blank');
+  aviso('Preparado el email al programador', o.titulo, texto(i));
 }
 function ficha(i, b, que, valor, pregunta) {
   if (!confirm(pregunta)) return;
